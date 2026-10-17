@@ -480,11 +480,11 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
               <div class="form-group">
                 <label class="form-label" for="setting-wifi-ssid">Wi-Fi Network Name (SSID)</label>
-                <input type="text" id="setting-wifi-ssid" class="form-control" required>
+                <input type="text" id="setting-wifi-ssid" class="form-control" placeholder="Optional">
               </div>
               <div class="form-group">
                 <label class="form-label" for="setting-wifi-pass">Wi-Fi Password</label>
-                <input type="text" id="setting-wifi-pass" class="form-control" required>
+                <input type="text" id="setting-wifi-pass" class="form-control" placeholder="Optional">
               </div>
             </div>
 
@@ -559,9 +559,7 @@
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
             <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;">Current Schedule Items</h2>
             <select id="schedule-admin-day-select" class="form-control" style="width: auto; padding: 4px 10px;" onchange="renderAdminSchedule()">
-              <option value="1">Day 1 (Friday 16 Oct)</option>
-              <option value="2">Day 2 (Saturday 17 Oct — Main Event)</option>
-              <option value="3">Day 3 (Sunday 18 Oct)</option>
+              <option value="1" selected>Saturday 17 Oct 2026 — Evening Celebration</option>
             </select>
           </div>
 
@@ -578,9 +576,7 @@
             <div class="form-group">
               <label class="form-label" for="sch-day">Target Day *</label>
               <select id="sch-day" class="form-control" required>
-                <option value="1">Day 1 — Welcome & Early Gatherings</option>
-                <option value="2" selected>Day 2 — Clarke Reunion Evening @ Papanui Club</option>
-                <option value="3">Day 3 — Farewell Breakfast & Departures</option>
+                <option value="1" selected>Saturday 17 Oct 2026 — Evening Celebration</option>
               </select>
             </div>
 
@@ -1112,13 +1108,7 @@
     (function () {
       var state = window.ClarkeApp ? window.ClarkeApp.getState() : {};
 
-      var DEFAULT_BRANCHES = [
-        "Chipley Somerset Line",
-        "Christchurch & Canterbury Branch",
-        "North Canterbury Branch",
-        "Otago & Southern Line",
-        "North Island Clarke Branch"
-      ];
+      var DEFAULT_BRANCHES = [];
 
       function getBranchNames() {
         if (state.familyTree && state.familyTree.branches && Array.isArray(state.familyTree.branches) && state.familyTree.branches.length > 0) {
@@ -1132,7 +1122,7 @@
         var selects = document.querySelectorAll('.dynamic-branch-select');
         selects.forEach(function (sel) {
           var currentVal = sel.value;
-          var html = '<option value="">-- Select Family Branch --</option>';
+          var html = '<option value="Clarke Family">Clarke Family</option>';
           branches.forEach(function (br) {
             html += '<option value="' + br + '">' + br + '</option>';
           });
@@ -1343,8 +1333,8 @@
         document.getElementById('setting-subtitle').value = state.eventInfo.subtitle || state.eventInfo.motto || 'Ye shall drink of the brook by the way';
         document.getElementById('setting-date').value = state.eventInfo.dateISO || '2026-10-17T19:30:00+13:00';
         document.getElementById('setting-location').value = state.eventInfo.location || 'Papanui Club, 310 Sawyers Arms Road, Bishopdale, Christchurch 8053';
-        document.getElementById('setting-wifi-ssid').value = state.eventInfo.wifiSsid || 'PapanuiClub_Guest';
-        document.getElementById('setting-wifi-pass').value = state.eventInfo.wifiPass || 'Clarke2026';
+        document.getElementById('setting-wifi-ssid').value = state.eventInfo.wifiSsid || '';
+        document.getElementById('setting-wifi-pass').value = state.eventInfo.wifiPass || '';
         if (document.getElementById('setting-shared-album-url')) {
           var alb = state.eventInfo.sharedAlbumUrl || 'https://photos.app.goo.gl/6fGko2NUqKfQp7866';
           document.getElementById('setting-shared-album-url').value = alb;
@@ -1874,9 +1864,7 @@
       function getScoresObj() {
         if (state.branchScores) return state.branchScores;
         if (state.trivia && state.trivia.branchScores) return state.trivia.branchScores;
-        var def = {};
-        getBranchNames().forEach(function (b, i) { def[b] = 100 + i * 25; });
-        return def;
+        return {};
       }
 
       function getTriviaArr() {
@@ -1890,13 +1878,18 @@
         var inputsContainer = document.getElementById('admin-branch-scores-inputs');
         if (inputsContainer) {
           var scores = getScoresObj();
+          var keys = Object.keys(scores);
           var html = '';
-          Object.keys(scores).forEach(function (branch) {
-            html += '<div class="form-group">';
-            html += '<label class="form-label" style="color: var(--gold-bright);">' + branch + ' Points</label>';
-            html += '<input type="number" class="form-control admin-score-input" data-branch="' + branch + '" value="' + scores[branch] + '">';
-            html += '</div>';
-          });
+          if (keys.length === 0) {
+            html = '<p style="color: var(--text-muted); padding: 10px 0;">No branch scores recorded yet.</p>';
+          } else {
+            keys.forEach(function (branch) {
+              html += '<div class="form-group">';
+              html += '<label class="form-label" style="color: var(--gold-bright);">' + branch + ' Points</label>';
+              html += '<input type="number" class="form-control admin-score-input" data-branch="' + branch + '" value="' + scores[branch] + '">';
+              html += '</div>';
+            });
+          }
           inputsContainer.innerHTML = html;
         }
 

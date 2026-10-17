@@ -519,16 +519,6 @@
               </div>
 
               <div style="display: flex; gap: 12px; align-items: flex-start;">
-                <span style="font-size: 20px;">📶</span>
-                <div>
-                  <strong style="color: var(--gold-bright); font-size: 15px;" id="lbl-detail-wifi-title">Club Wi-Fi Access</strong>
-                  <div style="font-size: 13px; color: var(--gold-primary);">
-                    Network: <code>PapanuiClub_Guest</code> &nbsp;•&nbsp; Pass: <code>Clarke2026</code>
-                  </div>
-                </div>
-              </div>
-
-              <div style="display: flex; gap: 12px; align-items: flex-start;">
                 <span style="font-size: 20px;">📸</span>
                 <div>
                   <strong style="color: var(--gold-bright); font-size: 15px;" id="lbl-detail-album-title">Shared Google Photos Album</strong>
@@ -536,7 +526,7 @@
                     Album: <strong>2026 -CLARKE FAMILY REUNION</strong>
                   </div>
                   <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;" id="lbl-detail-album-desc">
-                    Share photos and videos directly from your smartphone with all family branches!
+                    Share photos and videos directly from your smartphone with all family attendees!
                   </div>
                 </div>
               </div>
@@ -595,14 +585,11 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
           <div>
             <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 22px;" id="lbl-itinerary-title">Reunion Itinerary & Schedule</h2>
-            <p style="font-size: 13px; color: var(--text-muted);" id="lbl-itinerary-subtitle">Explore the weekend timetable at the Papanui Club and Christchurch venues.</p>
+            <p style="font-size: 13px; color: var(--text-muted);" id="lbl-itinerary-subtitle">Saturday, October 17, 2026 • From 7:30 PM at Papanui Club, Christchurch.</p>
           </div>
           <!-- Day Selector Buttons -->
           <div style="display: flex; gap: 8px;" id="schedule-day-buttons">
-            <button class="btn btn-primary" onclick="filterScheduleDay(1)" id="btn-day-1">Day 1 (Fri)</button>
-            <button class="btn btn-secondary" onclick="filterScheduleDay(2)" id="btn-day-2">Day 2 (Sat)</button>
-            <button class="btn btn-secondary" onclick="filterScheduleDay(3)" id="btn-day-3">Day 3 (Sun)</button>
-            <button class="btn btn-secondary" onclick="filterScheduleDay(0)" id="btn-day-all">All Days</button>
+            <button class="btn btn-primary" onclick="filterScheduleDay(0)" id="btn-day-all">All Events</button>
           </div>
         </div>
 
@@ -1065,13 +1052,7 @@
       var activeTriviaIndex = 0;
       var claimingTaskId = null;
 
-      var DEFAULT_BRANCHES = [
-        "Chipley Somerset Line",
-        "Christchurch & Canterbury Branch",
-        "North Canterbury Branch",
-        "Otago & Southern Line",
-        "North Island Clarke Branch"
-      ];
+      var DEFAULT_BRANCHES = [];
 
       // Dynamic branch getter
       function getBranchNames() {
@@ -1087,7 +1068,7 @@
         var selects = document.querySelectorAll('.dynamic-branch-select');
         selects.forEach(function (sel) {
           var currentVal = sel.value;
-          var html = '<option value="">-- Select Family Branch --</option>';
+          var html = '<option value="Clarke Family">Clarke Family</option>';
           branches.forEach(function (br) {
             html += '<option value="' + br + '">' + br + '</option>';
           });
@@ -1177,7 +1158,7 @@
         var elDetailAlbum = document.getElementById('lbl-detail-album-title');
         if (elDetailAlbum) elDetailAlbum.textContent = t("Shared Google Photos Album", "Puka Whakaahua Tiri (Google Photos)");
         var elDetailAlbumDesc = document.getElementById('lbl-detail-album-desc');
-        if (elDetailAlbumDesc) elDetailAlbumDesc.textContent = t("Share photos and videos directly from your smartphone with all family branches!", "Tukua mai ō whakaahua me ō ataata mai i tō waea pūkoro!");
+        if (elDetailAlbumDesc) elDetailAlbumDesc.textContent = t("Share photos and videos directly from your smartphone with all family attendees!", "Tukua mai ō whakaahua me ō ataata mai i tō waea pūkoro!");
         var elBtnQuickAlbum = document.getElementById('btn-quick-album');
         if (elBtnQuickAlbum) elBtnQuickAlbum.textContent = t("📸 Open Google Photos Album", "📸 Whakatuwhera Puka Whakaahua");
 
@@ -1197,11 +1178,9 @@
         if (elBtnShowcasePdf) elBtnShowcasePdf.textContent = t("📥 Download PDF", "📥 Tikiake PDF");
 
         document.getElementById('lbl-itinerary-title').textContent = t("Reunion Itinerary & Schedule", "Hōtaka o te Huihuinga");
-        document.getElementById('lbl-itinerary-subtitle').textContent = t("Explore the timetable at the Papanui Club and Christchurch venues.", "Tirohia ngā wātaka ki te Papanui Club, Ōtautahi.");
-        document.getElementById('btn-day-1').textContent = t("Day 1 (Fri)", "Rā 1 (Paraire)");
-        document.getElementById('btn-day-2').textContent = t("Day 2 (Sat)", "Rā 2 (Rāhoroi)");
-        document.getElementById('btn-day-3').textContent = t("Day 3 (Sun)", "Rā 3 (Rātapu)");
-        document.getElementById('btn-day-all').textContent = t("All Days", "Ngā Rā Katoa");
+        document.getElementById('lbl-itinerary-subtitle').textContent = t("Saturday, October 17, 2026 • From 7:30 PM at Papanui Club, Christchurch.", "Tirohia ngā wātaka ki te Papanui Club, Ōtautahi.");
+        var btnDayAll = document.getElementById('btn-day-all');
+        if (btnDayAll) btnDayAll.textContent = t("All Events", "Ngā Hui Katoa");
 
         // RSVP Tab Texts
         document.getElementById('lbl-stat-headcount').textContent = t("Total Confirmed", "Katoa Kua Whakaae");
@@ -1240,8 +1219,8 @@
         if (elWallPdfQr) elWallPdfQr.textContent = t("📥 Download PDF", "📥 Tikiake PDF");
 
         // Whakapapa Tab Texts
-        document.getElementById('lbl-ancestral-founders-badge').textContent = t("Family Heritage & Ancestral Founders", "Tīpuna & Pūtakenga Whānau");
-        document.getElementById('lbl-branches-header').textContent = t("The Five Family Branches", "Ngā Manga Whakapapa e Rima");
+        document.getElementById('lbl-ancestral-founders-badge').textContent = t("Family Heritage & Ancestral Crest", "Tīpuna & Pūtakenga Whānau");
+        document.getElementById('lbl-branches-header').textContent = t("Family Branches", "Ngā Manga Whakapapa");
         document.getElementById('lbl-memorial-title').textContent = t("In Memoriam Tributes", "He Aimahara — In Memoriam");
         document.getElementById('lbl-memorial-subtitle').textContent = t("Honouring our beloved elders and departed family members whose memories live on.", "E maumahara tonu ana ki ngā kaumātua me ngā whānau kua whetūrangitia.");
         document.getElementById('btn-submit-memorial').textContent = t("✦ Submit Memorial Tribute", "✦ Tukuna he Kōrero Whakamahara");
@@ -1613,39 +1592,49 @@
       // Whakapapa & Memoriam Rendering
       function renderWhakapapa() {
         var branchGrid = document.getElementById('whakapapa-branches-grid');
-        if (branchGrid && state.familyTree && state.familyTree.branches) {
+        if (branchGrid) {
+          var branches = (state.familyTree && state.familyTree.branches) || [];
           var html = '';
-          state.familyTree.branches.forEach(function (b) {
-            html += '<div class="branch-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">';
-            html += '<div class="branch-badge-header">';
-            html += '<span class="badge badge-gold">' + b.era + '</span>';
-            html += '<span class="badge badge-green">' + b.membersCount + ' ' + t("Members", "Mema") + '</span>';
-            html += '</div>';
-            html += '<h4 class="branch-name" style="color: var(--gold-bright); font-size: 17px;">' + b.name + '</h4>';
-            html += '<p style="font-size: 13px; color: var(--gold-muted); margin-top: 2px;">' + t("Ancestor: ", "Tūpuna: ") + b.ancestor + '</p>';
-            html += '<div class="branch-motto" style="border-left-color: var(--gold-primary); color: var(--gold-primary);">"' + b.motto + '"</div>';
-            html += '<p style="font-size: 13px; color: var(--text-primary); margin-bottom: 8px;">' + b.highlights + '</p>';
-            if (b.keyMembers && b.keyMembers.length) {
-              html += '<p style="font-size: 12px; color: var(--gold-muted);">' + t("Key Families: ", "Whānau Matua: ") + b.keyMembers.join(', ') + '</p>';
-            }
-            html += '</div>';
-          });
+          if (branches.length === 0) {
+            html = '<p style="color: var(--text-muted); grid-column: 1/-1; padding: 14px 0;">No family branches recorded yet.</p>';
+          } else {
+            branches.forEach(function (b) {
+              html += '<div class="branch-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">';
+              html += '<div class="branch-badge-header">';
+              html += '<span class="badge badge-gold">' + b.era + '</span>';
+              html += '<span class="badge badge-green">' + b.membersCount + ' ' + t("Members", "Mema") + '</span>';
+              html += '</div>';
+              html += '<h4 class="branch-name" style="color: var(--gold-bright); font-size: 17px;">' + b.name + '</h4>';
+              html += '<p style="font-size: 13px; color: var(--gold-muted); margin-top: 2px;">' + t("Ancestor: ", "Tūpuna: ") + b.ancestor + '</p>';
+              html += '<div class="branch-motto" style="border-left-color: var(--gold-primary); color: var(--gold-primary);">"' + b.motto + '"</div>';
+              html += '<p style="font-size: 13px; color: var(--text-primary); margin-bottom: 8px;">' + b.highlights + '</p>';
+              if (b.keyMembers && b.keyMembers.length) {
+                html += '<p style="font-size: 12px; color: var(--gold-muted);">' + t("Key Families: ", "Whānau Matua: ") + b.keyMembers.join(', ') + '</p>';
+              }
+              html += '</div>';
+            });
+          }
           branchGrid.innerHTML = html;
         }
 
         var memGrid = document.getElementById('memorial-cards-grid');
-        if (memGrid && state.memoriam) {
+        if (memGrid) {
+          var mems = state.memoriam || [];
           var mHtml = '';
-          state.memoriam.forEach(function (m) {
-            mHtml += '<div class="memorial-card" style="background: var(--bg-surface); border: 1px solid var(--gold-primary);">';
-            mHtml += '<h4 class="memorial-name" style="color: var(--gold-bright);">' + m.name + '</h4>';
-            mHtml += '<div class="memorial-years" style="color: var(--gold-muted);">' + m.years + ' • <span style="color: var(--gold-primary);">' + m.branch + '</span></div>';
-            if (m.role) {
-              mHtml += '<span class="badge badge-gold" style="margin-bottom: 8px;">' + m.role + '</span>';
-            }
-            mHtml += '<p class="memorial-tribute" style="color: var(--text-primary);">"' + m.tribute + '"</p>';
-            mHtml += '</div>';
-          });
+          if (mems.length === 0) {
+            mHtml = '<p style="color: var(--text-muted); grid-column: 1/-1; padding: 14px 0;">No memorial tributes submitted yet.</p>';
+          } else {
+            mems.forEach(function (m) {
+              mHtml += '<div class="memorial-card" style="background: var(--bg-surface); border: 1px solid var(--gold-primary);">';
+              mHtml += '<h4 class="memorial-name" style="color: var(--gold-bright);">' + m.name + '</h4>';
+              mHtml += '<div class="memorial-years" style="color: var(--gold-muted);">' + m.years + ' • <span style="color: var(--gold-primary);">' + m.branch + '</span></div>';
+              if (m.role) {
+                mHtml += '<span class="badge badge-gold" style="margin-bottom: 8px;">' + m.role + '</span>';
+              }
+              mHtml += '<p class="memorial-tribute" style="color: var(--text-primary);">"' + m.tribute + '"</p>';
+              mHtml += '</div>';
+            });
+          }
           memGrid.innerHTML = mHtml;
         }
       }
@@ -1685,6 +1674,11 @@
       function renderPotluck() {
         var container = document.getElementById('potluck-list-container');
         if (!container || !state.potluck) return;
+
+        if (state.potluck.length === 0) {
+          container.innerHTML = '<p style="color: var(--text-muted); padding: 14px 0;">No items or volunteer roles added yet.</p>';
+          return;
+        }
 
         var html = '';
         state.potluck.forEach(function (item) {
@@ -1781,9 +1775,7 @@
       function getBranchScores() {
         if (state.branchScores) return state.branchScores;
         if (state.trivia && state.trivia.branchScores) return state.trivia.branchScores;
-        var def = {};
-        getBranchNames().forEach(function (b, i) { def[b] = 100 + i * 25; });
-        return def;
+        return {};
       }
 
       function renderTrivia() {
@@ -1797,6 +1789,11 @@
 
         var scores = getBranchScores();
         var sorted = Object.keys(scores).sort(function (a, b) { return scores[b] - scores[a]; });
+
+        if (sorted.length === 0) {
+          grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 8px 0;">No trivia scores recorded yet.</p>';
+          return;
+        }
 
         var html = '';
         sorted.forEach(function (branch, rank) {
@@ -1815,7 +1812,12 @@
 
       function renderActiveTriviaQuestion() {
         var questions = getTriviaQuestions();
-        if (questions.length === 0) return;
+        if (questions.length === 0) {
+          document.getElementById('trivia-q-badge').textContent = t("Family Trivia", "Whānau Trivia");
+          document.getElementById('trivia-question-prompt').textContent = t("No trivia questions added yet. Add questions via the Admin Panel.", "Kāore anō kia tāpirihia he pātai trivia.");
+          document.getElementById('trivia-options-list').innerHTML = '';
+          return;
+        }
         if (activeTriviaIndex >= questions.length) activeTriviaIndex = 0;
         var q = questions[activeTriviaIndex];
         if (!q) return;

@@ -194,9 +194,9 @@ def create_poster():
 
     col_w = (W - 2 * b_in) // 3
     meta_cols = [
-        ("GATHERING DATE", "Easter Weekend • April 3–6, 2026"),
+        ("GATHERING DATE", "Oct 17, 2026 • From 7:30 PM"),
         ("ALBUM TITLE", "2026 -CLARKE FAMILY REUNION"),
-        ("CELEBRATION VENUE", "The Headland, 41 Ocean Rd, Ohope")
+        ("CELEBRATION VENUE", "Papanui Club, Christchurch")
     ]
 
     for i, (lbl, val) in enumerate(meta_cols):
@@ -222,7 +222,7 @@ def create_poster():
     draw.line([(W//2 + 30, div_y2), (W//2 + 250, div_y2)], fill=CREAM_GOLD, width=1)
     cur_y += 25
 
-    bilingual_text = "Nau mai, haere mai ki te whakanui i tō tātou whānau  •  Welcome to our family celebration"
+    bilingual_text = "Please RSVP by 31 July  •  ashleycroons@yahoo.com  •  027 584 4663"
     draw_centered_text(bilingual_text, font_bilingual, CREAM_GOLD, cur_y)
 
     # 10. Save Output Files
