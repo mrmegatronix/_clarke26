@@ -6,49 +6,27 @@
   <title>Clarke Family Reunion — Master Admin Panel</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ==========================================================================
-       Master Admin — Hunter / Forest Green & Warm Parchment Palette
-       ========================================================================== */
-    :root {
-      --bg-deep: #1b281e;
-      --bg-surface: #253528;
-      --bg-elevated: #2f4233;
-      --bg-glass: rgba(37, 53, 40, 0.92);
-
-      --gold-primary: #dfd3b8;
-      --gold-bright: #f4eee1;
-      --gold-muted: #9e937b;
-      --border-gold: #dfd3b8;
-
-      --green-forest: #3b5a42;
-      --green-light: #6ca177;
-      --red-pohutukawa: #b84a39;
-
-      --text-primary: #f4eee1;
-      --text-secondary: #dfd3b8;
-      --text-muted: #9e937b;
-      --border-color: #3b5a42;
-      --shadow-gold: 0 0 16px rgba(223, 211, 184, 0.2);
-    }
-
     body {
-      background-color: var(--bg-deep);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(59, 99, 70, 0.3) 0%, transparent 45%),
+        radial-gradient(circle at 82% 85%, rgba(222, 201, 154, 0.1) 0%, transparent 45%),
+        linear-gradient(180deg, #17261c 0%, #101a13 100%);
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-family);
     }
 
     /* Admin Header */
     .admin-header {
-      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
-      border-bottom: 2px solid var(--gold-primary);
-      padding: 14px 28px;
+      background: linear-gradient(180deg, rgba(34, 53, 39, 0.98) 0%, rgba(18, 29, 21, 0.98) 100%);
+      border-bottom: 2px solid var(--border-gold);
+      padding: 12px 28px;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.65);
     }
 
     .admin-header-inner {
@@ -64,45 +42,48 @@
     .admin-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .admin-brand-crest {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
+      padding: 3px;
       object-fit: contain;
-      border-radius: 8px;
-      border: 1px solid var(--gold-primary);
-      background: #1b281e;
-      box-shadow: 0 0 10px rgba(223, 211, 184, 0.3);
+      border-radius: 9px;
+      border: 2px solid var(--gold-primary);
+      background: #f5efe2;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 10px var(--gold-glow);
       flex-shrink: 0;
     }
 
     .admin-brand-title {
-      font-family: "Cinzel", Georgia, serif, -apple-system, sans-serif;
-      font-size: 19px;
+      font-family: var(--font-heading);
+      font-size: 21px;
       font-weight: 800;
       color: var(--gold-bright);
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
       white-space: nowrap;
     }
 
     .admin-brand-sub {
-      font-size: 11px;
-      color: var(--gold-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--gold-primary);
+      letter-spacing: 0.4px;
     }
 
     .admin-clock-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--gold-primary);
-      border-radius: 8px;
+      background: rgba(17, 27, 20, 0.85);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 9px;
       padding: 6px 14px;
-      font-size: 17px;
-      font-weight: 700;
-      font-family: ui-monospace, monospace;
-      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--gold-bright);
       white-space: nowrap;
     }
 

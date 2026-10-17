@@ -85,95 +85,124 @@
       </div>
       <div class="hero-welcome-container">
         <div class="hero-card-main">
-          <div>
-            <span class="hero-motto" id="hero-crest-title">Clarkes of Chipley, Somersetshire</span>
-            <h2 class="hero-headline" id="hero-event-title">Clarke Family Reunion</h2>
-            
-            <div class="diamond-divider">
-              <span class="diamond-symbol">◆</span>
-            </div>
-
-            <div style="font-family: Georgia, serif; font-style: italic; color: var(--gold-bright); font-size: 21px; margin-bottom: 8px;">
-              “Ye shall drink of the brook by the way”
-            </div>
-
-            <p class="hero-desc" id="hero-event-subtitle">
-              Join us for an evening of good company, great conversation, and plenty of laughter.
-            </p>
-
-            <div style="background: rgba(47, 66, 51, 0.7); border: 1px dashed var(--border-gold); border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; font-size: 14px; color: var(--gold-bright);">
-              ℹ️ <span id="hero-reg-note">To help cover event costs, there will be a registration fee for all attendees.</span>
+          <div style="display: flex; align-items: center; gap: 26px; z-index: 2;">
+            <img src="clarke_crest.jpg" alt="Clarkes of Chipley Crest" style="width: 122px; height: 140px; object-fit: contain; background: #f5efe2; padding: 6px; border-radius: 14px; border: 2px solid var(--gold-primary); box-shadow: 0 8px 24px rgba(0,0,0,0.6); flex-shrink: 0;">
+            <div style="min-width: 0; flex: 1;">
+              <div class="hero-motto" id="hero-crest-title">Clarkes of Chipley, Somersetshire</div>
+              <h2 class="hero-headline" id="hero-event-title">Clarke Family Reunion</h2>
+              <div style="font-family: var(--font-serif); font-style: italic; color: var(--gold-primary); font-size: 25px; font-weight: 600;">
+                “Ye shall drink of the brook by the way”
+              </div>
             </div>
           </div>
 
-          <div class="diamond-divider">
+          <div class="diamond-divider" style="z-index: 2; margin: 4px 0;">
             <span class="diamond-symbol">◆</span>
           </div>
 
-          <div class="hero-details-row">
+          <div style="z-index: 2; text-align: center; padding: 2px 12px;">
+            <p class="hero-desc" id="hero-event-subtitle" style="margin: 0 auto 14px auto; font-size: 29px;">
+              Join us for an evening of good company, great conversation, and plenty of laughter.
+            </p>
+            <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(17, 27, 20, 0.9); border: 1.5px solid var(--border-gold); border-radius: var(--radius-full); padding: 11px 28px; font-size: 16px; font-weight: 700; color: var(--gold-bright); box-shadow: var(--shadow-sm);">
+              <span style="color: var(--gold-primary);">◆</span>
+              <span id="hero-reg-note">To help cover event costs, there will be a registration fee for all attendees.</span>
+              <span style="color: var(--gold-primary);">◆</span>
+            </div>
+          </div>
+
+          <!-- 5 Clarke Family Branches Heritage Strip -->
+          <div style="z-index: 2; background: rgba(17, 27, 20, 0.72); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="font-size: 11px; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1.5px;">Gathering Branches • Clarkes of Chipley &amp; New Zealand</span>
+              <span style="font-size: 11px; font-weight: 700; color: var(--green-light);">Three Scallop Shells &amp; Crescent Crest • Est. Somersetshire</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px;">
+              <div style="background: rgba(34, 53, 39, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; text-align: center;">
+                <div style="font-family: var(--font-heading); font-size: 12px; font-weight: 800; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Chipley Somerset</div>
+                <div style="font-size: 11px; color: var(--gold-primary); margin-top: 2px;">Ancestral Line</div>
+              </div>
+              <div style="background: rgba(34, 53, 39, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; text-align: center;">
+                <div style="font-family: var(--font-heading); font-size: 12px; font-weight: 800; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Christchurch</div>
+                <div style="font-size: 11px; color: var(--gold-primary); margin-top: 2px;">Canterbury Host</div>
+              </div>
+              <div style="background: rgba(34, 53, 39, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; text-align: center;">
+                <div style="font-family: var(--font-heading); font-size: 12px; font-weight: 800; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">North Canterbury</div>
+                <div style="font-size: 11px; color: var(--gold-primary); margin-top: 2px;">Plains &amp; High Country</div>
+              </div>
+              <div style="background: rgba(34, 53, 39, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; text-align: center;">
+                <div style="font-family: var(--font-heading); font-size: 12px; font-weight: 800; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Otago &amp; South</div>
+                <div style="font-size: 11px; color: var(--gold-primary); margin-top: 2px;">Southern Kin</div>
+              </div>
+              <div style="background: rgba(34, 53, 39, 0.85); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 8px 10px; text-align: center;">
+                <div style="font-family: var(--font-heading); font-size: 12px; font-weight: 800; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">North Island</div>
+                <div style="font-size: 11px; color: var(--gold-primary); margin-top: 2px;">Northern Kin</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-details-row" style="margin-top: 0;">
             <div class="hero-detail-item">
-              <span class="hero-detail-label" id="lbl-hero-date">Date & Time</span>
+              <span class="hero-detail-label" id="lbl-hero-date">Date &amp; Time</span>
               <span class="hero-detail-val" id="hero-date-val">Oct 17 2026 • From 7:30pm</span>
+              <span style="font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Saturday Evening Gathering</span>
             </div>
             <div class="hero-detail-item">
-              <span class="hero-detail-label" id="lbl-hero-venue">Venue</span>
-              <span class="hero-detail-val" id="hero-location-text">Papanui Club, Christchurch</span>
+              <span class="hero-detail-label" id="lbl-hero-venue">Christchurch Venue</span>
+              <span class="hero-detail-val" id="hero-location-text">@ Papanui Club</span>
+              <span style="font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">310 Sawyers Arms Rd, Bishopdale</span>
             </div>
             <div class="hero-detail-item">
-              <span class="hero-detail-label" id="lbl-hero-rsvp">RSVP By 31 July</span>
-              <span class="hero-detail-val" id="hero-rsvp-val">ashleycroons@yahoo.com</span>
+              <span class="hero-detail-label" id="lbl-hero-rsvp">Please RSVP By 31 July</span>
+              <span class="hero-detail-val" id="hero-rsvp-val">027 584 4663</span>
+              <span style="font-size: 13px; color: var(--gold-primary); font-family: var(--font-mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ashleycroons@yahoo.com</span>
             </div>
           </div>
         </div>
 
         <div class="hero-side-column">
-          <!-- Official Invitation Poster Showcase Card & Scannable QR -->
-          <div class="hero-invitation-card" style="justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 14px;">
-              <img src="clarke_invitation.jpg" alt="Clarke Reunion Invitation" class="hero-invitation-thumb">
-              <div class="hero-invitation-details">
-                <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--gold-bright);">
-                  Official Reunion Invitation
+          <!-- Official Invitation & Custom QR Split Showcase -->
+          <div class="hero-invitation-card" style="flex: 1.3; align-items: center; padding: 20px 24px; gap: 22px;">
+            <img src="clarke_invitation.jpg" alt="Clarke Reunion Invitation" style="height: 295px; width: auto; object-fit: contain; border-radius: 10px; border: 2px solid var(--gold-primary); box-shadow: 0 8px 24px rgba(0,0,0,0.65); flex-shrink: 0;">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; height: 295px; flex: 1; min-width: 0;">
+              <div>
+                <div style="font-size: 11px; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1.5px;">Shared Google Photos Album</div>
+                <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px;">
+                  2026 -CLARKE FAMILY REUNION
                 </div>
-                <div style="font-size: 13px; color: var(--text-secondary);">
-                  Papanui Club • 310 Sawyers Arms Rd
-                </div>
-                <div style="font-size: 12px; color: var(--green-light); font-weight: 600; margin-top: 4px;">
-                  📞 RSVP: Ashley Croons (027 584 4663)
+                <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+                  Scan with your phone camera to view &amp; upload family photos live!
                 </div>
               </div>
-            </div>
-            <!-- Scannable QR Code Badge for Shared Google Photos -->
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; background: rgba(27,40,30,0.85); border: 1px solid var(--border-gold); border-radius: 8px; padding: 6px 10px; cursor: pointer;" onclick="window.open('qr-print.html', '_blank')" title="Scan QR Code or Click to Print Poster">
-              <img src="clarke_qr.png" alt="Scan QR for Shared Photos Album" style="width: 78px; height: 78px; background: #ffffff; padding: 3px; border-radius: 6px;">
-              <span style="font-size: 10px; font-weight: 700; color: var(--gold-bright); text-transform: uppercase;">Scan Photos QR</span>
+              <div style="display: flex; align-items: center; gap: 16px; background: rgba(17, 27, 20, 0.92); border: 1.5px solid var(--border-gold); border-radius: 14px; padding: 14px 16px; cursor: pointer;" onclick="window.open('qr-print.html', '_blank')" title="Click to Open Printable QR Poster">
+                <img src="clarke_qr.png" alt="Scan QR for Shared Photos Album" style="width: 142px; height: 142px; background: #ffffff; padding: 5px; border-radius: 10px; flex-shrink: 0; box-shadow: 0 4px 14px rgba(0,0,0,0.55);">
+                <div style="min-width: 0;">
+                  <div style="font-size: 15px; font-weight: 800; color: var(--gold-bright); text-transform: uppercase; letter-spacing: 0.6px;">Scan Photos QR</div>
+                  <div style="font-family: var(--font-mono); font-size: 12px; color: var(--green-light); margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">photos.app.goo.gl/6fGko2NUqKfQp7866</div>
+                  <div style="font-size: 12px; color: var(--gold-primary); margin-top: 8px; font-weight: 700;">Press [P] for Printable Poster</div>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- WiFi Credentials Card -->
           <div class="hero-wifi-card">
-            <div class="wifi-header">
-              <div class="wifi-icon-box">📶</div>
-              <div>
-                <div class="wifi-title" id="wifi-card-title">Guest WiFi Access</div>
-                <div class="wifi-subtitle">Complimentary access at Papanui Club</div>
-              </div>
-            </div>
             <div class="wifi-cred-box">
-              <div class="wifi-cred-row">
-                <span class="wifi-cred-label">Network SSID:</span>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="background: var(--gold-primary); color: #111b14; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px;" id="wifi-card-title">Club Wi-Fi</span>
+                <span class="wifi-cred-label">SSID:</span>
                 <span class="wifi-cred-val" id="wifi-ssid">PapanuiClub_Guest</span>
               </div>
               <div class="wifi-cred-row">
-                <span class="wifi-cred-label">Password:</span>
+                <span class="wifi-cred-label">Pass:</span>
                 <span class="wifi-cred-val" id="wifi-pass">Clarke2026</span>
               </div>
             </div>
           </div>
 
           <!-- Countdown Big Box -->
-          <div class="hero-countdown-card">
-            <div style="font-size: 13px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px;" id="cnt-box-title">
+          <div class="hero-countdown-card" style="flex: 0.85;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1.5px;" id="cnt-box-title">
               Countdown to Saturday Evening Gathering
             </div>
             <div class="countdown-grid">
@@ -631,9 +660,9 @@
         document.getElementById('hero-event-title').textContent = eventTitle;
         document.getElementById('hero-crest-title').textContent = state.eventInfo.crestTitle || 'Clarkes of Chipley, Somersetshire';
         document.getElementById('hero-event-subtitle').textContent = ClarkeApp.t(state.eventInfo.subtitle, state.eventInfo.subtitleMi || state.eventInfo.subtitle);
-        document.getElementById('hero-location-text').textContent = state.eventInfo.location;
+        document.getElementById('hero-location-text').textContent = (state.eventInfo.location || '@ Papanui Club').split(',')[0];
         document.getElementById('hero-date-val').textContent = state.eventInfo.dateDisplay || 'Oct 17 2026 • From 7:30pm';
-        document.getElementById('hero-rsvp-val').textContent = (state.eventInfo.rsvpEmail || 'ashleycroons@yahoo.com') + ' • ' + (state.eventInfo.rsvpPhone || '027 584 4663');
+        document.getElementById('hero-rsvp-val').textContent = state.eventInfo.rsvpPhone || '027 584 4663';
         document.getElementById('hero-reg-note').textContent = state.eventInfo.registrationFeeNote || 'To help cover event costs, there will be a registration fee for all attendees.';
         
         document.getElementById('wifi-ssid').textContent = state.eventInfo.wifiSsid;
@@ -652,9 +681,9 @@
         document.getElementById('s00-page').textContent = ClarkeApp.t('Schedule • Slide 1 of 3', 'Hōtaka • Whārangi 1 o te 3');
 
         document.getElementById('lbl-hero-date').textContent = ClarkeApp.t('Date & Time', 'Te Rā me te Wā');
-        document.getElementById('lbl-hero-venue').textContent = ClarkeApp.t('Venue', 'Wāhi');
-        document.getElementById('lbl-hero-rsvp').textContent = ClarkeApp.t('RSVP By 31 July', 'Whakaae mai i mua i te 31 o Hūrae');
-        document.getElementById('wifi-card-title').textContent = ClarkeApp.t('Guest WiFi Access', 'Ipurangi Ahokore (WiFi)');
+        document.getElementById('lbl-hero-venue').textContent = ClarkeApp.t('Christchurch Venue', 'Wāhi');
+        document.getElementById('lbl-hero-rsvp').textContent = ClarkeApp.t('Please RSVP By 31 July', 'Whakaae mai i mua i te 31 o Hūrae');
+        document.getElementById('wifi-card-title').textContent = ClarkeApp.t('Club Wi-Fi', 'WiFi');
 
         document.getElementById('s01-badge').textContent = ClarkeApp.t('Module 1 of 6', 'Wāhanga 1 o te 6');
         document.getElementById('s01-title').textContent = ClarkeApp.t('Reunion Itinerary — Evening Celebration & Weekend', 'Hōtaka Whakanui — Rāhoroi me te Rātapu');
