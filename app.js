@@ -1,65 +1,55 @@
 /**
- * Clarke Whānau Reunion 2026 — Core Application Engine & Shared State
+ * Clarke Family Reunion 2026 — Core Application Engine & Shared State
  * Global Namespace: window.ClarkeApp
  */
 
 (function (window) {
   'use strict';
 
-  var STORAGE_KEY = 'clarke26_state';
+  var STORAGE_KEY = 'clarke26_v3_state';
   var CHANNEL_NAME = 'clarke26_channel';
   var CMD_KEY = 'clarke26_cmd';
 
   // Helper to generate clean SVG Data URIs for offline heritage photos
   function createSvgPhoto(title, subtitle, color1, color2, iconType) {
     var iconSvg = '';
-    if (iconType === 'homestead') {
-      iconSvg = '<polygon points="400,240 240,360 560,360" fill="#f3cc56" opacity="0.85"/>' +
-                '<rect x="270" y="360" width="260" height="200" fill="#f0f6fc" opacity="0.9"/>' +
-                '<rect x="370" y="440" width="60" height="120" fill="#c93b2b"/>' +
-                '<rect x="300" y="390" width="50" height="50" fill="#161b22"/>' +
-                '<rect x="450" y="390" width="50" height="50" fill="#161b22"/>';
-    } else if (iconType === 'waka') {
-      iconSvg = '<path d="M180,480 Q400,530 620,480 Q560,420 400,430 Q240,420 180,480 Z" fill="#d4af37"/>' +
-                '<line x1="280" y1="380" x2="280" y2="440" stroke="#f0f6fc" stroke-width="4"/>' +
-                '<line x1="360" y1="360" x2="360" y2="440" stroke="#f0f6fc" stroke-width="4"/>' +
-                '<line x1="440" y1="360" x2="440" y2="440" stroke="#f0f6fc" stroke-width="4"/>' +
-                '<line x1="520" y1="380" x2="520" y2="440" stroke="#f0f6fc" stroke-width="4"/>' +
-                '<polygon points="400,280 400,430 480,360" fill="#c93b2b" opacity="0.9"/>';
-    } else if (iconType === 'tupuna') {
-      iconSvg = '<circle cx="400" cy="340" r="70" fill="#f3cc56" opacity="0.85"/>' +
-                '<circle cx="375" cy="330" r="8" fill="#161b22"/>' +
-                '<circle cx="425" cy="330" r="8" fill="#161b22"/>' +
-                '<path d="M375,370 Q400,390 425,370" stroke="#161b22" stroke-width="4" fill="none"/>' +
-                '<path d="M260,540 Q400,440 540,540 Z" fill="#c93b2b" opacity="0.9"/>' +
-                '<line x1="400" y1="410" x2="400" y2="480" stroke="#f3cc56" stroke-width="6"/>';
-    } else if (iconType === 'marae') {
-      iconSvg = '<polygon points="400,220 200,340 600,340" fill="#c93b2b"/>' +
-                '<rect x="240" y="340" width="320" height="220" fill="#1f6f50"/>' +
-                '<polygon points="400,190 380,240 420,240" fill="#d4af37"/>' +
-                '<rect x="360" y="420" width="80" height="140" fill="#d4af37"/>' +
-                '<line x1="200" y1="340" x2="600" y2="340" stroke="#f3cc56" stroke-width="8"/>';
+    if (iconType === 'crest') {
+      iconSvg = '<rect x="280" y="160" width="240" height="280" rx="12" fill="#253528" stroke="#dfd3b8" stroke-width="4"/>' +
+                '<circle cx="340" cy="220" r="22" fill="#dfd3b8"/>' +
+                '<circle cx="400" cy="220" r="22" fill="#dfd3b8"/>' +
+                '<circle cx="460" cy="220" r="22" fill="#dfd3b8"/>' +
+                '<path d="M400,280 A25,25 0 0,0 400,330 A20,20 0 0,1 400,280" fill="#dfd3b8"/>' +
+                '<text x="400" y="390" font-family="Georgia, serif" font-size="15" fill="#dfd3b8" text-anchor="middle" font-style="italic">ye shall drink of the brook by the way</text>';
+    } else if (iconType === 'papanui') {
+      iconSvg = '<polygon points="400,200 220,320 580,320" fill="#3b5a42"/>' +
+                '<rect x="250" y="320" width="300" height="200" fill="#253528" stroke="#dfd3b8" stroke-width="2"/>' +
+                '<rect x="360" y="400" width="80" height="120" fill="#dfd3b8"/>' +
+                '<rect x="280" y="350" width="50" height="50" fill="#1b281e" stroke="#dfd3b8"/>' +
+                '<rect x="470" y="350" width="50" height="50" fill="#1b281e" stroke="#dfd3b8"/>' +
+                '<text x="400" y="290" font-family="sans-serif" font-size="16" fill="#f4eee1" text-anchor="middle" font-weight="bold">PAPANUI CLUB • CHRISTCHURCH</text>';
+    } else if (iconType === 'homestead') {
+      iconSvg = '<polygon points="400,220 230,340 570,340" fill="#6ca177"/>' +
+                '<rect x="260" y="340" width="280" height="190" fill="#253528" stroke="#dfd3b8" stroke-width="2"/>' +
+                '<rect x="370" y="420" width="60" height="110" fill="#b84a39"/>' +
+                '<circle cx="400" cy="280" r="24" fill="#dfd3b8"/>';
     } else {
-      iconSvg = '<circle cx="400" cy="380" r="90" fill="#d4af37" opacity="0.6"/>' +
-                '<polygon points="400,260 430,340 515,340 445,390 475,470 400,420 325,470 355,390 285,340 370,340" fill="#f3cc56"/>';
+      iconSvg = '<circle cx="400" cy="320" r="80" fill="#3b5a42" stroke="#dfd3b8" stroke-width="3"/>' +
+                '<text x="400" y="330" font-family="Georgia, serif" font-size="36" fill="#f4eee1" text-anchor="middle" font-weight="bold">C</text>';
     }
 
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">' +
       '<defs>' +
-      '<linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">' +
+      '<linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">' +
       '<stop offset="0%" stop-color="' + color1 + '"/>' +
       '<stop offset="100%" stop-color="' + color2 + '"/>' +
       '</linearGradient>' +
-      '<pattern id="kowhaiwhai" width="40" height="40" patternUnits="userSpaceOnUse">' +
-      '<path d="M0,20 Q20,0 40,20 Q20,40 0,20" fill="none" stroke="rgba(212,175,55,0.08)" stroke-width="2"/>' +
-      '</pattern>' +
       '</defs>' +
-      '<rect width="800" height="600" fill="url(#grad)"/>' +
-      '<rect width="800" height="600" fill="url(#kowhaiwhai)"/>' +
+      '<rect width="800" height="600" fill="url(#g1)"/>' +
+      '<rect x="20" y="20" width="760" height="560" fill="none" stroke="#dfd3b8" stroke-width="2" stroke-dasharray="8 4"/>' +
       iconSvg +
-      '<rect x="40" y="500" width="720" height="70" rx="8" fill="rgba(13,17,23,0.85)" stroke="#d4af37" stroke-width="1"/>' +
-      '<text x="60" y="534" font-family="-apple-system, sans-serif" font-size="20" font-weight="bold" fill="#f0f6fc">' + title + '</text>' +
-      '<text x="60" y="556" font-family="-apple-system, sans-serif" font-size="14" fill="#d4af37">' + subtitle + '</text>' +
+      '<rect x="40" y="500" width="720" height="65" rx="8" fill="rgba(27,40,30,0.92)" stroke="#dfd3b8" stroke-width="1"/>' +
+      '<text x="60" y="528" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#f4eee1">' + title + '</text>' +
+      '<text x="60" y="550" font-family="-apple-system, sans-serif" font-size="13" fill="#dfd3b8">' + subtitle + '</text>' +
       '</svg>';
 
     return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
@@ -67,15 +57,27 @@
 
   var DEFAULT_STATE = {
     eventInfo: {
-      title: "CLARKE WHĀNAU REUNION 2026",
-      subtitle: "Kia Whakatōmuri Te Haere Whakamua — Honouring Our Past, Building Our Future",
-      dateISO: "2026-12-26T10:00:00+13:00",
-      location: "Waitangi Treaty Grounds & Clarke Homestead, Bay of Islands",
-      wifiSsid: "ClarkeReunion2026",
-      wifiPass: "Whanau2026",
+      title: "Clarke Family Reunion",
+      titleMi: "Te Huihuinga Whānau o Clarke",
+      crestTitle: "Clarkes of Chipley, Somersetshire",
+      motto: "Ye shall drink of the brook by the way",
+      subtitle: "Join us for an evening of good company, great conversation, and plenty of laughter.",
+      subtitleMi: "Kia Whakatōmuri Te Haere Whakamua — Good company, great conversation, and plenty of laughter.",
+      dateISO: "2026-10-17T19:30:00+13:00",
+      dateDisplay: "Oct 17 2026 • From 7:30pm",
+      location: "Papanui Club, 310 Sawyers Arms Road, Bishopdale, Christchurch 8053",
+      registrationFeeNote: "To help cover event costs, there will be a registration fee for all attendees.",
+      rsvpDeadline: "31 July 2026",
+      rsvpEmail: "ashleycroons@yahoo.com",
+      rsvpPhone: "027 584 4663",
+      wifiSsid: "PapanuiClub_Guest",
+      wifiPass: "Clarke2026",
+      sharedAlbumUrl: "https://photos.app.goo.gl/6fGko2NUqKfQp7866",
+      sharedAlbumTitle: "2026 -CLARKE FAMILY REUNION",
       emergencyNotice: ""
     },
     settings: {
+      useTeReo: false, // Default: English (OFF)
       slideDurationSec: 10,
       isPaused: false,
       isLocked: false
@@ -83,292 +85,298 @@
     schedule: [
       {
         dayNumber: 1,
-        dayName: "Day 1 — Welcome & Mihimihi",
-        dateString: "Friday, 26 December 2026",
+        dayName: "Evening Reunion Celebration",
+        dayNameMi: "Hākari Whakawhanaunga",
+        dateString: "Saturday, 17 October 2026",
         items: [
-          { time: "09:30", title: "Registration & Welcome Tea", location: "Marquee A, Treaty Grounds", lead: "Arrivals Committee" },
-          { time: "10:30", title: "Official Pōwhiri & Mihimihi", location: "Te Whare Rūnanga (Waitangi)", lead: "Kaumātua & Kuia" },
-          { time: "12:30", title: "Whakawhanaungatanga Light Kai", location: "Wharekai Grounds", lead: "Te Ariki Branch" },
-          { time: "14:00", title: "Whānau Generation Photo Session", location: "Treaty Grounds Flagstaff", lead: "Wiremu Clarke Line" },
-          { time: "16:30", title: "Welcome Hākari Dinner & Waiata", location: "Main Dining Hall", lead: "All Branches" }
+          { time: "19:00", title: "Doors Open & Guest Check-In", location: "Papanui Club Main Entrance", lead: "Ashley Croons & Reception" },
+          { time: "19:30", title: "Reunion Commences — Welcome & Drinks", location: "Lounge & Banquet Hall", lead: "Host Committee" },
+          { time: "20:00", title: "Official Welcome & Chipley Crest Presentation", location: "Main Stage", lead: "Family Historians" },
+          { time: "20:30", title: "Reunion Buffet Dinner & Conversations", location: "Dining Hall", lead: "Papanui Club Catering" },
+          { time: "21:30", title: "Family Roll Call & Heritage Showcase", location: "Main Stage", lead: "Branch Coordinators" },
+          { time: "22:30", title: "Evening Toast & Official Photographs", location: "Banquet Hall", lead: "All Clarke Descendants" }
         ]
       },
       {
         dayNumber: 2,
-        dayName: "Day 2 — Whakapapa & Games",
-        dateString: "Saturday, 27 December 2026",
+        dayName: "Sunday Whānau Gathering",
+        dayNameMi: "Hui Whakakapi o te Rātapu",
+        dateString: "Sunday, 18 October 2026",
         items: [
-          { time: "09:00", title: "Whakapapa Workshop & Oral Archives", location: "Heritage Marquee", lead: "Aroha & Rawiri Branch" },
-          { time: "11:00", title: "Whānau Olympics & Kī-o-Rahi", location: "Waitangi Sports Field", lead: "Youth Committee" },
-          { time: "13:00", title: "Grand Hāngī Lifting & Feast", location: "Clarke Homestead Paddock", lead: "Hāngī Pit Masters" },
-          { time: "15:30", title: "Historic Clarke Homestead Walking Tour", location: "Homestead & Orchard", lead: "Hemi & Mere Branch" },
-          { time: "19:00", title: "Archival Photo Night & Whānau Got Talent", location: "Main Stage Marquee", lead: "Kahu Southern Line" }
-        ]
-      },
-      {
-        dayNumber: 3,
-        dayName: "Day 3 — Memorial & Poroporoaki",
-        dateString: "Sunday, 28 December 2026",
-        items: [
-          { time: "09:30", title: "Memorial Service (He Whakamaumaharatanga)", location: "Waitangi Memorial Garden", lead: "Whānau Kaumātua" },
-          { time: "11:30", title: "Whānau Trust AGM & 2030 Handover", location: "Te Whare Rūnanga Annex", lead: "Executive Committee" },
-          { time: "13:00", title: "Poroporoaki Farewell & Kai Oti", location: "Marquee A", lead: "All Branches" },
-          { time: "15:00", title: "Safe Travels Whānau Karakia", location: "Main Gate Grounds", lead: "Kaumātua Tane" }
+          { time: "10:30", title: "Morning Tea & Coffee Mingling", location: "Bishopdale Park Cafe", lead: "Canterbury Branch" },
+          { time: "12:00", title: "Historic Canterbury Pioneer Walking Tour", location: "Christchurch Landmarks", lead: "Local Heritage Guides" },
+          { time: "14:00", title: "Farewell Afternoon Tea & 2028 Planning", location: "Papanui Club Pavilion", lead: "Organizing Committee" }
         ]
       }
     ],
     rsvps: [
-      { id: "rsvp-01", name: "Tane Clarke", branch: "Te Ariki Branch", adults: 2, kids: 2, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-10-15T09:12:00Z" },
-      { id: "rsvp-02", name: "Moana Clarke-Smith", branch: "Wiremu Clarke Line", adults: 3, kids: 1, dietary: "Gluten-Free", status: "Confirmed", checkedIn: true, timestamp: "2026-10-15T10:45:00Z" },
-      { id: "rsvp-03", name: "Rawiri & Aroha Clarke", branch: "Aroha & Rawiri Branch", adults: 2, kids: 0, dietary: "Diabetic Friendly", status: "Confirmed", checkedIn: true, timestamp: "2026-10-15T11:20:00Z" },
-      { id: "rsvp-04", name: "Keanu & Sarah Clarke", branch: "Hemi & Mere Branch", adults: 2, kids: 3, dietary: "Vegetarian (1)", status: "Confirmed", checkedIn: false, timestamp: "2026-10-15T14:02:00Z" },
-      { id: "rsvp-05", name: "Hine Kahu", branch: "Kahu Southern Line", adults: 1, kids: 0, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-10-15T15:30:00Z" },
-      { id: "rsvp-06", name: "Wiremu Clarke Jr.", branch: "Wiremu Clarke Line", adults: 2, kids: 2, dietary: "Nut Allergy", status: "Confirmed", checkedIn: false, timestamp: "2026-10-15T16:15:00Z" },
-      { id: "rsvp-07", name: "Dr. Ngaire Clarke", branch: "Te Ariki Branch", adults: 1, kids: 1, dietary: "Pescatarian", status: "Confirmed", checkedIn: true, timestamp: "2026-10-16T08:30:00Z" },
-      { id: "rsvp-08", name: "Rewi & Maraea Davis", branch: "Hemi & Mere Branch", adults: 4, kids: 2, dietary: "None", status: "Confirmed", checkedIn: false, timestamp: "2026-10-16T09:40:00Z" },
-      { id: "rsvp-09", name: "Tama & Chloe Clarke", branch: "Kahu Southern Line", adults: 2, kids: 2, dietary: "Dairy-Free", status: "Confirmed", checkedIn: true, timestamp: "2026-10-16T11:05:00Z" },
-      { id: "rsvp-10", name: "Marama Henare (Clarke)", branch: "Aroha & Rawiri Branch", adults: 2, kids: 1, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-10-16T13:20:00Z" },
-      { id: "rsvp-11", name: "Nikau & Zoe Clarke", branch: "Te Ariki Branch", adults: 2, kids: 3, dietary: "None", status: "Confirmed", checkedIn: false, timestamp: "2026-10-16T15:10:00Z" },
-      { id: "rsvp-12", name: "Pania Clarke", branch: "Wiremu Clarke Line", adults: 1, kids: 0, dietary: "Vegan", status: "Confirmed", checkedIn: true, timestamp: "2026-10-16T17:00:00Z" },
-      { id: "rsvp-13", name: "Ariki Clarke III", branch: "Te Ariki Branch", adults: 2, kids: 2, dietary: "None", status: "Confirmed", checkedIn: false, timestamp: "2026-10-17T08:15:00Z" },
-      { id: "rsvp-14", name: "Anaru & Chelsea Clarke", branch: "Hemi & Mere Branch", adults: 2, kids: 1, dietary: "Gluten-Free (1)", status: "Confirmed", checkedIn: true, timestamp: "2026-10-17T09:00:00Z" },
-      { id: "rsvp-15", name: "Kiriwai Southern-Clarke", branch: "Kahu Southern Line", adults: 2, kids: 0, dietary: "None", status: "Confirmed", checkedIn: false, timestamp: "2026-10-17T10:10:00Z" }
+      { id: "rsvp-01", name: "Ashley Croons", branch: "Christchurch & Canterbury Branch", adults: 2, kids: 1, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-06-10T09:15:00Z" },
+      { id: "rsvp-02", name: "David & Margaret Clarke", branch: "Chipley Somerset Line", adults: 2, kids: 0, dietary: "Gluten-Free (1)", status: "Confirmed", checkedIn: true, timestamp: "2026-06-12T11:20:00Z" },
+      { id: "rsvp-03", name: "James Clarke", branch: "Christchurch & Canterbury Branch", adults: 2, kids: 2, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-06-15T14:40:00Z" },
+      { id: "rsvp-04", name: "Sarah & Robert Macfarlane", branch: "North Canterbury Branch", adults: 2, kids: 1, dietary: "Vegetarian", status: "Confirmed", checkedIn: false, timestamp: "2026-06-18T10:05:00Z" },
+      { id: "rsvp-05", name: "Alistair Clarke", branch: "Otago & Southern Line", adults: 1, kids: 0, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-06-20T16:30:00Z" },
+      { id: "rsvp-06", name: "Dr. Elizabeth Clarke-Hall", branch: "North Island Clarke Branch", adults: 2, kids: 2, dietary: "Nut Allergy", status: "Confirmed", checkedIn: false, timestamp: "2026-06-25T08:50:00Z" },
+      { id: "rsvp-07", name: "Peter & Wendy Clarke", branch: "Christchurch & Canterbury Branch", adults: 2, kids: 0, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-07-02T13:15:00Z" },
+      { id: "rsvp-08", name: "Hannah Clarke & Partner", branch: "North Canterbury Branch", adults: 2, kids: 2, dietary: "Dairy-Free", status: "Confirmed", checkedIn: false, timestamp: "2026-07-05T17:45:00Z" },
+      { id: "rsvp-09", name: "Colin Clarke", branch: "Otago & Southern Line", adults: 2, kids: 1, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-07-10T12:00:00Z" },
+      { id: "rsvp-10", name: "Michael & Brenda Clarke", branch: "Chipley Somerset Line", adults: 2, kids: 0, dietary: "Diabetic Friendly", status: "Confirmed", checkedIn: true, timestamp: "2026-07-15T09:30:00Z" },
+      { id: "rsvp-11", name: "Richard Clarke", branch: "North Island Clarke Branch", adults: 1, kids: 0, dietary: "None", status: "Confirmed", checkedIn: false, timestamp: "2026-07-18T15:10:00Z" },
+      { id: "rsvp-12", name: "Thomas & Emma Clarke", branch: "Christchurch & Canterbury Branch", adults: 2, kids: 3, dietary: "None", status: "Confirmed", checkedIn: true, timestamp: "2026-07-22T11:45:00Z" },
+      { id: "rsvp-13", name: "Graeme & Lynette Clarke", branch: "North Canterbury Branch", adults: 2, kids: 0, dietary: "None", status: "Confirmed", checkedIn: false, timestamp: "2026-07-25T14:20:00Z" },
+      { id: "rsvp-14", name: "Stuart Clarke", branch: "Chipley Somerset Line", adults: 2, kids: 2, dietary: "Gluten-Free", status: "Confirmed", checkedIn: true, timestamp: "2026-07-28T16:00:00Z" },
+      { id: "rsvp-15", name: "Victoria Clarke", branch: "Otago & Southern Line", adults: 1, kids: 1, dietary: "Pescatarian", status: "Confirmed", checkedIn: false, timestamp: "2026-07-30T10:30:00Z" }
     ],
     photos: [
       {
+        id: "p0",
+        title: "2026 -CLARKE FAMILY REUNION Official Album",
+        year: 2026,
+        branch: "All Branches",
+        caption: "Google Photos Shared Album • Scan QR code to view & upload your family photos.",
+        url: "https://lh3.googleusercontent.com/pw/AP1GczPX_28XDjgr8KnIoeqqZgKsmFZKgnRZO7jzbES67iKOUlhJZXsvUMvXsF8uSJhxl9JWs1nD_ExTLGKgHg8gp_z4hnWSp1ilYQI2kXPylpJB7L3oPJ_l=w1200"
+      },
+      {
         id: "p1",
-        title: "Samuel & Mereana Clarke at Hokianga",
-        year: 1912,
-        branch: "Founders",
-        caption: "Original portrait of whānau founders outside the Hokianga homestead.",
-        url: createSvgPhoto("Samuel & Mereana Clarke (1912)", "Whānau Founders at Hokianga Harbour", "#161b22", "#21262d", "tupuna")
+        title: "Official Clarke Family Reunion Invitation",
+        year: 2026,
+        branch: "All Branches",
+        caption: "Join us at Papanui Club, 310 Sawyers Arms Road, Bishopdale, Christchurch on Oct 17 2026 from 7:30pm.",
+        url: "clarke_invitation.jpg"
       },
       {
         id: "p2",
-        title: "Clarke Homestead Orchard Harvest",
-        year: 1935,
-        branch: "Te Ariki Branch",
-        caption: "Gathering the summer fruit harvest at the Bay of Islands family orchard.",
-        url: createSvgPhoto("Homestead Orchard Harvest (1935)", "Bay of Islands Estate & Fruit Packing", "#144934", "#1f6f50", "homestead")
+        title: "Clarkes of Chipley, Somersetshire Crest",
+        year: 1680,
+        branch: "Chipley Somerset Line",
+        caption: "Three escallop shells and crescent with motto: 'Ye shall drink of the brook by the way'.",
+        url: "clarke_crest.jpg"
       },
       {
         id: "p3",
-        title: "Waitangi Whānau Waka Launch",
-        year: 1954,
-        branch: "Wiremu Clarke Line",
-        caption: "Wiremu and his sons taking part in the royal ceremonial waka escort.",
-        url: createSvgPhoto("Waitangi Ceremonial Waka (1954)", "Wiremu Clarke Line at Waitangi Inlet", "#161b22", "#1f6feb", "waka")
+        title: "Historic Canterbury Pioneer Homestead",
+        year: 1878,
+        branch: "Christchurch & Canterbury Branch",
+        caption: "Early Canterbury Clarke settlers homestead and orchard in Bishopdale.",
+        url: createSvgPhoto("Canterbury Pioneer Homestead (1878)", "Bishopdale Settlers Estate", "#1b281e", "#3b5a42", "homestead")
       },
       {
         id: "p4",
-        title: "Opening of Te Whare Hui",
-        year: 1978,
-        branch: "Hemi & Mere Branch",
-        caption: "Hemi Clarke speaking on behalf of northern descendants during whare opening.",
-        url: createSvgPhoto("Whare Hui Opening (1978)", "Hemi & Mere Branch Representation", "#8c2317", "#c93b2b", "marae")
+        title: "Papanui Club Venue & Pavilion",
+        year: 2026,
+        branch: "All Branches",
+        caption: "Venue for our evening celebration • 310 Sawyers Arms Road, Bishopdale, Christchurch.",
+        url: createSvgPhoto("Papanui Club Venue (2026)", "Bishopdale, Christchurch", "#253528", "#6ca177", "papanui")
       },
       {
         id: "p5",
-        title: "Centennial Reunion at Paihia",
-        year: 1998,
-        branch: "All Branches",
-        caption: "Over 280 whānau members gathered to celebrate 100 years of marriage.",
-        url: createSvgPhoto("Centennial Reunion Gathering (1998)", "Paihia Centennial Celebration", "#21262d", "#aa8522", "homestead")
+        title: "Clarke Family Heritage Gathering",
+        year: 1954,
+        branch: "North Canterbury Branch",
+        caption: "Generations gathered at Rangiora for the golden jubilee family reunion.",
+        url: createSvgPhoto("Heritage Gathering at Rangiora (1954)", "North Canterbury Jubilee", "#1b281e", "#2f4233", "homestead")
       },
       {
         id: "p6",
-        title: "Rangatahi Kī-o-Rahi Championship",
-        year: 2016,
-        branch: "Youth Committee",
-        caption: "Clarke descendants winning the Northland regional Whānau Kī-o-Rahi shield.",
-        url: createSvgPhoto("Kī-o-Rahi Championship (2016)", "Clarke Rangatahi Victory at Kaikohe", "#144934", "#2da44e", "star")
+        title: "Next Generation of Clarke Descendants",
+        year: 2024,
+        branch: "All Branches",
+        caption: "Tamariki and youth carrying the Clarke lineage forward with pride.",
+        url: createSvgPhoto("Next Generation Descendants (2024)", "Canterbury Youth & Families", "#253528", "#3b5a42", "crest")
       }
     ],
     familyTree: {
-      founders: "Samuel & Mereana Clarke (m. 1898, Hokianga)",
+      founders: "Clarkes of Chipley, Somersetshire & Canterbury Pioneers",
       branches: [
         {
           id: "branch-1",
-          name: "Te Ariki Branch",
-          ancestor: "Te Ariki Samuel Clarke (1900–1974)",
-          era: "Eldest Son Lineage",
-          motto: "Kia mau ki te mana me te tika (Hold steadfast to integrity and justice)",
-          membersCount: 84,
-          highlights: "Caretakers of ancestral land title, Marae trustees, orchard heritage",
-          keyMembers: ["Dr. Ngaire Clarke", "Ariki Clarke III", "Nikau Clarke"]
+          name: "Chipley Somerset Line",
+          ancestor: "Edward Clarke of Chipley (1650–1710)",
+          era: "Somersetshire Ancestral Seat",
+          motto: "Ye shall drink of the brook by the way",
+          membersCount: 112,
+          highlights: "Ancient Somersetshire estate, Member of Parliament, friend of philosopher John Locke",
+          keyMembers: ["David Clarke", "Michael Clarke", "Stuart Clarke"]
         },
         {
           id: "branch-2",
-          name: "Hemi & Mere Branch",
-          ancestor: "Hemi 'Jim' Clarke (1903–1981)",
-          era: "Paihia & Whangarei Line",
-          motto: "He kete whakairo, he mahi tahi (A carved basket made by unity)",
-          membersCount: 68,
-          highlights: "Tradition of Master Carvers, boat builders, teachers",
-          keyMembers: ["Keanu Clarke", "Rewi Davis", "Anaru Clarke"]
+          name: "Christchurch & Canterbury Branch",
+          ancestor: "Thomas & Elizabeth Clarke (arr. Lyttelton 1862)",
+          era: "Canterbury Pioneers",
+          motto: "Forward with courage and industrious hands",
+          membersCount: 94,
+          highlights: "Bishopdale orchards, Papanui builders, Canterbury merchants & civic leaders",
+          keyMembers: ["Ashley Croons", "James Clarke", "Peter Clarke"]
         },
         {
           id: "branch-3",
-          name: "Wiremu Clarke Line",
-          ancestor: "Wiremu Kingi Clarke (1906–1989)",
-          era: "Waitangi & Coast Line",
-          motto: "Ko te Moana to tatou oranga (The ocean is our livelihood)",
-          membersCount: 72,
-          highlights: "Maritime pilots, waka captains, fisheries conservation leaders",
-          keyMembers: ["Moana Clarke-Smith", "Wiremu Clarke Jr.", "Pania Clarke"]
+          name: "North Canterbury Branch",
+          ancestor: "William Henry Clarke (1868–1941)",
+          era: "Rangiora & Hurunui Settlers",
+          motto: "Strength in soil and community",
+          membersCount: 65,
+          highlights: "Agricultural pioneers, pastoral estates, Rangiora community builders",
+          keyMembers: ["Sarah Macfarlane", "Hannah Clarke", "Graeme Clarke"]
         },
         {
           id: "branch-4",
-          name: "Aroha & Rawiri Branch",
-          ancestor: "Aroha Clarke-Reid (1910–1995)",
-          era: "Auckland & Rotorua Line",
-          motto: "Manaaki tangata, manaaki whenua (Uplift the people, care for the land)",
-          membersCount: 59,
-          highlights: "Nurses, educators, healthcare pioneers, waiata composers",
-          keyMembers: ["Rawiri Clarke", "Marama Henare", "Aroha Clarke"]
+          name: "Otago & Southern Line",
+          ancestor: "George & Sarah Clarke (1874–1953)",
+          era: "Dunedin & Southland Line",
+          motto: "Unyielding through southern seasons",
+          membersCount: 58,
+          highlights: "Education, legal scholars, southern engineers, Dunedin educators",
+          keyMembers: ["Alistair Clarke", "Colin Clarke", "Victoria Clarke"]
         },
         {
           id: "branch-5",
-          name: "Kahu Southern Line",
-          ancestor: "Kahu 'Sam' Clarke (1914–2001)",
-          era: "Wellington & South Island Line",
-          motto: "E tu ki te tonga (Stand resolute in the south)",
-          membersCount: 51,
-          highlights: "Engineers, civil service, music conductors, Antarctic researchers",
-          keyMembers: ["Hine Kahu", "Tama Clarke", "Kiriwai Southern-Clarke"]
+          name: "North Island Clarke Branch",
+          ancestor: "Arthur & Margaret Clarke (1880–1960)",
+          era: "Wellington & Auckland Line",
+          motto: "Connecting past traditions to future horizons",
+          membersCount: 76,
+          highlights: "Maritime trade, public service, healthcare leaders",
+          keyMembers: ["Dr. Elizabeth Clarke-Hall", "Richard Clarke"]
         }
       ]
     },
     memoriam: [
       {
         id: "mem-1",
-        name: "Uncle Hoani 'John' Clarke",
-        years: "1932 – 2022",
-        branch: "Te Ariki Branch",
-        tribute: "Cherished Kaumātua, master of whaikōrero, keeper of genealogical records.",
-        role: "Whānau Historian"
+        name: "Arthur Thomas Clarke",
+        years: "1928 – 2021",
+        branch: "Christchurch & Canterbury Branch",
+        tribute: "Cherished patriarch, lifelong Bishopdale resident, keeper of the Canterbury family records.",
+        role: "Family Elder & Historian"
       },
       {
         id: "mem-2",
-        name: "Aunty Mereana Clarke-Pita",
-        years: "1938 – 2023",
-        branch: "Hemi & Mere Branch",
-        tribute: "Beloved matriarch whose warm smile and legendary hāngī puddings united every generation.",
-        role: "Wharekai Guardian"
+        name: "Margaret Eleanor Clarke (née Wood)",
+        years: "1932 – 2023",
+        branch: "Chipley Somerset Line",
+        tribute: "Beloved matriarch whose warmth, devotion, and hospitality brought every branch together.",
+        role: "Matriarch"
       },
       {
         id: "mem-3",
-        name: "Captain Wiremu 'Bill' Clarke",
-        years: "1940 – 2024",
-        branch: "Wiremu Clarke Line",
-        tribute: "Master Navigator of the Bay of Islands, respected sailor, and mentor to generations of young mariners.",
-        role: "Waka Navigator"
+        name: "William 'Bill' Henry Clarke Jr.",
+        years: "1935 – 2024",
+        branch: "North Canterbury Branch",
+        tribute: "Respected Hurunui farmer, generous community servant, and champion of rural sports.",
+        role: "Community Leader"
       },
       {
         id: "mem-4",
-        name: "Aroha 'Rose' Clarke-Davies",
-        years: "1944 – 2025",
-        branch: "Aroha & Rawiri Branch",
-        tribute: "Dedicated nurse leader who served the communities of Northland and Rotorua with unwavering love.",
-        role: "Community Healer"
+        name: "Dorothy 'Dot' Clarke-Sinclair",
+        years: "1940 – 2025",
+        branch: "Otago & Southern Line",
+        tribute: "Dedicated Dunedin teacher, loving grandmother, and passionate genealogist.",
+        role: "Genealogist & Educator"
       },
       {
         id: "mem-5",
-        name: "Kahu Samuel Clarke Jr.",
-        years: "1949 – 2021",
-        branch: "Kahu Southern Line",
-        tribute: "Pioneering mechanical engineer, whānau sports coach, and gentle soul whose laughter filled every hall.",
-        role: "Youth Sports Mentor"
+        name: "Edward John Clarke",
+        years: "1945 – 2022",
+        branch: "North Island Clarke Branch",
+        tribute: "Engineer, mentor, and beloved uncle whose infectious laughter filled every family reunion.",
+        role: "Youth Mentor"
       }
     ],
     announcements: [
       {
         id: "ann-1",
-        title: "Whānau Group Photo Scheduled",
-        body: "All five branches gather at Waitangi Flagstaff at 2:00 PM Friday. Branch coordinators please assemble your lines.",
+        title: "Please RSVP by 31 July 2026",
+        body: "Kindly RSVP by 31 July to Ashley Croons at ashleycroons@yahoo.com or text/call 027 584 4663 with your guest counts.",
         priority: "high",
-        time: "Friday 2:00 PM",
-        author: "Event Committee",
+        time: "RSVP Deadline: 31 July",
+        author: "Ashley Croons",
         pinned: true
       },
       {
         id: "ann-2",
-        title: "Hāngī Preparation Volunteers",
-        body: "Pit masters start fire prep at 5:00 AM Saturday at the Homestead. Wood chopping & basket prep team needed.",
-        priority: "normal",
-        time: "Saturday 5:00 AM",
-        author: "Hāngī Pit Crew",
+        title: "Registration Fee Notice",
+        body: "To help cover event costs, there will be a registration fee for all attendees. Details will be provided upon RSVP.",
+        priority: "high",
+        time: "Event Cost Notice",
+        author: "Reunion Committee",
         pinned: true
       },
       {
         id: "ann-3",
-        title: "Shuttle Van Between Motels & Grounds",
-        body: "Free whānau shuttle runs every 30 minutes between Paihia Waterfront Motels and Waitangi Treaty Grounds entrance.",
+        title: "Venue & Parking at Papanui Club",
+        body: "Celebration begins 7:30 PM at Papanui Club, 310 Sawyers Arms Road, Bishopdale. Plentiful free off-street parking.",
         priority: "normal",
-        time: "Continuous Daily",
-        author: "Transport Team",
+        time: "Oct 17 • From 7:30 PM",
+        author: "Papanui Club Coordination",
         pinned: false
       },
       {
         id: "ann-4",
-        title: "Sunblock & Water Stations Active",
-        body: "Complimentary SPF50 sunblock and filtered chilled water bottles available at Marquee A and Main Gate.",
+        title: "Heritage Photographs & Archival Display",
+        body: "Please bring vintage prints, album photos, or email digital scans to display on our archival slideshow screen.",
         priority: "normal",
-        time: "All Weekend",
-        author: "Health & Safety",
+        time: "Bring along Oct 17",
+        author: "Heritage Committee",
         pinned: false
       }
     ],
     potluck: [
-      { id: "pot-1", item: "Gourmet Potato Salad (x2 large tubs)", category: "Salads", neededQty: "2 Trays", claimedBy: "Moana Clarke-Smith", branch: "Wiremu Clarke Line", status: "Claimed" },
-      { id: "pot-2", item: "Creamed Pāua & Fried Bread", category: "Kaimoana", neededQty: "4 Trays", claimedBy: "Te Ariki Kitchen Crew", branch: "Te Ariki Branch", status: "Claimed" },
-      { id: "pot-3", item: "Steamed Golden Syrup Sponge Pudding", category: "Desserts", neededQty: "3 Puddings", claimedBy: "Chelsea Clarke", branch: "Hemi & Mere Branch", status: "Claimed" },
-      { id: "pot-4", item: "Fresh Sweet Corn on the Cob", category: "Sides", neededQty: "60 Cobs", claimedBy: "Rewi Davis", branch: "Hemi & Mere Branch", status: "Claimed" },
-      { id: "pot-5", item: "Chilled Sweet Watermelons", category: "Fruit", neededQty: "10 Melons", claimedBy: "Rawiri & Aroha Clarke", branch: "Aroha & Rawiri Branch", status: "Claimed" },
-      { id: "pot-6", item: "Gluten-Free Chocolate Brownies", category: "Baking", neededQty: "3 Tins", claimedBy: "Hine Kahu", branch: "Kahu Southern Line", status: "Claimed" },
-      { id: "pot-7", item: "Trifle with Peaches & Jelly", category: "Desserts", neededQty: "2 Large Bowls", claimedBy: "Unclaimed", branch: "Open to Any", status: "Needed" },
-      { id: "pot-8", item: "Artisan Sourdough Loaves & Butter", category: "Bakery", neededQty: "8 Loaves", claimedBy: "Unclaimed", branch: "Open to Any", status: "Needed" }
+      { id: "pot-1", item: "Savory Party Platters & Canapés", category: "Supper", neededQty: "4 Platters", claimedBy: "Ashley Croons", branch: "Christchurch & Canterbury Branch", status: "Claimed" },
+      { id: "pot-2", item: "Celebration Reunion Cake", category: "Baking", neededQty: "1 Large Cake", claimedBy: "Sarah Macfarlane", branch: "North Canterbury Branch", status: "Claimed" },
+      { id: "pot-3", item: "Artisan Cheese & Cracker Boards", category: "Finger Food", neededQty: "3 Boards", claimedBy: "David & Margaret Clarke", branch: "Chipley Somerset Line", status: "Claimed" },
+      { id: "pot-4", item: "Fresh Berry & Pavlova Dessert", category: "Desserts", neededQty: "2 Platters", claimedBy: "Peter Clarke", branch: "Christchurch & Canterbury Branch", status: "Claimed" },
+      { id: "pot-5", item: "Sparkling Toast & Non-Alcoholic Punch", category: "Beverages", neededQty: "5 Decanters", claimedBy: "Alistair Clarke", branch: "Otago & Southern Line", status: "Claimed" },
+      { id: "pot-6", item: "Gluten-Free Sweet Bites", category: "Baking", neededQty: "2 Boxes", claimedBy: "Stuart Clarke", branch: "Chipley Somerset Line", status: "Claimed" },
+      { id: "pot-7", item: "Gourmet Slider Buns", category: "Supper", neededQty: "40 Sliders", claimedBy: "Unclaimed", branch: "Open to Any", status: "Needed" },
+      { id: "pot-8", item: "Fruit Skewers & Grapes Platter", category: "Fresh Produce", neededQty: "3 Platters", claimedBy: "Unclaimed", branch: "Open to Any", status: "Needed" }
     ],
     trivia: [
       {
         id: "triv-1",
-        question: "In what year did Samuel and Mereana Clarke marry at Hokianga Harbour?",
-        options: ["1892", "1898", "1904", "1912"],
-        answerIndex: 1,
-        fact: "Samuel and Mereana married on 24 November 1898 at Rawene, establishing our Northland roots.",
+        question: "What is the historic English ancestral home of our Clarke lineage depicted on the crest?",
+        options: ["Clarkes of Chipley, Somersetshire", "Clarkes of Yorkshire", "Clarkes of Cornwall", "Clarkes of Kent"],
+        answerIndex: 0,
+        fact: "The Clarkes of Chipley originated in Somersetshire, England with ancestral roots dating back to the 17th century.",
         points: 50
       },
       {
         id: "triv-2",
-        question: "Which Clarke brother served as a master waka pilot during the 1954 Royal Visit to Waitangi?",
-        options: ["Te Ariki Clarke", "Hemi Clarke", "Wiremu Kingi Clarke", "Kahu Clarke"],
-        answerIndex: 2,
-        fact: "Wiremu Kingi Clarke steered the 80-foot ceremonial waka across the inlet in front of 30,000 spectators.",
+        question: "What three heraldic symbols are depicted on the upper third of the Clarke shield?",
+        options: ["Three Oak Leaves", "Three Scallop Shells (Escallops)", "Three Golden Stars", "Three Silver Lions"],
+        answerIndex: 1,
+        fact: "The three scallop shells traditionally symbolize pilgrimage, journey across waters, and enduring family lineage.",
         points: 50
       },
       {
         id: "triv-3",
-        question: "How many total registered branches make up the Clarke Whānau lineage today?",
-        options: ["3 Branches", "4 Branches", "5 Branches", "7 Branches"],
-        answerIndex: 2,
-        fact: "The five branches descend from the five surviving adult children of Samuel & Mereana.",
+        question: "What is the ancestral family motto written on the banner of the Clarke crest?",
+        options: ["Fortis et Fidelis", "Ye shall drink of the brook by the way", "To the stars through hardship", "Unity is our strength"],
+        answerIndex: 1,
+        fact: "Taken from Psalm 110:7, 'Ye shall drink of the brook by the way' signifies refreshment, resilience, and sustenance along life's journey.",
         points: 50
       },
       {
         id: "triv-4",
-        question: "What famous fruit was primarily grown in the Clarke Homestead orchard in the 1930s?",
-        options: ["Avocados", "Meyer Lemons & Oranges", "Feijoas", "Boysenberries"],
+        question: "Where is the 2026 Clarke Family Reunion being hosted on Saturday, 17 October?",
+        options: ["Christchurch Town Hall", "Papanui Club, 310 Sawyers Arms Road, Bishopdale", "Riccarton House Grounds", "Sumner Surf Life Saving Club"],
         answerIndex: 1,
-        fact: "The Clarke citrus orchard supplied fresh oranges and lemons by steamship to Auckland markets.",
+        fact: "The reunion celebration takes place from 7:30pm at Papanui Club, 310 Sawyers Arms Road, Bishopdale, Christchurch.",
+        points: 50
+      },
+      {
+        id: "triv-5",
+        question: "By what date are family attendees requested to RSVP to Ashley Croons?",
+        options: ["30 June 2026", "31 July 2026", "31 August 2026", "30 September 2026"],
+        answerIndex: 1,
+        fact: "RSVPs close on 31 July 2026 via ashleycroons@yahoo.com or 027 584 4663 to confirm venue arrangements.",
         points: 50
       }
     ],
     branchScores: {
-      "Te Ariki Branch": 190,
-      "Hemi & Mere Branch": 165,
-      "Wiremu Clarke Line": 210,
-      "Aroha & Rawiri Branch": 140,
-      "Kahu Southern Line": 180
+      "Chipley Somerset Line": 210,
+      "Christchurch & Canterbury Branch": 195,
+      "North Canterbury Branch": 170,
+      "Otago & Southern Line": 160,
+      "North Island Clarke Branch": 185
     }
   };
 
@@ -415,6 +423,30 @@
     var fresh = clone(DEFAULT_STATE);
     saveState(fresh);
     return fresh;
+  }
+
+  // Te Reo Māori Localization Helpers
+  function t(enStr, miStr) {
+    try {
+      var s = getState();
+      if (s && s.settings && s.settings.useTeReo && miStr) {
+        return miStr;
+      }
+    } catch (e) {}
+    return enStr;
+  }
+
+  function toggleTeReo(val) {
+    var s = getState();
+    if (!s.settings) s.settings = {};
+    if (typeof val === 'boolean') {
+      s.settings.useTeReo = val;
+    } else {
+      s.settings.useTeReo = !s.settings.useTeReo;
+    }
+    saveState(s);
+    sendCommand('toggleTeReo', s.settings.useTeReo);
+    return s.settings.useTeReo;
   }
 
   // Real-time Communication (BroadcastChannel + storage event fallback)
@@ -582,6 +614,8 @@
     getState: getState,
     saveState: saveState,
     resetState: resetState,
+    t: t,
+    toggleTeReo: toggleTeReo,
     sendCommand: sendCommand,
     onStateChange: onStateChange,
     onCommand: onCommand,

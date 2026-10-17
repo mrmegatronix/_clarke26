@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clarke Whānau Reunion 2026 — Live 1080p Display</title>
+  <title>Clarke Family Reunion 2026 — Live 1080p Display</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Specific tweaks for 1080p signage presentation */
-    .tv-brand-crest svg {
+    .tv-brand-crest img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -17,7 +18,7 @@
 
   <!-- Top Emergency Broadcast Alert Banner (Shown when emergencyNotice is set) -->
   <div id="emergency-banner" class="emergency-banner">
-    ⚠️ <span id="emergency-text">WHĀNAU NOTICE: Emergency update active</span>
+    ⚠️ <span id="emergency-text">REUNION NOTICE: Emergency update active</span>
   </div>
 
   <!-- TV Top Navigation & Header Bar -->
@@ -25,37 +26,37 @@
     <!-- Left: Family Crest & Brand Title -->
     <div class="tv-brand">
       <div class="tv-brand-crest">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="46" fill="#161b22" stroke="#d4af37" stroke-width="4"/>
-          <!-- Koru / Māori Motif -->
-          <path d="M50 20 C65 20 78 32 78 48 C78 64 64 76 50 76 C36 76 24 64 24 48 C24 38 32 30 40 30 C46 30 52 35 52 42 C52 47 48 51 44 51 C41 51 39 49 39 46 C39 44 41 42 43 42" 
-                fill="none" stroke="#f3cc56" stroke-width="4.5" stroke-linecap="round"/>
-          <circle cx="50" cy="50" r="4" fill="#c93b2b"/>
-        </svg>
+        <img src="clarke_crest.jpg" alt="Clarkes of Chipley Crest">
       </div>
       <div class="tv-brand-text">
-        <h1 class="tv-brand-title" id="tv-header-title">CLARKE WHĀNAU REUNION 2026</h1>
-        <div class="tv-brand-subtitle" id="tv-header-subtitle">Kia Whakatōmuri Te Haere Whakamua</div>
+        <h1 class="tv-brand-title" id="tv-header-title">Clarke Family Reunion</h1>
+        <div class="tv-brand-subtitle" id="tv-header-subtitle">Clarkes of Chipley, Somersetshire • Ye shall drink of the brook by the way</div>
       </div>
     </div>
 
     <!-- Center: Live Reunion Countdown Widget -->
     <div class="tv-header-center">
       <div class="tv-countdown-badge">
-        <span class="tv-countdown-label">Reunion Countdown:</span>
+        <span class="tv-countdown-label" id="tv-countdown-lbl">Reunion Commences:</span>
         <span class="tv-countdown-digits" id="tv-countdown-display">--d<span class="blink-colon">:</span>--h<span class="blink-colon">:</span>--m<span class="blink-colon">:</span>--s</span>
       </div>
     </div>
 
-    <!-- Right: Status Pill & Live Digital Clock with Blinking Colons -->
+    <!-- Right: Language Toggle, Status Pill & Live Digital Clock -->
     <div class="tv-header-right">
+      <!-- Clickable Language Toggle Button -->
+      <button type="button" id="tv-lang-toggle" class="tv-lang-btn" title="Toggle English / Te Reo Māori (Press L)">
+        <span id="tv-lang-icon">🌐</span>
+        <span id="tv-lang-text">Language: English</span>
+      </button>
+
       <div class="tv-status-pill" id="tv-status-pill">
         <span id="tv-status-icon">▶</span>
         <span id="tv-status-text">10s</span>
       </div>
       <div class="tv-live-clock-box">
-        <div class="tv-live-clock" id="tv-live-clock">12<span class="blink-colon">:</span>00<span class="blink-colon">:</span>00</div>
-        <div class="tv-live-date" id="tv-live-date">Waitangi, New Zealand</div>
+        <div class="tv-live-clock" id="tv-live-clock">19<span class="blink-colon">:</span>30<span class="blink-colon">:</span>00</div>
+        <div class="tv-live-date" id="tv-live-date">Christchurch, New Zealand</div>
       </div>
     </div>
   </header>
@@ -64,87 +65,120 @@
   <main class="tv-stage" id="tv-stage">
 
     <!-- ======================================================================
-         MODULE 0: EVENT SCHEDULE & WELCOME
+         MODULE 0: EVENT SCHEDULE & WELCOME / OFFICIAL INVITATION SHOWCASE
          ====================================================================== -->
     
-    <!-- Slide 0-0: Welcome Hero + Venue + Countdown + WiFi -->
+    <!-- Slide 0-0: Welcome Hero + Official Invitation + Venue + RSVP -->
     <section class="tv-slide" data-module="0" data-slide="0">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 1 of 6</span>
-          <span class="slide-title-text">Nau Mai, Haere Mai — Welcome Whānau</span>
+          <span class="slide-badge" id="s00-badge">Module 1 of 6</span>
+          <span class="slide-title-text" id="s00-title">Welcome to the Clarke Family Reunion</span>
         </div>
-        <div class="slide-pagination-pill">Schedule • Slide 1 of 3</div>
+        <div class="slide-pagination-pill" id="s00-page">Schedule • Slide 1 of 3</div>
       </div>
       <div class="hero-welcome-container">
         <div class="hero-card-main">
           <div>
-            <span class="hero-motto">Tīhei Mauri Ora • Welcome Home</span>
-            <h2 class="hero-headline" id="hero-event-title">CLARKE WHĀNAU REUNION 2026</h2>
+            <span class="hero-motto" id="hero-crest-title">Clarkes of Chipley, Somersetshire</span>
+            <h2 class="hero-headline" id="hero-event-title">Clarke Family Reunion</h2>
+            
+            <div class="diamond-divider">
+              <span class="diamond-symbol">◆</span>
+            </div>
+
+            <div style="font-family: Georgia, serif; font-style: italic; color: var(--gold-bright); font-size: 21px; margin-bottom: 8px;">
+              “Ye shall drink of the brook by the way”
+            </div>
+
             <p class="hero-desc" id="hero-event-subtitle">
-              Kia Whakatōmuri Te Haere Whakamua — Honouring Our Past, Building Our Future. 
-              Celebrating 128 years of descendants across all five branches.
+              Join us for an evening of good company, great conversation, and plenty of laughter.
             </p>
+
+            <div style="background: rgba(47, 66, 51, 0.7); border: 1px dashed var(--border-gold); border-radius: var(--radius-md); padding: 10px 16px; margin-bottom: 16px; font-size: 14px; color: var(--gold-bright);">
+              ℹ️ <span id="hero-reg-note">To help cover event costs, there will be a registration fee for all attendees.</span>
+            </div>
           </div>
+
+          <div class="diamond-divider">
+            <span class="diamond-symbol">◆</span>
+          </div>
+
           <div class="hero-details-row">
             <div class="hero-detail-item">
-              <span class="hero-detail-label">Location</span>
-              <span class="hero-detail-val" id="hero-location-text">Waitangi Treaty Grounds</span>
+              <span class="hero-detail-label" id="lbl-hero-date">Date & Time</span>
+              <span class="hero-detail-val" id="hero-date-val">Oct 17 2026 • From 7:30pm</span>
             </div>
             <div class="hero-detail-item">
-              <span class="hero-detail-label">Reunion Dates</span>
-              <span class="hero-detail-val">Dec 26 – 28, 2026</span>
+              <span class="hero-detail-label" id="lbl-hero-venue">Venue</span>
+              <span class="hero-detail-val" id="hero-location-text">Papanui Club, Christchurch</span>
             </div>
             <div class="hero-detail-item">
-              <span class="hero-detail-label">Descendants</span>
-              <span class="hero-detail-val" id="hero-headcount-stat">300+ Expected Whānau</span>
+              <span class="hero-detail-label" id="lbl-hero-rsvp">RSVP By 31 July</span>
+              <span class="hero-detail-val" id="hero-rsvp-val">ashleycroons@yahoo.com</span>
             </div>
           </div>
         </div>
 
         <div class="hero-side-column">
+          <!-- Official Invitation Poster Showcase Card -->
+          <div class="hero-invitation-card">
+            <img src="clarke_invitation.jpg" alt="Clarke Reunion Invitation" class="hero-invitation-thumb">
+            <div class="hero-invitation-details">
+              <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--gold-bright);">
+                Official Reunion Invitation
+              </div>
+              <div style="font-size: 13px; color: var(--text-secondary);">
+                Papanui Club, 310 Sawyers Arms Road, Bishopdale
+              </div>
+              <div style="font-size: 12px; color: var(--green-light); font-weight: 600; margin-top: 4px;">
+                📞 RSVP: Ashley Croons (027 584 4663)
+              </div>
+            </div>
+          </div>
+
           <!-- WiFi Credentials Card -->
           <div class="hero-wifi-card">
             <div class="wifi-header">
               <div class="wifi-icon-box">📶</div>
               <div>
-                <div class="wifi-title">Whānau High-Speed WiFi</div>
-                <div class="wifi-subtitle">Free guest access across all marquees</div>
+                <div class="wifi-title" id="wifi-card-title">Guest WiFi Access</div>
+                <div class="wifi-subtitle">Complimentary access at Papanui Club</div>
               </div>
             </div>
             <div class="wifi-cred-box">
               <div class="wifi-cred-row">
                 <span class="wifi-cred-label">Network SSID:</span>
-                <span class="wifi-cred-val" id="wifi-ssid">ClarkeReunion2026</span>
+                <span class="wifi-cred-val" id="wifi-ssid">PapanuiClub_Guest</span>
               </div>
               <div class="wifi-cred-row">
                 <span class="wifi-cred-label">Password:</span>
-                <span class="wifi-cred-val" id="wifi-pass">Whanau2026</span>
+                <span class="wifi-cred-val" id="wifi-pass">Clarke2026</span>
               </div>
             </div>
           </div>
 
           <!-- Countdown Big Box -->
           <div class="hero-countdown-card">
-            <div style="font-size: 13px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px;">
-              Reunion Opening Ceremony
+            <div style="font-size: 13px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 1px;" id="cnt-box-title">
+              Countdown to Saturday Evening Gathering
             </div>
             <div class="countdown-grid">
               <div class="countdown-box">
                 <span class="countdown-val" id="cnt-days">00</span>
-                <span class="countdown-lbl">Days</span>
+                <span class="countdown-lbl" id="cnt-lbl-days">Days</span>
               </div>
               <div class="countdown-box">
                 <span class="countdown-val" id="cnt-hours">00</span>
-                <span class="countdown-lbl">Hours</span>
+                <span class="countdown-lbl" id="cnt-lbl-hours">Hours</span>
               </div>
               <div class="countdown-box">
                 <span class="countdown-val" id="cnt-mins">00</span>
-                <span class="countdown-lbl">Minutes</span>
+                <span class="countdown-lbl" id="cnt-lbl-mins">Minutes</span>
               </div>
               <div class="countdown-box">
                 <span class="countdown-val" id="cnt-secs">00</span>
-                <span class="countdown-lbl">Seconds</span>
+                <span class="countdown-lbl" id="cnt-lbl-secs">Seconds</span>
               </div>
             </div>
           </div>
@@ -156,17 +190,17 @@
     <section class="tv-slide" data-module="0" data-slide="1">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 1 of 6</span>
-          <span class="slide-title-text">Event Schedule — Days 1 & 2</span>
+          <span class="slide-badge" id="s01-badge">Module 1 of 6</span>
+          <span class="slide-title-text" id="s01-title">Reunion Itinerary — Evening Celebration & Weekend</span>
         </div>
-        <div class="slide-pagination-pill">Schedule • Slide 2 of 3</div>
+        <div class="slide-pagination-pill" id="s01-page">Schedule • Slide 2 of 3</div>
       </div>
       <div class="schedule-grid-2col">
         <!-- Day 1 Column -->
         <div class="schedule-day-column" id="schedule-col-day1">
           <div class="day-header">
-            <span class="day-title" id="day1-title">Day 1 — Welcome & Mihimihi</span>
-            <span class="day-date" id="day1-date">Friday, 26 Dec</span>
+            <span class="day-title" id="day1-title">Evening Reunion Celebration</span>
+            <span class="day-date" id="day1-date">Saturday, 17 Oct 2026</span>
           </div>
           <div class="timeline-list" id="day1-timeline">
             <!-- Dynamically populated -->
@@ -176,8 +210,8 @@
         <!-- Day 2 Column -->
         <div class="schedule-day-column" id="schedule-col-day2">
           <div class="day-header">
-            <span class="day-title" id="day2-title">Day 2 — Whakapapa & Games</span>
-            <span class="day-date" id="day2-date">Saturday, 27 Dec</span>
+            <span class="day-title" id="day2-title">Sunday Gathering & Mingling</span>
+            <span class="day-date" id="day2-date">Sunday, 18 Oct 2026</span>
           </div>
           <div class="timeline-list" id="day2-timeline">
             <!-- Dynamically populated -->
@@ -186,45 +220,65 @@
       </div>
     </section>
 
-    <!-- Slide 0-2: Schedule Day 3 & Committee Handover -->
+    <!-- Slide 0-2: Venue Protocols, Directions & Committee Notice -->
     <section class="tv-slide" data-module="0" data-slide="2">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 1 of 6</span>
-          <span class="slide-title-text">Event Schedule — Day 3 & Farewells</span>
+          <span class="slide-badge" id="s02-badge">Module 1 of 6</span>
+          <span class="slide-title-text" id="s02-title">Venue Information, RSVP & Event Guidelines</span>
         </div>
-        <div class="slide-pagination-pill">Schedule • Slide 3 of 3</div>
+        <div class="slide-pagination-pill" id="s02-page">Schedule • Slide 3 of 3</div>
       </div>
       <div class="schedule-grid-2col">
-        <!-- Day 3 Column -->
-        <div class="schedule-day-column" id="schedule-col-day3">
+        <!-- Venue Guide -->
+        <div class="schedule-day-column">
           <div class="day-header">
-            <span class="day-title" id="day3-title">Day 3 — Memorial & Poroporoaki</span>
-            <span class="day-date" id="day3-date">Sunday, 28 Dec</span>
+            <span class="day-title">Papanui Club Venue Guidelines</span>
+            <span class="day-date">Bishopdale, Christchurch</span>
           </div>
-          <div class="timeline-list" id="day3-timeline">
-            <!-- Dynamically populated -->
+          <div style="display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: space-around;">
+            <div style="background: rgba(47,66,51,0.7); padding: 14px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--green-light);">
+              <div style="font-weight: 700; color: #fff; font-size: 16px;">Address & Arrival</div>
+              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                310 Sawyers Arms Road, Bishopdale, Christchurch 8053. Doors open at 7:00 PM for guest registration and welcome drinks.
+              </div>
+            </div>
+            <div style="background: rgba(47,66,51,0.7); padding: 14px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--gold-primary);">
+              <div style="font-weight: 700; color: #fff; font-size: 16px;">Parking & Accessibility</div>
+              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                Abundant free off-street parking in the main club car park. Full wheelchair and mobility ramp access available at front entry.
+              </div>
+            </div>
+            <div style="background: rgba(47,66,51,0.7); padding: 14px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--red-pohutukawa);">
+              <div style="font-weight: 700; color: #fff; font-size: 16px;">Registration Fee Information</div>
+              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
+                To help cover event costs, there will be a registration fee for all attendees. Details will be provided upon RSVP.
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Venue & Transport Info Column -->
-        <div class="schedule-day-column" style="background: linear-gradient(135deg, rgba(22,27,34,0.9), rgba(13,17,23,0.95)); border-color: var(--border-gold);">
+        <!-- RSVP & Contact Information -->
+        <div class="schedule-day-column" style="background: linear-gradient(135deg, rgba(37,53,40,0.95), rgba(27,40,30,0.98)); border-color: var(--border-gold);">
           <div class="day-header">
-            <span class="day-title" style="color: var(--gold-light);">Venue Locations & Protocols</span>
-            <span class="day-date">Waitangi & Paihia</span>
+            <span class="day-title" style="color: var(--gold-bright);">RSVP Coordination</span>
+            <span class="day-date">Deadline: 31 July 2026</span>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: space-around;">
-            <div style="background: rgba(33,38,45,0.7); padding: 14px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--green-primary);">
-              <div style="font-weight: 700; color: #fff; font-size: 16px;">Te Whare Rūnanga (Marae Grounds)</div>
-              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Official pōwhiri protocol applies. Remove footwear before entering. Please arrive by 10:15 AM.</div>
+          <div style="display: flex; flex-direction: column; gap: 16px; flex: 1; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+            <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--gold-primary); color: #1b281e; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 800;">
+              ✉️
             </div>
-            <div style="background: rgba(33,38,45,0.7); padding: 14px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--gold-primary);">
-              <div style="font-weight: 700; color: #fff; font-size: 16px;">Historic Clarke Homestead Grounds</div>
-              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Paddock parking available. Hāngī pit site and youth games arena located behind main orchard.</div>
+            <div style="font-size: 18px; font-weight: 700; color: #ffffff;">
+              Please RSVP by 31 July 2026
             </div>
-            <div style="background: rgba(33,38,45,0.7); padding: 14px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--blue-primary);">
-              <div style="font-weight: 700; color: #fff; font-size: 16px;">Whānau Trust AGM & 2030 Committee</div>
-              <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Nominations open for the 2030 Reunion Committee and Whānau Trust education grant trustees.</div>
+            <div style="font-family: var(--font-mono); font-size: 18px; color: var(--gold-bright); font-weight: 800;">
+              ashleycroons@yahoo.com
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 18px; color: var(--green-light); font-weight: 800;">
+              027 584 4663
+            </div>
+            <div style="font-size: 13px; color: var(--text-secondary); max-width: 90%;">
+              Please advise number of adults, children, and any dietary requirements when confirming your attendance.
             </div>
           </div>
         </div>
@@ -239,31 +293,31 @@
     <section class="tv-slide" data-module="1" data-slide="0">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 2 of 6</span>
-          <span class="slide-title-text">Whānau Attendance & Registration Tracker</span>
+          <span class="slide-badge" id="s10-badge">Module 2 of 6</span>
+          <span class="slide-title-text" id="s10-title">Family Attendance & RSVP Registration Tracker</span>
         </div>
-        <div class="slide-pagination-pill">RSVP • Slide 1 of 2</div>
+        <div class="slide-pagination-pill" id="s10-page">RSVP • Slide 1 of 2</div>
       </div>
       <div class="attendance-layout">
         <!-- KPI Counters Grid -->
         <div class="kpi-cards-grid">
           <div class="kpi-card">
-            <span class="kpi-card-label">Total Attending</span>
+            <span class="kpi-card-label" id="lbl-kpi-total">Total Attending</span>
             <span class="kpi-card-value" id="kpi-total-people">0</span>
-            <span class="kpi-card-sub" id="kpi-rsvps-count">From 0 registrations</span>
+            <span class="kpi-card-sub" id="kpi-rsvps-count">From 0 bookings</span>
           </div>
           <div class="kpi-card kpi-checkedin">
-            <span class="kpi-card-label">Checked In On-Site</span>
+            <span class="kpi-card-label" id="lbl-kpi-checkedin">Checked In On-Site</span>
             <span class="kpi-card-value" id="kpi-checked-in">0</span>
-            <span class="kpi-card-sub" id="kpi-checkin-pct">0% checked in</span>
+            <span class="kpi-card-sub" id="kpi-checkin-pct">0% arrived</span>
           </div>
           <div class="kpi-card kpi-adults">
-            <span class="kpi-card-label">Adults Registered</span>
+            <span class="kpi-card-label" id="lbl-kpi-adults">Adults Registered</span>
             <span class="kpi-card-value" id="kpi-adults">0</span>
-            <span class="kpi-card-sub">Pakeke (16+ years)</span>
+            <span class="kpi-card-sub">Ages 16+</span>
           </div>
           <div class="kpi-card kpi-kids">
-            <span class="kpi-card-label">Tamariki / Youth</span>
+            <span class="kpi-card-label" id="lbl-kpi-kids">Children & Youth</span>
             <span class="kpi-card-value" id="kpi-kids">0</span>
             <span class="kpi-card-sub">Next generation</span>
           </div>
@@ -271,7 +325,7 @@
 
         <!-- Branch Attendance Leaderboard -->
         <div class="leaderboard-card">
-          <div class="leaderboard-title">Branch Attendance Leaderboard</div>
+          <div class="leaderboard-title" id="ldr-title">Branch Attendance Leaderboard</div>
           <div class="leaderboard-list" id="branch-leaderboard-list">
             <!-- Dynamically populated -->
           </div>
@@ -283,15 +337,15 @@
     <section class="tv-slide" data-module="1" data-slide="1">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 2 of 6</span>
-          <span class="slide-title-text">Live Check-In Stream & Catering Overview</span>
+          <span class="slide-badge" id="s11-badge">Module 2 of 6</span>
+          <span class="slide-title-text" id="s11-title">Recent Check-Ins & Catering Dietary Summary</span>
         </div>
-        <div class="slide-pagination-pill">RSVP • Slide 2 of 2</div>
+        <div class="slide-pagination-pill" id="s11-page">RSVP • Slide 2 of 2</div>
       </div>
       <div class="checkin-stream-layout">
         <div class="checkin-list-container">
-          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light); margin-bottom: 14px;">
-            Recent Whānau Check-Ins
+          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light); margin-bottom: 14px;" id="checkin-hdr">
+            Recent Family Check-Ins
           </div>
           <div class="checkin-feed" id="checkin-live-feed">
             <!-- Dynamically populated -->
@@ -299,11 +353,11 @@
         </div>
 
         <div class="dietary-summary-card">
-          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light);">
+          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light);" id="diet-hdr">
             Kitchen & Catering Dietary Summary
           </div>
-          <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">
-            Special meals pre-labeled at kitchen dispatch
+          <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;" id="diet-sub">
+            Special meal arrangements confirmed with Papanui Club kitchen
           </div>
           <div class="dietary-pill-list" id="dietary-summary-list">
             <!-- Dynamically populated -->
@@ -320,24 +374,24 @@
     </div>
 
     <!-- ======================================================================
-         MODULE 3: WHAKAPAPA (LINEAGE) & IN MEMORIAM
+         MODULE 3: LINEAGE & IN MEMORIAM
          ====================================================================== -->
 
     <!-- Slide 3-0: Founders & 5 Branches Overview -->
     <section class="tv-slide" data-module="3" data-slide="0">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 4 of 6</span>
-          <span class="slide-title-text">Whakapapa — Generational Lineage & Branches</span>
+          <span class="slide-badge" id="s30-badge">Module 4 of 6</span>
+          <span class="slide-title-text" id="s30-title">Lineage & Family Branches Overview</span>
         </div>
-        <div class="slide-pagination-pill">Whakapapa • Slide 1 of 2</div>
+        <div class="slide-pagination-pill" id="s30-page">Lineage • Slide 1 of 2</div>
       </div>
       <div class="whakapapa-founders-banner">
         <div>
-          <span style="font-size: 12px; font-weight: 700; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1px;">Founding Ancestors</span>
-          <div class="whakapapa-founders-name" id="whakapapa-founders">Samuel & Mereana Clarke (m. 1898, Hokianga)</div>
+          <span style="font-size: 12px; font-weight: 700; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 1px;" id="whakapapa-founders-lbl">Ancestral Founders</span>
+          <div class="whakapapa-founders-name" id="whakapapa-founders">Clarkes of Chipley, Somersetshire & Canterbury Pioneers</div>
         </div>
-        <div class="whakapapa-founders-meta">128 Years of Whānau Heritage • 5 Generations of Descendants</div>
+        <div class="whakapapa-founders-meta" id="whakapapa-meta">Somersetshire Roots • Canterbury Pioneers • 5 Family Branches</div>
       </div>
       <div class="whakapapa-branches-grid" id="whakapapa-branches-list">
         <!-- Dynamically populated -->
@@ -348,10 +402,10 @@
     <section class="tv-slide" data-module="3" data-slide="1">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 4 of 6</span>
-          <span class="slide-title-text">Heaimahara — In Loving Memory of Departed Whānau</span>
+          <span class="slide-badge" id="s31-badge">Module 4 of 6</span>
+          <span class="slide-title-text" id="s31-title">In Loving Memory — Honoring Departed Loved Ones</span>
         </div>
-        <div class="slide-pagination-pill">In Memoriam • Slide 2 of 2</div>
+        <div class="slide-pagination-pill" id="s31-page">In Memoriam • Slide 2 of 2</div>
       </div>
       <div class="memoriam-grid" id="memoriam-tribute-grid">
         <!-- Dynamically populated -->
@@ -359,31 +413,31 @@
     </section>
 
     <!-- ======================================================================
-         MODULE 4: ANNOUNCEMENTS & POTLUCK / TASKS ROSTER
+         MODULE 4: ANNOUNCEMENTS & POTLUCK / ROSTER
          ====================================================================== -->
 
-    <!-- Slide 4-0: Pinned Whānau Announcements -->
+    <!-- Slide 4-0: Pinned Announcements -->
     <section class="tv-slide" data-module="4" data-slide="0">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 5 of 6</span>
-          <span class="slide-title-text">Whānau Notice Board & Live Announcements</span>
+          <span class="slide-badge" id="s40-badge">Module 5 of 6</span>
+          <span class="slide-title-text" id="s40-title">Reunion Notice Board & Announcements</span>
         </div>
-        <div class="slide-pagination-pill">Notices • Slide 1 of 2</div>
+        <div class="slide-pagination-pill" id="s40-page">Notices • Slide 1 of 2</div>
       </div>
       <div class="announcements-grid" id="announcements-grid-list">
         <!-- Dynamically populated -->
       </div>
     </section>
 
-    <!-- Slide 4-1: Kai / Potluck & Volunteer Roster -->
+    <!-- Slide 4-1: Supper Coordination & Tasks Roster -->
     <section class="tv-slide" data-module="4" data-slide="1">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 5 of 6</span>
-          <span class="slide-title-text">Kai / Potluck Roster & Volunteer Coordination</span>
+          <span class="slide-badge" id="s41-badge">Module 5 of 6</span>
+          <span class="slide-title-text" id="s41-title">Supper, Coordination & Task Roster</span>
         </div>
-        <div class="slide-pagination-pill">Potluck • Slide 2 of 2</div>
+        <div class="slide-pagination-pill" id="s41-page">Coordination • Slide 2 of 2</div>
       </div>
       <div class="potluck-display-grid" id="potluck-display-list">
         <!-- Dynamically populated -->
@@ -391,17 +445,17 @@
     </section>
 
     <!-- ======================================================================
-         MODULE 5: WHĀNAU TRIVIA CHALLENGE
+         MODULE 5: HERITAGE TRIVIA CHALLENGE
          ====================================================================== -->
 
     <!-- Slide 5-0: Active Trivia Question & Scoreboard -->
     <section class="tv-slide" data-module="5" data-slide="0">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 6 of 6</span>
-          <span class="slide-title-text">Whānau Heritage Trivia Challenge</span>
+          <span class="slide-badge" id="s50-badge">Module 6 of 6</span>
+          <span class="slide-title-text" id="s50-title">Clarke Family Heritage Trivia Challenge</span>
         </div>
-        <div class="slide-pagination-pill">Trivia • Slide 1 of 2</div>
+        <div class="slide-pagination-pill" id="s50-page">Trivia • Slide 1 of 2</div>
       </div>
       <div class="trivia-layout">
         <div class="trivia-question-card">
@@ -417,7 +471,7 @@
         </div>
 
         <div class="trivia-scoreboard-card">
-          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light); margin-bottom: 14px;">
+          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light); margin-bottom: 14px;" id="trivia-score-hdr">
             Branch Trivia Standings
           </div>
           <div id="trivia-scoreboard-rows">
@@ -431,10 +485,10 @@
     <section class="tv-slide" data-module="5" data-slide="1">
       <div class="slide-subhead">
         <div class="slide-module-title">
-          <span class="slide-badge">Module 6 of 6</span>
-          <span class="slide-title-text">Trivia Reveal & Whānau Historical Fact</span>
+          <span class="slide-badge" id="s51-badge">Module 6 of 6</span>
+          <span class="slide-title-text" id="s51-title">Trivia Answer Reveal & Historical Fact</span>
         </div>
-        <div class="slide-pagination-pill">Trivia • Slide 2 of 2</div>
+        <div class="slide-pagination-pill" id="s51-page">Trivia • Slide 2 of 2</div>
       </div>
       <div class="trivia-layout">
         <div class="trivia-question-card" style="border-color: var(--green-light);">
@@ -444,9 +498,9 @@
               Question text
             </div>
           </div>
-          <div style="background: rgba(31, 111, 80, 0.25); border: 1px solid var(--green-primary); border-radius: var(--radius-md); padding: 18px 22px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--green-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
-              Whānau Historical Fact
+          <div style="background: rgba(47, 66, 51, 0.7); border: 1px solid var(--green-light); border-radius: var(--radius-md); padding: 18px 22px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--green-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;" id="trivia-fact-hdr">
+              Heritage Fact
             </div>
             <div style="font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.45;" id="trivia-reveal-fact">
               Historical fact text
@@ -458,7 +512,7 @@
         </div>
 
         <div class="trivia-scoreboard-card">
-          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light); margin-bottom: 14px;">
+          <div style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--gold-light); margin-bottom: 14px;" id="trivia-score-reveal-hdr">
             Updated Branch Leaderboard
           </div>
           <div id="trivia-scoreboard-rows-reveal">
@@ -474,12 +528,12 @@
   <footer class="tv-footer-bar">
     <!-- Left: Module Indicator Badges -->
     <div class="tv-module-indicators" id="module-indicators">
-      <span class="tv-module-pill" data-mod="0">1. Schedule</span>
-      <span class="tv-module-pill" data-mod="1">2. Attendance</span>
-      <span class="tv-module-pill" data-mod="2">3. Gallery</span>
-      <span class="tv-module-pill" data-mod="3">4. Whakapapa</span>
-      <span class="tv-module-pill" data-mod="4">5. Notices</span>
-      <span class="tv-module-pill" data-mod="5">6. Trivia</span>
+      <span class="tv-module-pill" data-mod="0" id="pill-mod-0">1. Schedule</span>
+      <span class="tv-module-pill" data-mod="1" id="pill-mod-1">2. Attendance</span>
+      <span class="tv-module-pill" data-mod="2" id="pill-mod-2">3. Gallery</span>
+      <span class="tv-module-pill" data-mod="3" id="pill-mod-3">4. Lineage</span>
+      <span class="tv-module-pill" data-mod="4" id="pill-mod-4">5. Notices</span>
+      <span class="tv-module-pill" data-mod="5" id="pill-mod-5">6. Trivia</span>
     </div>
 
     <!-- Right: Keyboard & Remote Shortcut Hints -->
@@ -490,6 +544,7 @@
       <span><span class="kbd-badge">Space</span> Pause</span>
       <span><span class="kbd-badge">0</span> Lock</span>
       <span><span class="kbd-badge">1-9</span> Speed</span>
+      <span><span class="kbd-badge">L</span> Te Reo</span>
       <span><span class="kbd-badge">A</span> Admin</span>
       <span><span class="kbd-badge">R</span> Remote</span>
     </div>
@@ -511,7 +566,6 @@
       var state = ClarkeApp.getState();
       var currentSlideIndex = 0;
       var slides = [];
-      var slideTimer = null;
       var progressInterval = null;
       var slideStartTime = Date.now();
       var activeDurationSec = (state.settings && state.settings.slideDurationSec) || 10;
@@ -531,19 +585,124 @@
       var emergencyText = document.getElementById('emergency-text');
       var moduleIndicators = document.querySelectorAll('.tv-module-pill');
       var galleryContainer = document.getElementById('gallery-slides-container');
+      var langToggleBtn = document.getElementById('tv-lang-toggle');
+      var langIcon = document.getElementById('tv-lang-icon');
+      var langText = document.getElementById('tv-lang-text');
 
       // Initialize Dynamic Content from State
       function renderAllData() {
         state = ClarkeApp.getState();
+        var useTeReo = !!(state.settings && state.settings.useTeReo);
 
-        // Header & Hero Titles
-        document.getElementById('tv-header-title').textContent = state.eventInfo.title;
-        document.getElementById('tv-header-subtitle').textContent = state.eventInfo.subtitle;
-        document.getElementById('hero-event-title').textContent = state.eventInfo.title;
-        document.getElementById('hero-event-subtitle').textContent = state.eventInfo.subtitle;
+        // Language Toggle Button State
+        if (useTeReo) {
+          langToggleBtn.classList.add('active');
+          langIcon.textContent = '🇳🇿';
+          langText.textContent = 'Te Reo: ON';
+        } else {
+          langToggleBtn.classList.remove('active');
+          langIcon.textContent = '🌐';
+          langText.textContent = 'English (Te Reo: OFF)';
+        }
+
+        // Header & Titles
+        var eventTitle = ClarkeApp.t(state.eventInfo.title, state.eventInfo.titleMi);
+        var eventSub = ClarkeApp.t(
+          (state.eventInfo.crestTitle || 'Clarkes of Chipley, Somersetshire') + ' • ' + (state.eventInfo.motto || 'Ye shall drink of the brook by the way'),
+          state.eventInfo.subtitleMi || state.eventInfo.subtitle
+        );
+
+        document.getElementById('tv-header-title').textContent = eventTitle;
+        document.getElementById('tv-header-subtitle').textContent = eventSub;
+        document.getElementById('hero-event-title').textContent = eventTitle;
+        document.getElementById('hero-crest-title').textContent = state.eventInfo.crestTitle || 'Clarkes of Chipley, Somersetshire';
+        document.getElementById('hero-event-subtitle').textContent = ClarkeApp.t(state.eventInfo.subtitle, state.eventInfo.subtitleMi || state.eventInfo.subtitle);
         document.getElementById('hero-location-text').textContent = state.eventInfo.location;
+        document.getElementById('hero-date-val').textContent = state.eventInfo.dateDisplay || 'Oct 17 2026 • From 7:30pm';
+        document.getElementById('hero-rsvp-val').textContent = (state.eventInfo.rsvpEmail || 'ashleycroons@yahoo.com') + ' • ' + (state.eventInfo.rsvpPhone || '027 584 4663');
+        document.getElementById('hero-reg-note').textContent = state.eventInfo.registrationFeeNote || 'To help cover event costs, there will be a registration fee for all attendees.';
+        
         document.getElementById('wifi-ssid').textContent = state.eventInfo.wifiSsid;
         document.getElementById('wifi-pass').textContent = state.eventInfo.wifiPass;
+
+        // Dynamic Headings & Badges Localization
+        document.getElementById('tv-countdown-lbl').textContent = ClarkeApp.t('Reunion Commences:', 'Te Timatatanga:');
+        document.getElementById('cnt-box-title').textContent = ClarkeApp.t('Countdown to Saturday Evening Gathering', 'Te Kaute ki te Hui o te Rāhoroi');
+        document.getElementById('cnt-lbl-days').textContent = ClarkeApp.t('Days', 'Rā');
+        document.getElementById('cnt-lbl-hours').textContent = ClarkeApp.t('Hours', 'Hāora');
+        document.getElementById('cnt-lbl-mins').textContent = ClarkeApp.t('Minutes', 'Mēneti');
+        document.getElementById('cnt-lbl-secs').textContent = ClarkeApp.t('Seconds', 'Hēkona');
+
+        document.getElementById('s00-badge').textContent = ClarkeApp.t('Module 1 of 6', 'Wāhanga 1 o te 6');
+        document.getElementById('s00-title').textContent = ClarkeApp.t('Welcome to the Clarke Family Reunion', 'Nau Mai, Haere Mai — Te Huihuinga Whānau');
+        document.getElementById('s00-page').textContent = ClarkeApp.t('Schedule • Slide 1 of 3', 'Hōtaka • Whārangi 1 o te 3');
+
+        document.getElementById('lbl-hero-date').textContent = ClarkeApp.t('Date & Time', 'Te Rā me te Wā');
+        document.getElementById('lbl-hero-venue').textContent = ClarkeApp.t('Venue', 'Wāhi');
+        document.getElementById('lbl-hero-rsvp').textContent = ClarkeApp.t('RSVP By 31 July', 'Whakaae mai i mua i te 31 o Hūrae');
+        document.getElementById('wifi-card-title').textContent = ClarkeApp.t('Guest WiFi Access', 'Ipurangi Ahokore (WiFi)');
+
+        document.getElementById('s01-badge').textContent = ClarkeApp.t('Module 1 of 6', 'Wāhanga 1 o te 6');
+        document.getElementById('s01-title').textContent = ClarkeApp.t('Reunion Itinerary — Evening Celebration & Weekend', 'Hōtaka Whakanui — Rāhoroi me te Rātapu');
+        document.getElementById('s01-page').textContent = ClarkeApp.t('Schedule • Slide 2 of 3', 'Hōtaka • Whārangi 2 o te 3');
+
+        document.getElementById('s02-badge').textContent = ClarkeApp.t('Module 1 of 6', 'Wāhanga 1 o te 6');
+        document.getElementById('s02-title').textContent = ClarkeApp.t('Venue Information, RSVP & Event Guidelines', 'Ngā Kōrero o te Whare me ngā Tikanga');
+        document.getElementById('s02-page').textContent = ClarkeApp.t('Schedule • Slide 3 of 3', 'Hōtaka • Whārangi 3 o te 3');
+
+        document.getElementById('s10-badge').textContent = ClarkeApp.t('Module 2 of 6', 'Wāhanga 2 o te 6');
+        document.getElementById('s10-title').textContent = ClarkeApp.t('Family Attendance & RSVP Registration Tracker', 'Kaitono me te Rēhita Whānau');
+        document.getElementById('s10-page').textContent = ClarkeApp.t('RSVP • Slide 1 of 2', 'Kaitono • Whārangi 1 o te 2');
+        document.getElementById('ldr-title').textContent = ClarkeApp.t('Branch Attendance Leaderboard', 'Rārangi Mema o ngā Peka');
+
+        document.getElementById('lbl-kpi-total').textContent = ClarkeApp.t('Total Attending', 'Huinga Katoa');
+        document.getElementById('lbl-kpi-checkedin').textContent = ClarkeApp.t('Checked In On-Site', 'Kua Tae Mai');
+        document.getElementById('lbl-kpi-adults').textContent = ClarkeApp.t('Adults Registered', 'Pakeke (16+)');
+        document.getElementById('lbl-kpi-kids').textContent = ClarkeApp.t('Children & Youth', 'Tamariki');
+
+        document.getElementById('s11-badge').textContent = ClarkeApp.t('Module 2 of 6', 'Wāhanga 2 o te 6');
+        document.getElementById('s11-title').textContent = ClarkeApp.t('Recent Check-Ins & Catering Dietary Summary', 'Tirohanga Whānau me te Kai');
+        document.getElementById('s11-page').textContent = ClarkeApp.t('RSVP • Slide 2 of 2', 'Kaitono • Whārangi 2 o te 2');
+        document.getElementById('checkin-hdr').textContent = ClarkeApp.t('Recent Family Check-Ins', 'Whānau Kua Tae Mai');
+        document.getElementById('diet-hdr').textContent = ClarkeApp.t('Kitchen & Catering Dietary Summary', 'Whakarāpopototanga Kai Motuhake');
+        document.getElementById('diet-sub').textContent = ClarkeApp.t('Special meal arrangements confirmed with Papanui Club kitchen', 'He kai motuhake kua whakaritea ki te kīhini o Papanui Club');
+
+        document.getElementById('s30-badge').textContent = ClarkeApp.t('Module 4 of 6', 'Wāhanga 4 o te 6');
+        document.getElementById('s30-title').textContent = ClarkeApp.t('Lineage & Family Branches Overview', 'Whakapapa me ngā Peka Whānau');
+        document.getElementById('s30-page').textContent = ClarkeApp.t('Lineage • Slide 1 of 2', 'Whakapapa • Whārangi 1 o te 2');
+        document.getElementById('whakapapa-founders-lbl').textContent = ClarkeApp.t('Ancestral Founders', 'Ngā Tīpuna');
+        document.getElementById('whakapapa-meta').textContent = ClarkeApp.t('Somersetshire Roots • Canterbury Pioneers • 5 Family Branches', 'Ngā Pakiaka o Somerset • Ngā Pae o Waitaha');
+
+        document.getElementById('s31-badge').textContent = ClarkeApp.t('Module 4 of 6', 'Wāhanga 4 o te 6');
+        document.getElementById('s31-title').textContent = ClarkeApp.t('In Loving Memory — Honoring Departed Loved Ones', 'Heaimahara — He Whakamaharatanga');
+        document.getElementById('s31-page').textContent = ClarkeApp.t('In Memoriam • Slide 2 of 2', 'Heaimahara • Whārangi 2 o te 2');
+
+        document.getElementById('s40-badge').textContent = ClarkeApp.t('Module 5 of 6', 'Wāhanga 5 o te 6');
+        document.getElementById('s40-title').textContent = ClarkeApp.t('Reunion Notice Board & Announcements', 'Pānui me ngā Whakaaturanga');
+        document.getElementById('s40-page').textContent = ClarkeApp.t('Notices • Slide 1 of 2', 'Pānui • Whārangi 1 o te 2');
+
+        document.getElementById('s41-badge').textContent = ClarkeApp.t('Module 5 of 6', 'Wāhanga 5 o te 6');
+        document.getElementById('s41-title').textContent = ClarkeApp.t('Supper, Coordination & Task Roster', 'Rārangi Mahi me ngā Kai');
+        document.getElementById('s41-page').textContent = ClarkeApp.t('Coordination • Slide 2 of 2', 'Mahi • Whārangi 2 o te 2');
+
+        document.getElementById('s50-badge').textContent = ClarkeApp.t('Module 6 of 6', 'Wāhanga 6 o te 6');
+        document.getElementById('s50-title').textContent = ClarkeApp.t('Clarke Family Heritage Trivia Challenge', 'Pātai Whānau — Trivia');
+        document.getElementById('s50-page').textContent = ClarkeApp.t('Trivia • Slide 1 of 2', 'Pātai • Whārangi 1 o te 2');
+        document.getElementById('trivia-score-hdr').textContent = ClarkeApp.t('Branch Trivia Standings', 'Ngā Kaute o ngā Peka');
+
+        document.getElementById('s51-badge').textContent = ClarkeApp.t('Module 6 of 6', 'Wāhanga 6 o te 6');
+        document.getElementById('s51-title').textContent = ClarkeApp.t('Trivia Answer Reveal & Historical Fact', 'Whakautu me ngā Kōrero Tuku Iho');
+        document.getElementById('s51-page').textContent = ClarkeApp.t('Trivia • Slide 2 of 2', 'Pātai • Whārangi 2 o te 2');
+        document.getElementById('trivia-fact-hdr').textContent = ClarkeApp.t('Heritage Fact', 'Kōrero Tuku Iho');
+        document.getElementById('trivia-score-reveal-hdr').textContent = ClarkeApp.t('Updated Branch Leaderboard', 'Rārangi Kaute Whakahōu');
+
+        // Footer module pills
+        document.getElementById('pill-mod-0').textContent = ClarkeApp.t('1. Schedule', '1. Hōtaka');
+        document.getElementById('pill-mod-1').textContent = ClarkeApp.t('2. Attendance', '2. Whānau');
+        document.getElementById('pill-mod-2').textContent = ClarkeApp.t('3. Gallery', '3. Whakaahua');
+        document.getElementById('pill-mod-3').textContent = ClarkeApp.t('4. Lineage', '4. Whakapapa');
+        document.getElementById('pill-mod-4').textContent = ClarkeApp.t('5. Notices', '5. Pānui');
+        document.getElementById('pill-mod-5').textContent = ClarkeApp.t('6. Trivia', '6. Pātai');
 
         // Emergency Notice Banner
         if (state.eventInfo.emergencyNotice && state.eventInfo.emergencyNotice.trim().length > 0) {
@@ -553,7 +712,7 @@
           emergencyBanner.style.display = 'none';
         }
 
-        // Schedule Day 1, Day 2, Day 3
+        // Schedule Day 1, Day 2
         renderScheduleDays();
 
         // RSVP KPIs & Leaderboard
@@ -581,7 +740,7 @@
       function renderScheduleDays() {
         var days = state.schedule || [];
         if (days[0]) {
-          document.getElementById('day1-title').textContent = days[0].dayName;
+          document.getElementById('day1-title').textContent = ClarkeApp.t(days[0].dayName, days[0].dayNameMi || days[0].dayName);
           document.getElementById('day1-date').textContent = days[0].dateString;
           var html1 = '';
           (days[0].items || []).forEach(function (it) {
@@ -596,7 +755,7 @@
         }
 
         if (days[1]) {
-          document.getElementById('day2-title').textContent = days[1].dayName;
+          document.getElementById('day2-title').textContent = ClarkeApp.t(days[1].dayName, days[1].dayNameMi || days[1].dayName);
           document.getElementById('day2-date').textContent = days[1].dateString;
           var html2 = '';
           (days[1].items || []).forEach(function (it) {
@@ -608,21 +767,6 @@
               '</div></div>';
           });
           document.getElementById('day2-timeline').innerHTML = html2;
-        }
-
-        if (days[2]) {
-          document.getElementById('day3-title').textContent = days[2].dayName;
-          document.getElementById('day3-date').textContent = days[2].dateString;
-          var html3 = '';
-          (days[2].items || []).forEach(function (it) {
-            html3 += '<div class="timeline-item">' +
-              '<div class="timeline-time">' + it.time + '</div>' +
-              '<div class="timeline-body">' +
-              '<div class="timeline-event-name">' + it.title + '</div>' +
-              '<div class="timeline-location">📍 ' + it.location + ' • Lead: ' + it.lead + '</div>' +
-              '</div></div>';
-          });
-          document.getElementById('day3-timeline').innerHTML = html3;
         }
       }
 
@@ -650,8 +794,7 @@
 
         var grandTotal = totalAdults + totalKids;
         document.getElementById('kpi-total-people').textContent = grandTotal;
-        document.getElementById('kpi-rsvps-count').textContent = 'From ' + rsvps.length + ' whānau bookings';
-        document.getElementById('hero-headcount-stat').textContent = grandTotal + ' Whānau Confirmed';
+        document.getElementById('kpi-rsvps-count').textContent = 'From ' + rsvps.length + ' registered parties';
         document.getElementById('kpi-checked-in').textContent = totalCheckedIn;
         var pct = grandTotal > 0 ? Math.round((totalCheckedIn / grandTotal) * 100) : 0;
         document.getElementById('kpi-checkin-pct').textContent = pct + '% on-site arrived';
@@ -686,7 +829,7 @@
         var recentChecked = rsvps.filter(function (r) { return r.checkedIn; }).slice(0, 6);
         var feedHtml = '';
         recentChecked.forEach(function (r) {
-          var initials = (r.name || 'W').split(' ').map(function (n) { return n[0]; }).join('').slice(0, 2);
+          var initials = (r.name || 'C').split(' ').map(function (n) { return n[0]; }).join('').slice(0, 2);
           feedHtml += '<div class="checkin-item">' +
             '<div class="checkin-person">' +
             '<div class="checkin-avatar">' + initials + '</div>' +
@@ -694,7 +837,7 @@
             '<div class="checkin-name">' + r.name + ' (' + (r.adults + r.kids) + ' pax)</div>' +
             '<div class="checkin-branch-tag">' + r.branch + '</div>' +
             '</div></div>' +
-            '<span class="badge badge-green">Checked In</span>' +
+            '<span class="badge badge-green">' + ClarkeApp.t('Checked In', 'Tae Mai') + '</span>' +
             '</div>';
         });
         document.getElementById('checkin-live-feed').innerHTML = feedHtml;
@@ -717,20 +860,79 @@
 
       function renderPhotoGallerySlides() {
         var photos = state.photos || [];
+        var albumUrl = (state.eventInfo && state.eventInfo.sharedAlbumUrl) || 'https://photos.app.goo.gl/6fGko2NUqKfQp7866';
+        var albumTitle = (state.eventInfo && state.eventInfo.sharedAlbumTitle) || '2026 -CLARKE FAMILY REUNION';
+        var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(albumUrl);
         var html = '';
-        // Group photos into pairs of 2 per slide
-        for (var i = 0; i < photos.length; i += 2) {
-          var slideNum = Math.floor(i / 2);
-          var p1 = photos[i];
-          var p2 = photos[i + 1];
+
+        // Slide 0: Prominent Shared Photo Album Hub with Scannable QR Code & Cover Photo
+        html += '<section class="tv-slide" data-module="2" data-slide="0">' +
+          '<div class="slide-subhead">' +
+          '<div class="slide-module-title">' +
+          '<span class="slide-badge">' + ClarkeApp.t('Module 3 of 6', 'Wāhanga 3 o te 6') + '</span>' +
+          '<span class="slide-title-text">' + ClarkeApp.t('Official Shared Photo Album & Live Photo Hub', 'Pukapuka Whakaahua Whānau') + '</span>' +
+          '</div>' +
+          '<div class="slide-pagination-pill">' + ClarkeApp.t('Gallery • Slide 1 of ', 'Whakaahua • Whārangi 1 o te ') + (Math.ceil((photos.length - 1) / 2) + 1) + '</div>' +
+          '</div>' +
+          '<div class="gallery-slide-container">' +
+          '<div class="gallery-card">' +
+          '<div class="gallery-img-wrapper">' +
+          '<img src="' + (photos[0] ? photos[0].url : 'clarke_invitation.jpg') + '" class="gallery-photo-img" alt="' + albumTitle + '">' +
+          '</div>' +
+          '<div class="gallery-caption-overlay">' +
+          '<div class="gallery-meta-row">' +
+          '<span class="gallery-year-badge">2026</span>' +
+          '<span class="gallery-branch-tag">Google Photos Live Album</span>' +
+          '</div>' +
+          '<div class="gallery-title">' + albumTitle + '</div>' +
+          '<div class="gallery-caption">' + ClarkeApp.t('Collaborative family album • Scan the QR code or click to upload and view photos in real time.', 'Pukapuka whakaahua whānau • Matawaihia te waehere QR hei tuku whakaahua.') + '</div>' +
+          '</div></div>' +
+          '<div class="shared-album-card">' +
+          '<div>' +
+          '<div style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; color: var(--gold-bright); margin-bottom: 6px;">' +
+          '📷 ' + ClarkeApp.t('Upload Your Reunion Photos', 'Tukua mai ō Whakaahua') +
+          '</div>' +
+          '<div style="font-size: 14px; color: var(--text-secondary); line-height: 1.45; margin-bottom: 14px;">' +
+          ClarkeApp.t('Scan this QR code using your smartphone camera to join our shared Google Photos album and upload photos from tonight’s celebration!', 'Matawaihia tēnei waehere QR ki tō waea pūkoro hei tuku whakaahua ki te pukapuka a Google Photos!') +
+          '</div>' +
+          '<div class="diamond-divider"><span class="diamond-symbol">◆</span></div>' +
+          '<div class="shared-album-qr-box">' +
+          '<img src="' + qrUrl + '" alt="QR Code to Clarke Reunion Album" class="shared-album-qr-img">' +
+          '<div style="font-size: 12px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.5px;">' +
+          ClarkeApp.t('Scan with Phone Camera', 'Matawaihia ki te Waea') +
+          '</div>' +
+          '<a href="' + albumUrl + '" target="_blank" rel="noopener noreferrer" style="color: var(--gold-bright); font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-decoration: underline; word-break: break-all;">' +
+          'photos.app.goo.gl/6fGko2NUqKfQp7866' +
+          '</a>' +
+          '</div>' +
+          '</div>' +
+          '<div style="background: rgba(37,53,40,0.8); border: 1px dashed var(--border-gold); border-radius: var(--radius-md); padding: 10px 16px; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between;">' +
+          '<span>📱 ' + ClarkeApp.t('Compatible with iPhone & Android Camera apps', 'Ka taea e ngā waea iPhone me Android') + '</span>' +
+          '<a href="' + albumUrl + '" target="_blank" class="btn btn-primary" style="padding: 6px 14px; font-size: 12px; text-decoration: none;">' + ClarkeApp.t('Open Album ↗', 'Whakatuwheratia ↗') + '</a>' +
+          '</div>' +
+          '</div>' +
+          '</div></section>';
+
+        // Remaining photos paired in slides
+        var remainingPhotos = photos.slice(1);
+        for (var i = 0; i < remainingPhotos.length; i += 2) {
+          var slideNum = Math.floor(i / 2) + 1;
+          var p1 = remainingPhotos[i];
+          var p2 = remainingPhotos[i + 1];
+          var totalSlides = Math.ceil(remainingPhotos.length / 2) + 1;
 
           html += '<section class="tv-slide" data-module="2" data-slide="' + slideNum + '">' +
             '<div class="slide-subhead">' +
             '<div class="slide-module-title">' +
-            '<span class="slide-badge">Module 3 of 6</span>' +
-            '<span class="slide-title-text">Historic Photo Gallery & Whānau Archives</span>' +
+            '<span class="slide-badge">' + ClarkeApp.t('Module 3 of 6', 'Wāhanga 3 o te 6') + '</span>' +
+            '<span class="slide-title-text">' + ClarkeApp.t('Historic Photo Gallery & Archival Wall', 'Ngā Whakaahua o Nehe') + '</span>' +
             '</div>' +
-            '<div class="slide-pagination-pill">Gallery • Slide ' + (slideNum + 1) + ' of ' + Math.ceil(photos.length / 2) + '</div>' +
+            '<div style="display:flex; align-items:center; gap:12px;">' +
+            '<a href="' + albumUrl + '" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--gold-bright); background:rgba(47,66,51,0.8); border:1px solid var(--border-gold); padding:4px 12px; border-radius:var(--radius-full);">' +
+            '📷 ' + ClarkeApp.t('Shared Album (QR)', 'Pukapuka Whakaahua') +
+            '</a>' +
+            '<div class="slide-pagination-pill">' + ClarkeApp.t('Gallery • Slide ', 'Whakaahua • Whārangi ') + (slideNum + 1) + ' of ' + totalSlides + '</div>' +
+            '</div>' +
             '</div>' +
             '<div class="gallery-slide-container">';
 
@@ -772,7 +974,7 @@
 
       function renderWhakapapa() {
         var tree = state.familyTree || {};
-        document.getElementById('whakapapa-founders').textContent = tree.founders || 'Samuel & Mereana Clarke';
+        document.getElementById('whakapapa-founders').textContent = tree.founders || 'Clarkes of Chipley, Somersetshire & Canterbury Pioneers';
         var branches = tree.branches || [];
         var html = '';
         branches.forEach(function (b) {
@@ -807,7 +1009,7 @@
             '</div>' +
             '<div class="memoriam-footer">' +
             '<span>' + m.branch + '</span>' +
-            '<span style="color: var(--gold-light);">' + (m.role || 'Kaumātua') + '</span>' +
+            '<span style="color: var(--gold-light);">' + (m.role || 'Family Elder') + '</span>' +
             '</div></div>';
         });
         document.getElementById('memoriam-tribute-grid').innerHTML = html;
@@ -823,7 +1025,7 @@
             '<div class="announcement-header">' +
             '<div class="announcement-title">' + a.title + '</div>' +
             '<span class="announcement-badge ' + (isHigh ? 'badge-red' : 'badge-gold') + '">' +
-            (isHigh ? 'Urgent Notice' : 'Whānau Update') +
+            (isHigh ? ClarkeApp.t('Important Notice', 'Pānui Whakahirahira') : ClarkeApp.t('Family Update', 'Pānui Whānau')) +
             '</span>' +
             '</div>' +
             '<div class="announcement-body">' + a.body + '</div>' +
@@ -848,7 +1050,7 @@
             '</div>' +
             '<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">' +
             '<span style="font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%;">' +
-            (isClaimed ? ('👤 ' + p.claimedBy) : 'Open for claim') +
+            (isClaimed ? ('👤 ' + p.claimedBy) : 'Open for allocation') +
             '</span>' +
             '<span class="potluck-status-tag ' + (isClaimed ? 'potluck-claimed' : 'potluck-needed') + '">' +
             p.status +
@@ -973,7 +1175,6 @@
             return;
           }
         }
-        // Fallback to first slide
         showSlide(0);
       }
 
@@ -1061,13 +1262,13 @@
         liveClock.innerHTML = ClarkeApp.formatClockWithBlinkingColons(now) + ' <span style="font-size:16px; font-weight:700; color:var(--gold-primary);">NZDT</span>';
         
         var options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
-        liveDate.textContent = now.toLocaleDateString('en-NZ', options) + ' • Waitangi Grounds';
+        liveDate.textContent = now.toLocaleDateString('en-NZ', options) + ' • Christchurch, NZ';
 
         // Countdown
-        var targetISO = (state.eventInfo && state.eventInfo.dateISO) || '2026-12-26T10:00:00+13:00';
+        var targetISO = (state.eventInfo && state.eventInfo.dateISO) || '2026-10-17T19:30:00+13:00';
         var parts = ClarkeApp.getCountdownParts(targetISO);
         if (parts.isPassed) {
-          countdownDisplay.innerHTML = '<span style="color:var(--green-light);">EVENT IN PROGRESS</span>';
+          countdownDisplay.innerHTML = '<span style="color:var(--green-light);">' + ClarkeApp.t('REUNION IN PROGRESS', 'E HAERE ANA TE HUI') + '</span>';
         } else {
           var pad = function (n) { return String(n).padStart(2, '0'); };
           countdownDisplay.innerHTML = parts.days + 'd<span class="blink-colon">:</span>' +
@@ -1081,6 +1282,12 @@
           document.getElementById('cnt-secs').textContent = pad(parts.secs);
         }
       }
+
+      // Language Toggle Click Event
+      langToggleBtn.addEventListener('click', function () {
+        ClarkeApp.toggleTeReo();
+        renderAllData();
+      });
 
       // Keyboard Controls per User Rules
       window.addEventListener('keydown', function (e) {
@@ -1121,6 +1328,12 @@
           case 'R':
             e.preventDefault();
             window.open('remote.html', '_blank');
+            break;
+          case 'l':
+          case 'L':
+            e.preventDefault();
+            ClarkeApp.toggleTeReo();
+            renderAllData();
             break;
           case '0':
             e.preventDefault();
@@ -1209,6 +1422,9 @@
           case 'setDuration':
             var sec = parseInt(data.payload, 10);
             if (sec) setDuration(sec);
+            break;
+          case 'toggleTeReo':
+            renderAllData();
             break;
           case 'RELOAD':
             location.reload();

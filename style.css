@@ -1,42 +1,51 @@
 /* ==========================================================================
-   Clarke Whānau Reunion 2026 — Shared Design System & 1080p Digital Signage
-   Theme: Heritage NZ (Deep Charcoal, Heritage Gold, Pohutukawa Red, Forest Green)
+   Clarke Family Reunion 2026 — Shared Design System & 1080p Digital Signage
+   Theme: Official Chipley Somersetshire Heritage (Deep Forest Green & Warm Parchment)
    ========================================================================== */
 
 :root {
-  /* Color Palette */
-  --bg-primary: #0d1117;
-  --bg-secondary: #161b22;
-  --bg-tertiary: #21262d;
-  --bg-card: rgba(22, 27, 34, 0.85);
-  --bg-card-hover: rgba(33, 38, 45, 0.95);
+  /* Exact Invitation Deep Forest / Hunter Green & Parchment Palette */
+  --bg-deep: #1b281e;
+  --bg-surface: #253528;
+  --bg-elevated: #2f4233;
+  --bg-glass: rgba(37, 53, 40, 0.92);
   
-  --border-color: #30363d;
-  --border-gold: #d4af37;
-  --border-subtle: rgba(212, 175, 55, 0.25);
+  --bg-primary: #1b281e;
+  --bg-secondary: #253528;
+  --bg-tertiary: #2f4233;
+  --bg-card: rgba(37, 53, 40, 0.92);
+  --bg-card-hover: rgba(47, 66, 51, 0.96);
+  
+  --border-color: #3b5a42;
+  --border-gold: #dfd3b8;
+  --border-subtle: rgba(223, 211, 184, 0.28);
 
-  --gold-primary: #d4af37;
-  --gold-light: #f3cc56;
-  --gold-dark: #aa8522;
-  --gold-glow: rgba(212, 175, 55, 0.35);
+  --gold-primary: #dfd3b8; /* Warm Parchment / Somerset Cream */
+  --gold-bright: #f4eee1;  /* High-contrast bright cream */
+  --gold-light: #f4eee1;
+  --gold-muted: #9e937b;
+  --gold-dark: #7a7059;
+  --gold-glow: rgba(223, 211, 184, 0.35);
 
-  --red-primary: #c93b2b;
-  --red-light: #e64938;
-  --red-dark: #8c2317;
-  --red-glow: rgba(201, 59, 43, 0.35);
+  --green-forest: #3b5a42;
+  --green-light: #6ca177;
+  --green-dark: #1b281e;
+  --green-primary: #3b5a42;
+  --green-glow: rgba(108, 161, 119, 0.35);
 
-  --green-primary: #1f6f50;
-  --green-light: #2da44e;
-  --green-dark: #144934;
-  --green-glow: rgba(31, 111, 80, 0.35);
+  --red-pohutukawa: #b84a39;
+  --red-primary: #b84a39;
+  --red-light: #d45b48;
+  --red-dark: #802e21;
+  --red-glow: rgba(184, 74, 57, 0.35);
 
-  --blue-primary: #1f6feb;
-  --blue-glow: rgba(31, 111, 235, 0.35);
+  --blue-primary: #4a7c9b;
+  --blue-glow: rgba(74, 124, 155, 0.35);
 
-  --text-primary: #f0f6fc;
-  --text-secondary: #c9d1d9;
-  --text-muted: #8b949e;
-  --text-gold: #f3cc56;
+  --text-primary: #f4eee1;
+  --text-secondary: #dfd3b8;
+  --text-muted: #9e937b;
+  --text-gold: #f4eee1;
 
   /* Typography */
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
@@ -47,14 +56,79 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.7);
-  --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.25);
-  --shadow-red: 0 0 20px rgba(201, 59, 43, 0.3);
+  --shadow-gold: 0 0 20px rgba(223, 211, 184, 0.22);
+  --shadow-red: 0 0 20px rgba(184, 74, 57, 0.3);
 
   /* Radius */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-full: 9999px;
+}
+
+/* Ornamental Diamond Divider matching Invitation (── ◆ ──) */
+.diamond-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 10px 0;
+  color: var(--gold-muted);
+  font-size: 13px;
+  width: 100%;
+}
+
+.diamond-divider::before,
+.diamond-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-muted), transparent);
+}
+
+.diamond-symbol {
+  color: var(--gold-primary);
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* TV Language Toggle Button */
+.tv-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(59, 90, 66, 0.45);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-bright);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.tv-lang-btn:hover {
+  background: rgba(108, 161, 119, 0.35);
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 10px rgba(223, 211, 184, 0.25);
+}
+
+.tv-lang-btn.active {
+  background: var(--gold-primary);
+  color: var(--bg-deep);
+  border-color: var(--gold-bright);
+}
+
+.tv-brand-crest img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
 }
 
 /* Base Reset & Box Sizing */
@@ -116,7 +190,7 @@ body.tv-body {
   height: 88px;
   min-height: 88px;
   max-height: 88px;
-  background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
   border-bottom: 2px solid var(--gold-primary);
   box-shadow: var(--shadow-md);
   display: flex;
@@ -304,7 +378,7 @@ body.tv-body {
   width: 100%;
   height: calc(100vh - 88px - 50px - 32px); /* 1080 - header(88) - footer(50) - bar(32) */
   box-sizing: border-box;
-  background: radial-gradient(circle at 50% 25%, #161b22 0%, #0d1117 80%);
+  background: radial-gradient(circle at 50% 25%, var(--bg-surface) 0%, var(--bg-deep) 80%);
 }
 
 .tv-slide {
@@ -395,10 +469,10 @@ body.tv-body {
 }
 
 .hero-card-main {
-  background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(13, 17, 23, 0.95));
+  background: linear-gradient(135deg, rgba(37, 53, 40, 0.95), rgba(27, 40, 30, 0.95));
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
-  padding: 36px 40px;
+  padding: 32px 36px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -612,6 +686,35 @@ body.tv-body {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 6px;
+}
+
+/* Invitation Card Showcase */
+.hero-invitation-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-invitation-thumb {
+  width: 80px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.hero-invitation-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
 }
 
 /* ==========================================================================
@@ -1089,6 +1192,42 @@ body.tv-body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Shared Google Photos Album Banner & Card */
+.shared-album-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(37, 53, 40, 0.95), rgba(27, 40, 30, 0.98));
+  border: 2px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-gold);
+  height: 100%;
+}
+
+.shared-album-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(27, 40, 30, 0.85);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  gap: 8px;
+  text-align: center;
+}
+
+.shared-album-qr-img {
+  width: 160px;
+  height: 160px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  display: block;
 }
 
 /* ==========================================================================

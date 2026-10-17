@@ -3,12 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Clarke Whānau Reunion 2026 — TV Remote Control</title>
+  <title>Clarke Family Reunion 2026 — TV Remote Control</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Handheld Smartphone TV Remote Styling */
+    /* Handheld Smartphone TV Remote Styling — Hunter/Forest Green & Parchment Cream */
+    :root {
+      --bg-deep: #1b281e;
+      --bg-surface: #253528;
+      --bg-card: #2f4233;
+      --gold-primary: #dfd3b8;
+      --gold-light: #f4eee1;
+      --gold-bright: #dfd3b8;
+      --border-color: rgba(223, 211, 184, 0.22);
+      --border-gold: #dfd3b8;
+      --text-primary: #f4eee1;
+      --text-secondary: #dfd3b8;
+      --text-muted: #a3b899;
+      --green-light: #81c784;
+      --red-light: #ff7b72;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+
+    .blink-colon {
+      animation: blink 1s ease-in-out infinite;
+      display: inline-block;
+    }
+
     body {
-      background-color: #080a0f;
+      background-color: #121d15;
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
@@ -24,14 +50,14 @@
     .remote-casing {
       width: 100%;
       max-width: 420px;
-      background: linear-gradient(165deg, #181d26 0%, #0d1117 100%);
-      border: 2px solid #28303d;
+      background: linear-gradient(165deg, #1b281e 0%, #131d16 100%);
+      border: 2px solid rgba(223, 211, 184, 0.35);
       border-radius: 36px;
       padding: 24px 20px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(223, 211, 184, 0.15);
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
       position: relative;
     }
 
@@ -53,8 +79,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border-color);
+      gap: 8px;
     }
 
     .remote-brand {
@@ -64,37 +91,42 @@
     }
 
     .remote-crest {
-      width: 28px;
-      height: 28px;
-      filter: drop-shadow(0 0 6px var(--gold-glow));
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-primary);
+      background: #131c15;
     }
 
     .remote-title {
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
-      color: var(--gold-light);
+      color: var(--gold-bright);
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     .remote-clock {
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--text-primary);
-      background: #11151c;
+      color: var(--gold-light);
+      background: #141f17;
       padding: 4px 8px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-color);
+      white-space: nowrap;
     }
 
     /* LCD Virtual Status Screen */
     .remote-lcd {
-      background: #080c10;
-      border: 2px solid var(--border-gold);
+      background: #131c15;
+      border: 2px solid var(--gold-primary);
       border-radius: 16px;
-      padding: 14px;
-      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px var(--gold-glow);
+      padding: 12px 14px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(223, 211, 184, 0.15);
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -119,16 +151,16 @@
 
     .lcd-status-badge {
       font-family: var(--font-mono);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       letter-spacing: 1px;
     }
 
     .lcd-dur-badge {
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      background: rgba(212, 175, 55, 0.15);
+      background: rgba(223, 211, 184, 0.15);
       border: 1px solid var(--gold-primary);
       padding: 3px 8px;
       border-radius: 6px;
@@ -138,7 +170,7 @@
     .remote-lcd-notice {
       font-size: 11px;
       color: #ff9990;
-      background: rgba(201, 59, 43, 0.2);
+      background: rgba(201, 59, 43, 0.25);
       border-radius: 4px;
       padding: 4px 6px;
       display: none;
@@ -149,9 +181,9 @@
 
     /* Tactile Remote Buttons */
     .remote-btn {
-      background: linear-gradient(180deg, #242b35 0%, #171c24 100%);
+      background: linear-gradient(180deg, #2f4233 0%, #202e23 100%);
       color: var(--text-primary);
-      border: 1px solid #363e4d;
+      border: 1px solid rgba(223, 211, 184, 0.28);
       border-radius: 14px;
       cursor: pointer;
       font-weight: 700;
@@ -159,25 +191,29 @@
       align-items: center;
       justify-content: center;
       transition: all 0.1s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(223, 211, 184, 0.1);
       user-select: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .remote-btn:active {
       transform: translateY(2px);
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-      background: #11151c;
+      background: #172419;
       border-color: var(--gold-primary);
     }
 
     .remote-btn-gold {
-      background: linear-gradient(180deg, #d4af37 0%, #aa8522 100%);
-      color: #0d1117;
-      border-color: var(--gold-light);
+      background: linear-gradient(180deg, #dfd3b8 0%, #b8a67d 100%);
+      color: #1b281e;
+      border-color: #f4eee1;
+      font-weight: 800;
     }
 
     .remote-btn-gold:active {
-      background: #8e6e16;
+      background: #99875e;
       color: #ffffff;
     }
 
@@ -191,7 +227,7 @@
     .dpad-container {
       width: 210px;
       height: 210px;
-      margin: 4px auto;
+      margin: 2px auto;
       position: relative;
     }
 
@@ -199,9 +235,9 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: #13171f;
-      border: 2px solid #2b3342;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(255, 255, 255, 0.05);
+      background: #18241b;
+      border: 2px solid rgba(223, 211, 184, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(223, 211, 184, 0.08);
       position: relative;
       overflow: hidden;
     }
@@ -215,13 +251,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       transition: background 0.1s ease;
     }
 
     .dpad-btn:active {
-      background: rgba(212, 175, 55, 0.25);
+      background: rgba(223, 211, 184, 0.25);
     }
 
     .dpad-up {
@@ -264,9 +300,9 @@
       width: 82px;
       height: 82px;
       border-radius: 50%;
-      background: linear-gradient(145deg, #1f2530 0%, #141820 100%);
-      border: 2px solid var(--border-gold);
-      color: var(--gold-light);
+      background: linear-gradient(145deg, #283a2d 0%, #1a271d 100%);
+      border: 2px solid var(--gold-primary);
+      color: var(--gold-primary);
       font-size: 13px;
       font-weight: 800;
       cursor: pointer;
@@ -281,7 +317,7 @@
     .dpad-center:active {
       transform: translate(-50%, -50%) scale(0.95);
       background: var(--gold-primary);
-      color: #0d1117;
+      color: #1b281e;
     }
 
     /* Sub-Controls: Pause, Lock */
@@ -318,9 +354,9 @@
       padding: 0 6px;
       text-align: center;
       border-radius: 10px;
-      background: #181d26;
-      border: 1px solid #2c3442;
-      color: var(--text-secondary);
+      background: #253528;
+      border: 1px solid rgba(223, 211, 184, 0.25);
+      color: var(--gold-light);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -328,7 +364,7 @@
 
     .module-jump-btn:active {
       background: var(--gold-primary);
-      color: #0d1117;
+      color: #1b281e;
       border-color: var(--gold-light);
     }
 
@@ -360,7 +396,7 @@
 
     /* Quick Announcement Section */
     .quick-announce-box {
-      background: #12161f;
+      background: #1f2c22;
       border: 1px solid var(--border-color);
       border-radius: 14px;
       padding: 10px;
@@ -397,7 +433,7 @@
       top: 16px;
       left: 50%;
       transform: translateX(-50%) translateY(-100px);
-      background: rgba(22, 27, 34, 0.95);
+      background: rgba(31, 44, 34, 0.95);
       border: 1px solid var(--gold-primary);
       color: var(--text-primary);
       padding: 8px 16px;
@@ -427,25 +463,28 @@
     <!-- Physical Infrared Emitter Visual -->
     <div class="remote-ir-emitter"></div>
 
-    <!-- Remote Header -->
+    <!-- Remote Header with Clarke Crest, Te Reo Toggle, and Blinking Clock -->
     <header class="remote-header">
       <div class="remote-brand">
-        <!-- Gold Koru Crest -->
-        <svg class="remote-crest" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="46" fill="#161b22" stroke="#d4af37" stroke-width="4"/>
-          <path d="M50 14 C68 14 82 28 82 46 C82 64 68 78 50 78 C36 78 26 68 26 54 C26 42 34 34 44 34 C52 34 58 40 58 48 C58 54 54 58 48 58 C44 58 42 55 42 51 C42 47 45 44 49 44" fill="none" stroke="#f3cc56" stroke-width="4.5" stroke-linecap="round"/>
-        </svg>
-        <span class="remote-title">CLARKE TV REMOTE</span>
+        <img src="clarke_crest.jpg" alt="Clarke Crest" class="remote-crest" onerror="this.style.display='none'">
+        <div>
+          <span class="remote-title" id="remote-header-title">CLARKE TV REMOTE</span>
+        </div>
       </div>
-      <div class="remote-clock" id="remote-header-clock">
-        12<span class="blink-colon">:</span>00<span class="blink-colon">:</span>00
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <button class="remote-btn" id="remote-lang-btn" onclick="toggleRemoteLanguage()" style="height: 28px; padding: 0 8px; font-size: 10px; border-radius: 8px; border-color: var(--gold-primary); background: #253528;" title="Toggle Te Reo Māori / English">
+          🌐 Te Reo: OFF (EN)
+        </button>
+        <div class="remote-clock" id="remote-header-clock">
+          12<span class="blink-colon">:</span>00<span class="blink-colon">:</span>00
+        </div>
       </div>
     </header>
 
     <!-- Virtual LCD Feedback Screen -->
     <section class="remote-lcd">
       <div class="remote-lcd-top">
-        <span>1080P TV FEEDBACK</span>
+        <span id="lcd-feedback-title">1080P TV FEEDBACK</span>
         <span id="lcd-lock-status">UNLOCKED</span>
       </div>
       <div class="remote-lcd-main">
@@ -493,22 +532,27 @@
       </button>
     </div>
 
+    <!-- Shared Google Photos Album Quick Button -->
+    <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="remote-btn remote-btn-gold" id="remote-photos-btn" style="text-decoration: none; height: 42px; font-size: 12.5px; gap: 8px;">
+      📸 Shared Google Photos Album
+    </a>
+
     <!-- Direct Module Jump Grid -->
     <div>
-      <div class="module-jump-title">DIRECT MODULE JUMP</div>
+      <div class="module-jump-title" id="module-jump-heading">DIRECT MODULE JUMP</div>
       <div class="module-jump-grid">
-        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(0)">0: Schedule</button>
-        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(1)">1: RSVPs</button>
-        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(2)">2: Photos</button>
-        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(3)">3: Whakapapa</button>
-        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(4)">4: Notices</button>
-        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(5)">5: Trivia</button>
+        <button class="remote-btn module-jump-btn" id="btn-mod-0" onclick="triggerModuleJump(0)">0: Schedule</button>
+        <button class="remote-btn module-jump-btn" id="btn-mod-1" onclick="triggerModuleJump(1)">1: RSVPs</button>
+        <button class="remote-btn module-jump-btn" id="btn-mod-2" onclick="triggerModuleJump(2)">2: Photos</button>
+        <button class="remote-btn module-jump-btn" id="btn-mod-3" onclick="triggerModuleJump(3)">3: Family Tree</button>
+        <button class="remote-btn module-jump-btn" id="btn-mod-4" onclick="triggerModuleJump(4)">4: Notices</button>
+        <button class="remote-btn module-jump-btn" id="btn-mod-5" onclick="triggerModuleJump(5)">5: Trivia</button>
       </div>
     </div>
 
     <!-- Numeric Duration Keypad (1=10s ... 9=90s) -->
     <div>
-      <div class="module-jump-title">SLIDE TIMER PRESETS (KEYS 1–9)</div>
+      <div class="module-jump-title" id="module-duration-heading">SLIDE TIMER PRESETS (KEYS 1–9)</div>
       <div class="numeric-keypad-grid">
         <button class="remote-btn num-key-btn" onclick="triggerDurationKey(1)">
           <span>1</span><span class="num-key-label">10s</span>
@@ -542,15 +586,15 @@
 
     <!-- Quick Live Announcement Push Box -->
     <div class="quick-announce-box">
-      <div style="font-size: 11px; font-weight: 700; color: var(--gold-light); text-transform: uppercase;">
+      <div style="font-size: 11px; font-weight: 700; color: var(--gold-light); text-transform: uppercase;" id="lbl-quick-push-title">
         PUSH LIVE BANNER TO TV
       </div>
       <input type="text" id="remote-notice-input" class="form-control" style="padding: 7px 10px; font-size: 12px;" placeholder="Urgent message for TV...">
       <div style="display: flex; gap: 6px;">
-        <button class="remote-btn remote-btn-red" style="flex: 2; height: 34px; font-size: 12px;" onclick="pushRemoteNotice()">
+        <button class="remote-btn remote-btn-red" id="btn-push-notice" style="flex: 2; height: 34px; font-size: 12px;" onclick="pushRemoteNotice()">
           🚨 Push to TV
         </button>
-        <button class="remote-btn" style="flex: 1; height: 34px; font-size: 12px;" onclick="clearRemoteNotice()">
+        <button class="remote-btn" id="btn-clear-notice" style="flex: 1; height: 34px; font-size: 12px;" onclick="clearRemoteNotice()">
           Clear
         </button>
       </div>
@@ -716,11 +760,97 @@
         showRemoteToast("Cleared notice from TV");
       };
 
+      // Te Reo Māori / English Localization Handler
+      function t(en, mi) {
+        return (state.settings && state.settings.useTeReo) ? mi : en;
+      }
+
+      function updateLanguageLabels() {
+        var isTeReo = !!(state.settings && state.settings.useTeReo);
+        var langBtn = document.getElementById('remote-lang-btn');
+        if (langBtn) {
+          langBtn.textContent = isTeReo ? '🌿 Te Reo: ON' : '🌐 Te Reo: OFF (EN)';
+          langBtn.style.color = isTeReo ? 'var(--green-light)' : 'var(--gold-bright)';
+        }
+
+        var headerTitle = document.getElementById('remote-header-title');
+        if (headerTitle) {
+          headerTitle.textContent = t('CLARKE TV REMOTE', 'WHAKAATA MATA O CLARKE');
+        }
+
+        var lcdTitle = document.getElementById('lcd-feedback-title');
+        if (lcdTitle) {
+          lcdTitle.textContent = t('1080P TV FEEDBACK', 'WHAKAATU POUAKA (1080P)');
+        }
+
+        var photosBtn = document.getElementById('remote-photos-btn');
+        if (photosBtn) {
+          photosBtn.textContent = t('📸 Shared Google Photos Album', '📸 Puka Whakaahua Tiri (Google)');
+          if (state.eventInfo && state.eventInfo.sharedAlbumUrl) {
+            photosBtn.href = state.eventInfo.sharedAlbumUrl;
+          }
+        }
+
+        var modHeading = document.getElementById('module-jump-heading');
+        if (modHeading) {
+          modHeading.textContent = t('DIRECT MODULE JUMP', 'WHAKATERE KI TE WĀHANGA');
+        }
+
+        var durHeading = document.getElementById('module-duration-heading');
+        if (durHeading) {
+          durHeading.textContent = t('SLIDE TIMER PRESETS (KEYS 1–9)', 'TATAURANGA MATA (PĀTAI 1–9)');
+        }
+
+        var pushTitle = document.getElementById('lbl-quick-push-title');
+        if (pushTitle) {
+          pushTitle.textContent = t('PUSH LIVE BANNER TO TV', 'TUKUA HE PĀNUI MATA KI TE TV');
+        }
+
+        var pushBtn = document.getElementById('btn-push-notice');
+        if (pushBtn) {
+          pushBtn.textContent = t('🚨 Push to TV', '🚨 Tukua ki te TV');
+        }
+
+        var clearBtn = document.getElementById('btn-clear-notice');
+        if (clearBtn) {
+          clearBtn.textContent = t('Clear', 'Whakakore');
+        }
+
+        // Direct Module Jump Buttons (0 to 5)
+        var m0 = document.getElementById('btn-mod-0');
+        var m1 = document.getElementById('btn-mod-1');
+        var m2 = document.getElementById('btn-mod-2');
+        var m3 = document.getElementById('btn-mod-3');
+        var m4 = document.getElementById('btn-mod-4');
+        var m5 = document.getElementById('btn-mod-5');
+
+        if (m0) m0.textContent = t('0: Schedule', '0: Hōtaka (Schedule)');
+        if (m1) m1.textContent = t('1: RSVPs', '1: Rārangi (RSVPs)');
+        if (m2) m2.textContent = t('2: Photos', '2: Whakaahua (Photos)');
+        if (m3) m3.textContent = t('3: Family Tree', '3: Whakapapa (Tree)');
+        if (m4) m4.textContent = t('4: Notices', '4: Pānui (Notices)');
+        if (m5) m5.textContent = t('5: Trivia', '5: Pātai (Trivia)');
+      }
+
+      window.toggleRemoteLanguage = function () {
+        vibrate();
+        if (!state.settings) state.settings = {};
+        state.settings.useTeReo = !state.settings.useTeReo;
+        if (window.ClarkeApp) {
+          window.ClarkeApp.saveState(state);
+          window.ClarkeApp.sendCommand('toggleTeReo', state.settings.useTeReo);
+          window.ClarkeApp.sendCommand('SET_LANGUAGE', state.settings.useTeReo ? 'mi' : 'en');
+        }
+        updateLanguageLabels();
+        showRemoteToast(state.settings.useTeReo ? 'Te Reo Māori: ON' : 'English: ON (Te Reo OFF)');
+      };
+
       // Sync across tabs
       if (window.ClarkeApp) {
         window.ClarkeApp.onStateChange(function (newState) {
           state = newState;
           updateLcdDisplay();
+          updateLanguageLabels();
         });
       }
 
@@ -777,8 +907,9 @@
         }
       });
 
-      // Initial LCD sync
+      // Initial LCD & Language sync
       updateLcdDisplay();
+      updateLanguageLabels();
 
     })();
   </script>

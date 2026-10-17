@@ -3,26 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clarke Whānau Reunion 2026 — Master Admin Panel</title>
+  <title>Clarke Family Reunion — Master Admin Panel</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Master Admin Specific Styles */
+    /* ==========================================================================
+       Master Admin — Hunter / Forest Green & Warm Parchment Palette
+       ========================================================================== */
+    :root {
+      --bg-deep: #1b281e;
+      --bg-surface: #253528;
+      --bg-elevated: #2f4233;
+      --bg-glass: rgba(37, 53, 40, 0.92);
+
+      --gold-primary: #dfd3b8;
+      --gold-bright: #f4eee1;
+      --gold-muted: #9e937b;
+      --border-gold: #dfd3b8;
+
+      --green-forest: #3b5a42;
+      --green-light: #6ca177;
+      --red-pohutukawa: #b84a39;
+
+      --text-primary: #f4eee1;
+      --text-secondary: #dfd3b8;
+      --text-muted: #9e937b;
+      --border-color: #3b5a42;
+      --shadow-gold: 0 0 16px rgba(223, 211, 184, 0.2);
+    }
+
     body {
-      background-color: var(--bg-primary);
+      background-color: var(--bg-deep);
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
+    /* Admin Header */
     .admin-header {
-      background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
       border-bottom: 2px solid var(--gold-primary);
-      padding: 16px 28px;
+      padding: 14px 28px;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     .admin-header-inner {
@@ -42,51 +68,76 @@
     }
 
     .admin-brand-crest {
-      width: 44px;
-      height: 44px;
-      filter: drop-shadow(0 0 8px var(--gold-glow));
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--gold-primary);
+      background: #1b281e;
+      box-shadow: 0 0 10px rgba(223, 211, 184, 0.3);
+      flex-shrink: 0;
     }
 
     .admin-brand-title {
-      font-family: var(--font-heading);
+      font-family: "Cinzel", Georgia, serif, -apple-system, sans-serif;
       font-size: 19px;
       font-weight: 800;
-      color: var(--gold-light);
+      color: var(--gold-bright);
       letter-spacing: 1px;
       white-space: nowrap;
     }
 
     .admin-brand-sub {
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--gold-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .admin-clock-box {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--gold-primary);
+      border-radius: 8px;
       padding: 6px 14px;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      font-family: var(--font-mono);
+      font-family: ui-monospace, monospace;
       color: var(--text-primary);
-      box-shadow: var(--shadow-sm);
       white-space: nowrap;
     }
 
-    .admin-nav-links {
-      display: flex;
+    .lang-toggle-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-bright);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .lang-toggle-btn:hover {
+      background: var(--green-forest);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .lang-toggle-btn.active {
+      background: var(--gold-primary);
+      color: #1b281e;
+      font-weight: 800;
     }
 
     /* Live TV Control Strip */
     .tv-control-strip {
-      background: #11151c;
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--border-color);
-      padding: 12px 28px;
+      padding: 10px 28px;
     }
 
     .tv-control-inner {
@@ -103,7 +154,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: var(--font-mono);
+      font-family: ui-monospace, monospace;
       font-size: 12px;
     }
 
@@ -114,10 +165,10 @@
       flex-wrap: wrap;
     }
 
-    /* Urgent Emergency Broadcast Bar */
+    /* Emergency Alert Bar */
     .emergency-broadcast-strip {
-      background: linear-gradient(90deg, #2b1111 0%, #161b22 100%);
-      border-bottom: 2px solid var(--red-primary);
+      background: linear-gradient(90deg, #3d1c18 0%, var(--bg-surface) 100%);
+      border-bottom: 2px solid var(--red-pohutukawa);
       padding: 10px 28px;
     }
 
@@ -126,13 +177,13 @@
       margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    /* Admin Tab Navigation */
+    /* Tab Bar */
     .admin-tabs-bar {
-      background: var(--bg-secondary);
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 76px;
@@ -156,11 +207,11 @@
     .admin-tab-btn {
       background: transparent;
       border: 1px solid transparent;
-      color: var(--text-secondary);
+      color: var(--gold-muted);
       padding: 9px 16px;
       font-size: 13px;
       font-weight: 700;
-      border-radius: var(--radius-md);
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -170,18 +221,18 @@
     }
 
     .admin-tab-btn:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
+      background: var(--bg-elevated);
+      color: var(--gold-bright);
     }
 
     .admin-tab-btn.active {
-      background: var(--gold-primary);
-      color: #0d1117;
-      border-color: var(--gold-light);
+      background: var(--green-forest);
+      color: #ffffff;
+      border-color: var(--gold-primary);
       box-shadow: var(--shadow-gold);
     }
 
-    /* Admin Main Container */
+    /* Content Area */
     .admin-content {
       max-width: 1400px;
       margin: 0 auto;
@@ -216,17 +267,73 @@
       }
     }
 
-    /* Toast Notification */
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+    }
+
+    /* Form Controls */
+    .form-control {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 8px;
+    }
+
+    .form-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 2px rgba(223, 211, 184, 0.25);
+    }
+
+    /* Badges */
+    .badge-gold {
+      background: rgba(223, 211, 184, 0.15);
+      color: var(--gold-bright);
+      border: 1px solid var(--gold-primary);
+    }
+
+    .badge-green {
+      background: rgba(108, 161, 119, 0.2);
+      color: #9fe2ad;
+      border: 1px solid var(--green-light);
+    }
+
+    .badge-red {
+      background: rgba(184, 74, 57, 0.2);
+      color: #ffa599;
+      border: 1px solid var(--red-pohutukawa);
+    }
+
+    /* Blinking colon */
+    .blink-colon {
+      display: inline-block;
+      animation: colonBlink 1s step-start infinite;
+      color: var(--gold-primary);
+      font-weight: 700;
+      padding: 0 1px;
+    }
+
+    @keyframes colonBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+
+    /* Toast */
     #admin-toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #161b22;
+      background: var(--bg-surface);
       border: 1px solid var(--gold-primary);
       color: var(--text-primary);
       padding: 12px 18px;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
       z-index: 9999;
       transform: translateY(120px);
       transition: transform 0.3s ease;
@@ -247,30 +354,35 @@
   <header class="admin-header">
     <div class="admin-header-inner">
       <div class="admin-brand">
-        <!-- Heritage Gold Crest -->
-        <svg class="admin-brand-crest" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="46" fill="#161b22" stroke="#d4af37" stroke-width="4"/>
-          <path d="M50 14 C68 14 82 28 82 46 C82 64 68 78 50 78 C36 78 26 68 26 54 C26 42 34 34 44 34 C52 34 58 40 58 48 C58 54 54 58 48 58 C44 58 42 55 42 51 C42 47 45 44 49 44" fill="none" stroke="#f3cc56" stroke-width="4.5" stroke-linecap="round"/>
-        </svg>
+        <!-- Clarke Family Crest -->
+        <img src="clarke_crest.jpg" alt="Clarke Family Crest" class="admin-brand-crest">
         <div>
-          <h1 class="admin-brand-title">CLARKE 2026 — MASTER ADMIN</h1>
-          <p class="admin-brand-sub">Central Hub: Live TV Signage & Data Control</p>
+          <h1 class="admin-brand-title" id="lbl-admin-header-title">CLARKE REUNION — MASTER ADMIN</h1>
+          <p class="admin-brand-sub" id="lbl-admin-header-sub">Central Hub: Live TV Signage & Data Control</p>
         </div>
       </div>
 
-      <div class="admin-clock-box" id="admin-header-clock">
-        12<span class="blink-colon">:</span>00<span class="blink-colon">:</span>00
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- Language Switcher Button -->
+        <button class="lang-toggle-btn" id="btn-language-toggle" onclick="toggleLanguage()" title="Toggle Language (Shortcut: L)">
+          <span id="lang-toggle-icon">🌐</span>
+          <span id="lang-toggle-text">Language: English</span>
+        </button>
+
+        <div class="admin-clock-box" id="admin-header-clock">
+          12<span class="blink-colon">:</span>00<span class="blink-colon">:</span>00
+        </div>
       </div>
 
-      <div class="admin-nav-links">
+      <div class="portal-nav-links" style="display: flex; gap: 8px;">
         <a href="index.html" target="_blank" class="btn btn-secondary" style="padding: 7px 12px; font-size: 13px;" title="Launch 1080p Digital Signage TV Display">
-          📺 Live Display
+          📺 <span id="lbl-btn-live">Live Display</span>
         </a>
         <a href="portal.html" target="_blank" class="btn btn-secondary" style="padding: 7px 12px; font-size: 13px;" title="Open Guest Web Portal">
-          🌐 Guest Portal
+          🌐 <span id="lbl-btn-portal">Guest Portal</span>
         </a>
         <a href="remote.html" target="_blank" class="btn btn-primary" style="padding: 7px 12px; font-size: 13px;" title="Open Smartphone Touch TV Remote">
-          📱 Mobile Remote
+          📱 <span id="lbl-btn-remote">Mobile Remote</span>
         </a>
       </div>
     </div>
@@ -280,19 +392,19 @@
   <section class="tv-control-strip">
     <div class="tv-control-inner">
       <div class="tv-status-indicators">
-        <span style="color: var(--text-muted);">TV STATUS:</span>
+        <span style="color: var(--gold-muted);" id="lbl-tv-status-title">TV STATUS:</span>
         <span id="tv-status-mode" class="badge badge-green">PLAYING</span>
         <span id="tv-status-lock" class="badge badge-gold">UNLOCKED</span>
         <span id="tv-status-dur" class="badge badge-gold">10s DURATION</span>
       </div>
 
       <div class="tv-strip-buttons">
-        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('prevSlide')">⏮️ Prev Slide</button>
-        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('nextSlide')">⏭️ Next Slide</button>
+        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('prevSlide')" id="btn-ctrl-prev">⏮️ Prev Slide</button>
+        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('nextSlide')" id="btn-ctrl-next">⏭️ Next Slide</button>
         <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" id="btn-toggle-pause" onclick="sendTvAction('togglePause')">⏸️ Pause</button>
         <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" id="btn-toggle-lock" onclick="sendTvAction('toggleLock')">🔒 Lock Screen</button>
-        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('restartModule')">⬆️ Module Top</button>
-        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('nextModule')">⬇️ Next Module</button>
+        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('restartModule')" id="btn-ctrl-top">⬆️ Module Top</button>
+        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="sendTvAction('nextModule')" id="btn-ctrl-nextmod">⬇️ Next Module</button>
 
         <!-- Duration Dropdown -->
         <select id="tv-duration-select" class="form-control" style="width: auto; padding: 6px 10px; font-size: 13px; font-weight: 700;" onchange="handleDurationChange(this.value)">
@@ -311,22 +423,22 @@
   <!-- Urgent / Emergency Broadcast Bar -->
   <section class="emergency-broadcast-strip">
     <div class="emergency-broadcast-inner">
-      <strong style="color: var(--red-light); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">
+      <strong style="color: #ffa599; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;" id="lbl-emergency-title">
         🚨 Emergency / Urgent TV Banner:
       </strong>
-      <input type="text" id="emergency-notice-input" class="form-control" style="flex: 1; min-width: 260px; padding: 6px 12px; font-size: 13px; border-color: var(--red-primary);" placeholder="Type urgent announcement to overlay on TV screen immediately...">
-      <button class="btn btn-danger" style="padding: 6px 14px; font-size: 13px;" onclick="broadcastEmergencyNotice()">
+      <input type="text" id="emergency-notice-input" class="form-control" style="flex: 1; min-width: 260px; padding: 6px 12px; font-size: 13px; border-color: var(--red-pohutukawa);" placeholder="Type urgent announcement to overlay on TV screen immediately...">
+      <button class="btn btn-danger" style="padding: 6px 14px; font-size: 13px;" onclick="broadcastEmergencyNotice()" id="btn-broadcast-now">
         Broadcast to TV
       </button>
-      <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="clearEmergencyNotice()">
+      <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" onclick="clearEmergencyNotice()" id="btn-clear-notice">
         Clear Notice
       </button>
 
       <!-- Quick Preset Buttons -->
       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="setPresetNotice('Whānau Group Photo gathering at Waitangi Flagstaff NOW!')">📸 Photo Now</button>
-        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="setPresetNotice('Grand Hāngī lifting in 15 minutes at Clarke Homestead paddock!')">🍲 Hāngī 15m</button>
-        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="setPresetNotice('Welcome Dinner & Waiata serving now in Main Dining Hall.')">🍽️ Dinner Ready</button>
+        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="setPresetNotice('Family Group Photo gathering at Papanui Club Hall NOW!')">📸 Photo Now</button>
+        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="setPresetNotice('Evening buffet dinner starting in 15 minutes!')">🍽️ Dinner 15m</button>
+        <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="setPresetNotice('Family Trivia starting in 10 minutes — assemble your branch!')">🎯 Trivia Soon</button>
       </div>
     </div>
   </section>
@@ -334,14 +446,14 @@
   <!-- Navigation Tabs -->
   <nav class="admin-tabs-bar">
     <div class="admin-tabs-inner">
-      <button class="admin-tab-btn active" data-tab="pane-settings">⚙️ Event & Sync Settings</button>
-      <button class="admin-tab-btn" data-tab="pane-schedule">📅 Manage Schedule</button>
-      <button class="admin-tab-btn" data-tab="pane-rsvps">👥 Manage RSVPs</button>
-      <button class="admin-tab-btn" data-tab="pane-photos">📸 Manage Photos</button>
-      <button class="admin-tab-btn" data-tab="pane-whakapapa">🌳 Whakapapa & Memoriam</button>
-      <button class="admin-tab-btn" data-tab="pane-announcements">📣 Notices & Potluck</button>
-      <button class="admin-tab-btn" data-tab="pane-trivia">🎯 Trivia & Branch Scores</button>
-      <button class="admin-tab-btn" data-tab="pane-backup">💾 Backup & Restore</button>
+      <button class="admin-tab-btn active" data-tab="pane-settings" id="admin-tab-settings">⚙️ Event & Sync Settings</button>
+      <button class="admin-tab-btn" data-tab="pane-schedule" id="admin-tab-schedule">📅 Manage Schedule</button>
+      <button class="admin-tab-btn" data-tab="pane-rsvps" id="admin-tab-rsvps">👥 Manage RSVPs</button>
+      <button class="admin-tab-btn" data-tab="pane-photos" id="admin-tab-photos">📸 Manage Photos</button>
+      <button class="admin-tab-btn" data-tab="pane-whakapapa" id="admin-tab-whakapapa">🌳 Family Tree & Memorial</button>
+      <button class="admin-tab-btn" data-tab="pane-announcements" id="admin-tab-announcements">📣 Notices & Food Roster</button>
+      <button class="admin-tab-btn" data-tab="pane-trivia" id="admin-tab-trivia">🎯 Trivia & Branch Scores</button>
+      <button class="admin-tab-btn" data-tab="pane-backup" id="admin-tab-backup">💾 Backup & Restore</button>
     </div>
   </nav>
 
@@ -352,23 +464,28 @@
     <section id="pane-settings" class="admin-pane active">
       <div class="grid-admin-2">
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Event Details & Wi-Fi</h2>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;">Event Details & Wi-Fi</h2>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Edit the core metadata shown across all display slides and the guest portal.</p>
 
           <form id="settings-event-form" onsubmit="handleSaveEventSettings(event)">
             <div class="form-group">
-              <label class="form-label" for="setting-title">Event Title</label>
+              <label class="form-label" for="setting-title">Event Title (English)</label>
               <input type="text" id="setting-title" class="form-control" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="setting-subtitle">Theme Subtitle / Whakataukī</label>
+              <label class="form-label" for="setting-title-mi">Event Title (Te Reo Māori alternative)</label>
+              <input type="text" id="setting-title-mi" class="form-control" placeholder="Te Huihuinga Whānau o Clarke">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-subtitle">Theme Subtitle / Motto</label>
               <input type="text" id="setting-subtitle" class="form-control" required>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="setting-date">Reunion Opening Date & Time (ISO format)</label>
-              <input type="text" id="setting-date" class="form-control" placeholder="2026-12-26T10:00:00+13:00" required>
+              <input type="text" id="setting-date" class="form-control" placeholder="2026-10-17T19:30:00+13:00" required>
             </div>
 
             <div class="form-group">
@@ -387,16 +504,35 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+            <div class="form-group">
+              <label class="form-label" for="setting-shared-album-url">Shared Google Photos Album URL</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="url" id="setting-shared-album-url" class="form-control" placeholder="https://photos.app.goo.gl/..." value="https://photos.app.goo.gl/6fGko2NUqKfQp7866">
+                <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" id="btn-admin-test-album" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="white-space: nowrap; text-decoration: none; display: flex; align-items: center;">
+                  Open ↗
+                </a>
+              </div>
+              <small style="color: var(--text-muted); font-size: 11px; margin-top: 4px; display: block;">Official Album: "2026 -CLARKE FAMILY REUNION". Shared across TV QR codes, Guest Portal, and Mobile TV Remote.</small>
+            </div>
+
+            <div class="form-group" style="margin-top: 10px; background: var(--bg-elevated); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; font-weight: 700; color: var(--gold-bright);">
+                <input type="checkbox" id="setting-enable-tereeo" style="width: 18px; height: 18px; accent-color: var(--green-light);">
+                <span>Enable Te Reo Māori Labels by Default (useTeReo)</span>
+              </label>
+              <small style="color: var(--text-muted); font-size: 12px; margin-top: 4px; display: block;">When unchecked (default), all headers, buttons, and sections render in clean English.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 14px;">
               Save Event Details
             </button>
           </form>
         </div>
 
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Multi-Device Cloud Sync</h2>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;">Multi-Device Cloud Sync</h2>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
-            Same-device tabs synchronize instantly via <code>BroadcastChannel</code> and <code>localStorage</code>. To sync across separate smartphones and laptops across the grounds, enter an optional Firebase Realtime Database or Webhook endpoint URL below.
+            Same-device tabs synchronize instantly via <code>BroadcastChannel</code> and <code>localStorage</code>. To sync across separate smartphones and laptops across Papanui Club, enter an optional Firebase Realtime Database or Webhook endpoint URL below.
           </p>
 
           <div class="form-group">
@@ -412,7 +548,7 @@
 
           <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 24px 0;">
 
-          <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 16px; margin-bottom: 8px;">Display Timing Presets</h3>
+          <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 16px; margin-bottom: 8px;">Display Timing Presets</h3>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Configure default slide duration on the TV display.</p>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-secondary" onclick="handleDurationChange(10)">10 Seconds</button>
@@ -427,14 +563,13 @@
     <!-- TAB 2: MANAGE SCHEDULE -->
     <section id="pane-schedule" class="admin-pane">
       <div class="grid-admin-2">
-        <!-- Schedule List -->
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Current Schedule Items</h2>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;">Current Schedule Items</h2>
             <select id="schedule-admin-day-select" class="form-control" style="width: auto; padding: 4px 10px;" onchange="renderAdminSchedule()">
-              <option value="1">Day 1 (Friday 26 Dec)</option>
-              <option value="2">Day 2 (Saturday 27 Dec)</option>
-              <option value="3">Day 3 (Sunday 28 Dec)</option>
+              <option value="1">Day 1 (Friday 16 Oct)</option>
+              <option value="2">Day 2 (Saturday 17 Oct — Main Event)</option>
+              <option value="3">Day 3 (Sunday 18 Oct)</option>
             </select>
           </div>
 
@@ -443,40 +578,39 @@
           </div>
         </div>
 
-        <!-- Add Schedule Item Form -->
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Add New Schedule Item</h2>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;">Add New Schedule Item</h2>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">New items automatically display in the itinerary slides on the TV and Portal.</p>
 
           <form id="add-schedule-form" onsubmit="handleAddScheduleItem(event)">
             <div class="form-group">
               <label class="form-label" for="sch-day">Target Day *</label>
               <select id="sch-day" class="form-control" required>
-                <option value="1">Day 1 — Welcome & Mihimihi (Friday 26 Dec)</option>
-                <option value="2">Day 2 — Whakapapa & Games (Saturday 27 Dec)</option>
-                <option value="3">Day 3 — Memorial & Poroporoaki (Sunday 28 Dec)</option>
+                <option value="1">Day 1 — Welcome & Early Gatherings</option>
+                <option value="2" selected>Day 2 — Clarke Reunion Evening @ Papanui Club</option>
+                <option value="3">Day 3 — Farewell Breakfast & Departures</option>
               </select>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 12px;">
               <div class="form-group">
-                <label class="form-label" for="sch-time">Time (e.g. 10:30) *</label>
-                <input type="text" id="sch-time" class="form-control" placeholder="10:30" required>
+                <label class="form-label" for="sch-time">Time (e.g. 19:30) *</label>
+                <input type="text" id="sch-time" class="form-control" placeholder="19:30" required>
               </div>
               <div class="form-group">
                 <label class="form-label" for="sch-title">Event Title *</label>
-                <input type="text" id="sch-title" class="form-control" placeholder="e.g. Kaumātua Storytelling Circle" required>
+                <input type="text" id="sch-title" class="form-control" placeholder="e.g. Opening Address & Family Welcome" required>
               </div>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="sch-loc">Location / Venue *</label>
-              <input type="text" id="sch-loc" class="form-control" placeholder="e.g. Te Whare Rūnanga Annex" required>
+              <input type="text" id="sch-loc" class="form-control" placeholder="e.g. Main Lounge, Papanui Club" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="sch-lead">Lead Whānau / Committee</label>
-              <input type="text" id="sch-lead" class="form-control" placeholder="e.g. Wiremu Clarke Line" value="Whānau Committee">
+              <label class="form-label" for="sch-lead">Lead Host / Committee</label>
+              <input type="text" id="sch-lead" class="form-control" placeholder="e.g. Ashley Clarke" value="Reunion Committee">
             </div>
 
             <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
@@ -492,7 +626,7 @@
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 22px;">Registered RSVPs & Attendance</h2>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 22px;">Registered RSVPs & Attendance</h2>
             <p style="font-size: 13px; color: var(--text-muted);">Manage guest registrations, check-in arrivals, and download CSV spreadsheets.</p>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -531,11 +665,36 @@
 
     <!-- TAB 4: MANAGE PHOTOS -->
     <section id="pane-photos" class="admin-pane">
+      <!-- Shared Google Photos Album Integration Card -->
+      <div class="card" style="margin-bottom: 20px; background: rgba(37, 53, 40, 0.7); border: 1.5px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; gap: 14px; align-items: center;">
+            <span style="font-size: 28px;">📸</span>
+            <div>
+              <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 16px; margin-bottom: 3px;">
+                Shared Google Photos Album: "2026 -CLARKE FAMILY REUNION"
+              </h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin: 0;">
+                Live QR codes and mobile upload buttons point to this Google Photos album across TV slides, Remote, and Portal.
+              </p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" id="btn-admin-pane-photos-album" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="text-decoration: none; font-size: 12px; padding: 6px 12px;">
+              🚀 Open Google Photos Album
+            </a>
+            <a href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fphotos.app.goo.gl%2F6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="text-decoration: none; font-size: 12px; padding: 6px 12px;">
+              📱 Test QR Code
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 22px;">Whānau Photo Gallery Management</h2>
-            <p style="font-size: 13px; color: var(--text-muted);">Photos appear in the high-definition Ken Burns slideshow on the 1080p TV.</p>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 22px;">Family Photo Gallery Management</h2>
+            <p style="font-size: 13px; color: var(--text-muted);">Photos appear in the slideshow on the TV and the guest portal.</p>
           </div>
           <button class="btn btn-primary" onclick="toggleAdminPhotoModal(true)">
             📸 + Add Photo
@@ -562,21 +721,19 @@
       </div>
     </section>
 
-    <!-- TAB 5: WHAKAPAPA & IN MEMORIAM -->
+    <!-- TAB 5: FAMILY TREE & MEMORIAL -->
     <section id="pane-whakapapa" class="admin-pane">
       <div class="grid-admin-2">
-        <!-- Whakapapa Branches -->
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 12px;">Family Lineage Branches</h2>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 12px;">Family Lineage Branches</h2>
           <div id="admin-branches-list" style="max-height: 520px; overflow-y: auto;">
             <!-- Rendered via JS -->
           </div>
         </div>
 
-        <!-- In Memoriam Tributes -->
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Heaimahara — Memorial Tributes</h2>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;">In Memoriam Tributes</h2>
             <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px;" onclick="toggleAdminMemorialModal(true)">+ Add Tribute</button>
           </div>
           <div id="admin-memoriam-list" style="max-height: 520px; overflow-y: auto;">
@@ -586,13 +743,12 @@
       </div>
     </section>
 
-    <!-- TAB 6: NOTICES & POTLUCK -->
+    <!-- TAB 6: NOTICES & FOOD ROSTER -->
     <section id="pane-announcements" class="admin-pane">
       <div class="grid-admin-2">
-        <!-- Announcements -->
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Whānau Announcements</h2>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;">Family Announcements</h2>
             <button class="btn btn-primary" style="padding: 4px 10px; font-size: 12px;" onclick="toggleAddAnnouncementModal(true)">+ Add Notice</button>
           </div>
           <div id="admin-announcements-list" style="max-height: 520px; overflow-y: auto;">
@@ -600,11 +756,10 @@
           </div>
         </div>
 
-        <!-- Potluck & Tasks -->
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Kai & Volunteer Roster</h2>
-            <button class="btn btn-primary" style="padding: 4px 10px; font-size: 12px;" onclick="toggleAddPotluckModal(true)">+ Add Kai/Duty</button>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;">Food & Volunteer Roster</h2>
+            <button class="btn btn-primary" style="padding: 4px 10px; font-size: 12px;" onclick="toggleAddPotluckModal(true)">+ Add Item/Role</button>
           </div>
           <div id="admin-potluck-list" style="max-height: 520px; overflow-y: auto;">
             <!-- Rendered via JS -->
@@ -616,10 +771,9 @@
     <!-- TAB 7: TRIVIA & SCORES -->
     <section id="pane-trivia" class="admin-pane">
       <div class="grid-admin-2">
-        <!-- Branch Scoreboard Editor -->
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Branch Scoreboard Editor</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Adjust points directly or award bonus whānau olympics points.</p>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;">Branch Scoreboard Editor</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Adjust points directly or award bonus family game points.</p>
 
           <form id="admin-scores-form" onsubmit="handleSaveScores(event)">
             <div id="admin-branch-scores-inputs">
@@ -632,10 +786,9 @@
           </form>
         </div>
 
-        <!-- Trivia Questions List -->
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Trivia Questions</h2>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;">Trivia Questions</h2>
             <button class="btn btn-primary" style="padding: 4px 10px; font-size: 12px;" onclick="toggleAddTriviaModal(true)">+ Add Question</button>
           </div>
           <div id="admin-trivia-questions-list" style="max-height: 520px; overflow-y: auto;">
@@ -649,15 +802,15 @@
     <section id="pane-backup" class="admin-pane">
       <div class="grid-admin-2">
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Export Full Backup (JSON)</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">Download a complete timestamped JSON snapshot of all reunion data (RSVPs, Schedule, Photos, Whakapapa, Trivia).</p>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;">Export Full Backup (JSON)</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">Download a complete timestamped JSON snapshot of all reunion data.</p>
           <button class="btn btn-primary" onclick="exportFullJsonBackup()" style="padding: 12px 20px;">
             💾 Download State Backup JSON
           </button>
         </div>
 
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Import & Restore (JSON)</h2>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;">Import & Restore (JSON)</h2>
           <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">Upload or paste a previous JSON state file to restore data.</p>
 
           <div class="form-group">
@@ -676,10 +829,10 @@
         </div>
       </div>
 
-      <div class="card" style="border: 2px solid var(--red-primary); margin-top: 24px;">
-        <h2 style="font-family: var(--font-heading); color: var(--red-light); font-size: 20px; margin-bottom: 6px;">⚠️ Danger Zone: Factory Reset</h2>
+      <div class="card" style="border: 2px solid var(--red-pohutukawa); margin-top: 24px;">
+        <h2 style="font-family: 'Cinzel', Georgia, serif; color: #ffa599; font-size: 20px; margin-bottom: 6px;">⚠️ Danger Zone: Factory Reset</h2>
         <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
-          This will wipe any changes in <code>localStorage</code> and restore the default Clarke 2026 Reunion seed dataset.
+          This will restore the original default seed dataset for the Clarke Family Reunion.
         </p>
         <button class="btn btn-danger" onclick="handleFactoryReset()">
           Reset to Factory Default Seed Data
@@ -691,9 +844,9 @@
 
   <!-- Add Manual RSVP Modal -->
   <div id="admin-add-rsvp-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 480px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 480px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Add Manual RSVP</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Add Manual RSVP</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleAddRsvpModal(false)">✕</button>
       </div>
       <form id="admin-manual-rsvp-form" onsubmit="handleAdminAddRsvp(event)">
@@ -703,12 +856,8 @@
         </div>
         <div class="form-group">
           <label class="form-label">Branch *</label>
-          <select id="admin-m-branch" class="form-control" required>
-            <option value="Te Ariki Branch">Te Ariki Branch</option>
-            <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-            <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-            <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-            <option value="Kahu Southern Line">Kahu Southern Line</option>
+          <select id="admin-m-branch" class="form-control dynamic-branch-select" required>
+            <!-- Populated via JS -->
           </select>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -717,7 +866,7 @@
             <input type="number" id="admin-m-adults" class="form-control" value="2" min="1" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Kids</label>
+            <label class="form-label">Children</label>
             <input type="number" id="admin-m-kids" class="form-control" value="0" min="0">
           </div>
         </div>
@@ -742,9 +891,9 @@
 
   <!-- Add Photo Modal -->
   <div id="admin-add-photo-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 500px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 500px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Add New Photo</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Add New Photo</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleAdminPhotoModal(false)">✕</button>
       </div>
       <form id="admin-photo-form" onsubmit="handleAdminAddPhoto(event)">
@@ -759,15 +908,8 @@
           </div>
           <div class="form-group">
             <label class="form-label">Branch</label>
-            <select id="admin-ph-branch" class="form-control">
-              <option value="All Branches">All Branches</option>
-              <option value="Founders">Founders</option>
-              <option value="Te Ariki Branch">Te Ariki Branch</option>
-              <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-              <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-              <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-              <option value="Kahu Southern Line">Kahu Southern Line</option>
-              <option value="Youth Committee">Youth Committee</option>
+            <select id="admin-ph-branch" class="form-control dynamic-branch-select">
+              <!-- Populated via JS -->
             </select>
           </div>
         </div>
@@ -790,9 +932,9 @@
 
   <!-- Add Memorial Modal -->
   <div id="admin-add-memorial-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 480px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 480px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Add Memorial Tribute</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Add Memorial Tribute</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleAdminMemorialModal(false)">✕</button>
       </div>
       <form id="admin-memorial-form" onsubmit="handleAdminAddMemorial(event)">
@@ -803,22 +945,18 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-group">
             <label class="form-label">Years *</label>
-            <input type="text" id="admin-mem-years" class="form-control" placeholder="1940 – 2024" required>
+            <input type="text" id="admin-mem-years" class="form-control" placeholder="1935 – 2021" required>
           </div>
           <div class="form-group">
             <label class="form-label">Branch</label>
-            <select id="admin-mem-branch" class="form-control">
-              <option value="Te Ariki Branch">Te Ariki Branch</option>
-              <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-              <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-              <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-              <option value="Kahu Southern Line">Kahu Southern Line</option>
+            <select id="admin-mem-branch" class="form-control dynamic-branch-select">
+              <!-- Populated via JS -->
             </select>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Whānau Role</label>
-          <input type="text" id="admin-mem-role" class="form-control" placeholder="e.g. Kaumātua, Healer">
+          <label class="form-label">Family Role / Title</label>
+          <input type="text" id="admin-mem-role" class="form-control" placeholder="e.g. Beloved Matriarch, Historian">
         </div>
         <div class="form-group">
           <label class="form-label">Tribute *</label>
@@ -834,9 +972,9 @@
 
   <!-- Add Announcement Modal -->
   <div id="admin-add-ann-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 480px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 480px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Add Announcement</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Add Announcement</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleAddAnnouncementModal(false)">✕</button>
       </div>
       <form id="admin-ann-form" onsubmit="handleAdminAddAnnouncement(event)">
@@ -851,11 +989,11 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-group">
             <label class="form-label">Time / Schedule</label>
-            <input type="text" id="admin-ann-time" class="form-control" placeholder="e.g. Saturday 2:00 PM">
+            <input type="text" id="admin-ann-time" class="form-control" placeholder="e.g. Saturday 7:30 PM">
           </div>
           <div class="form-group">
             <label class="form-label">Author / Team</label>
-            <input type="text" id="admin-ann-author" class="form-control" value="Event Committee">
+            <input type="text" id="admin-ann-author" class="form-control" value="Reunion Committee">
           </div>
         </div>
         <div class="form-group" style="flex-direction: row; align-items: center; gap: 8px;">
@@ -872,22 +1010,21 @@
 
   <!-- Add Potluck Modal -->
   <div id="admin-add-pot-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 460px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 460px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Add Kai / Volunteer Duty</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Add Food / Volunteer Role</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleAddPotluckModal(false)">✕</button>
       </div>
       <form id="admin-pot-form" onsubmit="handleAdminAddPotluck(event)">
         <div class="form-group">
-          <label class="form-label">Item / Duty Name *</label>
+          <label class="form-label">Item / Role Name *</label>
           <input type="text" id="admin-pot-item" class="form-control" required>
         </div>
         <div class="form-group">
           <label class="form-label">Category</label>
           <select id="admin-pot-cat" class="form-control">
-            <option value="Salads">Salads</option>
-            <option value="Kaimoana">Kaimoana</option>
             <option value="Desserts">Desserts</option>
+            <option value="Salads">Salads</option>
             <option value="Sides">Sides</option>
             <option value="Baking">Baking</option>
             <option value="Fruit">Fruit</option>
@@ -896,7 +1033,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">Needed Quantity / Details</label>
-          <input type="text" id="admin-pot-qty" class="form-control" placeholder="e.g. 2 Large Bowls" required>
+          <input type="text" id="admin-pot-qty" class="form-control" placeholder="e.g. 2 Bowls, 1 Person" required>
         </div>
         <div style="display: flex; gap: 10px; margin-top: 14px;">
           <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="toggleAddPotluckModal(false)">Cancel</button>
@@ -908,9 +1045,9 @@
 
   <!-- Add Trivia Modal -->
   <div id="admin-add-triv-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 520px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 520px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Add Trivia Question</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Add Trivia Question</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleAddTriviaModal(false)">✕</button>
       </div>
       <form id="admin-triv-form" onsubmit="handleAdminAddTrivia(event)">
@@ -975,7 +1112,101 @@
     (function () {
       var state = window.ClarkeApp ? window.ClarkeApp.getState() : {};
 
-      // Toast Helper
+      var DEFAULT_BRANCHES = [
+        "Chipley Somerset Line",
+        "Christchurch & Canterbury Branch",
+        "North Canterbury Branch",
+        "Otago & Southern Line",
+        "North Island Clarke Branch"
+      ];
+
+      function getBranchNames() {
+        if (state.familyTree && state.familyTree.branches && Array.isArray(state.familyTree.branches) && state.familyTree.branches.length > 0) {
+          return state.familyTree.branches.map(function (b) { return b.name; });
+        }
+        return DEFAULT_BRANCHES;
+      }
+
+      function populateBranchSelects() {
+        var branches = getBranchNames();
+        var selects = document.querySelectorAll('.dynamic-branch-select');
+        selects.forEach(function (sel) {
+          var currentVal = sel.value;
+          var html = '<option value="">-- Select Family Branch --</option>';
+          branches.forEach(function (br) {
+            html += '<option value="' + br + '">' + br + '</option>';
+          });
+          sel.innerHTML = html;
+          if (currentVal && branches.includes(currentVal)) {
+            sel.value = currentVal;
+          }
+        });
+      }
+
+      // Translation Helper
+      function t(enStr, miStr) {
+        if (window.ClarkeApp && typeof window.ClarkeApp.t === 'function') {
+          return window.ClarkeApp.t(enStr, miStr);
+        }
+        var useTeReo = state && state.settings && state.settings.useTeReo;
+        return useTeReo ? miStr : enStr;
+      }
+
+      // Toggle Te Reo
+      window.toggleLanguage = function () {
+        if (window.ClarkeApp && typeof window.ClarkeApp.toggleTeReo === 'function') {
+          window.ClarkeApp.toggleTeReo();
+          state = window.ClarkeApp.getState();
+        } else {
+          if (!state.settings) state.settings = {};
+          state.settings.useTeReo = !state.settings.useTeReo;
+          if (window.ClarkeApp && window.ClarkeApp.saveState) {
+            window.ClarkeApp.saveState(state);
+          }
+        }
+        renderTranslations();
+        showToast(state.settings.useTeReo ? "Te Reo Māori labels enabled" : "English labels active", "🌐");
+      };
+
+      function renderTranslations() {
+        var isMi = !!(state.settings && state.settings.useTeReo);
+
+        var toggleBtn = document.getElementById('btn-language-toggle');
+        var toggleText = document.getElementById('lang-toggle-text');
+        var toggleIcon = document.getElementById('lang-toggle-icon');
+        if (toggleBtn && toggleText) {
+          if (isMi) {
+            toggleBtn.classList.add('active');
+            toggleText.textContent = "Te Reo Māori: ON";
+            toggleIcon.textContent = "🌿";
+          } else {
+            toggleBtn.classList.remove('active');
+            toggleText.textContent = "Te Reo Māori: OFF (English)";
+            toggleIcon.textContent = "🌐";
+          }
+        }
+
+        document.getElementById('lbl-admin-header-title').textContent = isMi ? "CLARKE REUNION — KAIWHAKAHAERE" : "CLARKE REUNION — MASTER ADMIN";
+        document.getElementById('lbl-admin-header-sub').textContent = isMi ? "Pūtake: Whakaaturanga Ora & Raraunga" : "Central Hub: Live TV Signage & Data Control";
+        document.getElementById('lbl-btn-live').textContent = isMi ? "Tātari Ora" : "Live Display";
+        document.getElementById('lbl-btn-portal').textContent = isMi ? "Kūaha Whānau" : "Guest Portal";
+        document.getElementById('lbl-btn-remote').textContent = isMi ? "Mana Mamao" : "Mobile Remote";
+
+        // Admin Tab Labels
+        document.getElementById('admin-tab-settings').textContent = t("⚙️ Event & Sync Settings", "⚙️ Tautuhinga & Tukutahi");
+        document.getElementById('admin-tab-schedule').textContent = t("📅 Manage Schedule", "📅 Whakahaere Hōtaka");
+        document.getElementById('admin-tab-rsvps').textContent = t("👥 Manage RSVPs", "👥 Whakahaere RSVP");
+        document.getElementById('admin-tab-photos').textContent = t("📸 Manage Photos", "📸 Whakahaere Whakaahua");
+        document.getElementById('admin-tab-whakapapa').textContent = t("🌳 Family Tree & Memorial", "🌳 Whakapapa & He Aimahara");
+        document.getElementById('admin-tab-announcements').textContent = t("📣 Notices & Food Roster", "📣 Pānui & Roster Kai");
+        document.getElementById('admin-tab-trivia').textContent = t("🎯 Trivia & Branch Scores", "🎯 Pātai & Piro Manga");
+        document.getElementById('admin-tab-backup').textContent = t("💾 Backup & Restore", "💾 Pūrua & Whakaora");
+
+        // Sync Event Settings Checkbox
+        var chk = document.getElementById('setting-enable-tereeo');
+        if (chk) chk.checked = isMi;
+      }
+
       function showToast(msg, icon) {
         var toast = document.getElementById('admin-toast');
         if (!toast) return;
@@ -984,10 +1215,9 @@
         toast.classList.add('show');
         setTimeout(function () {
           toast.classList.remove('show');
-        }, 3200);
+        }, 3000);
       }
 
-      // Live Clock with Blinking Colons
       function updateClock() {
         var el = document.getElementById('admin-header-clock');
         if (el && window.ClarkeApp) {
@@ -1046,7 +1276,6 @@
         }
       }
 
-      // TV Actions Dispatcher
       window.sendTvAction = function (cmd, payload) {
         if (!window.ClarkeApp) return;
         window.ClarkeApp.sendCommand(cmd, payload);
@@ -1079,7 +1308,7 @@
         showToast("Slide duration set to " + sec + "s", "⏱️");
       };
 
-      // Emergency Broadcast
+      // Emergency Notice
       window.broadcastEmergencyNotice = function () {
         var notice = document.getElementById('emergency-notice-input').value.trim();
         state.eventInfo.emergencyNotice = notice;
@@ -1104,29 +1333,57 @@
         showToast("Preset notice broadcasted to TV!", "🚨");
       };
 
-      // TAB 1: Event & Sync Settings Form
+      // Settings Form
       function populateSettingsForm() {
         if (!state.eventInfo) return;
-        document.getElementById('setting-title').value = state.eventInfo.title || '';
-        document.getElementById('setting-subtitle').value = state.eventInfo.subtitle || '';
-        document.getElementById('setting-date').value = state.eventInfo.dateISO || '';
-        document.getElementById('setting-location').value = state.eventInfo.location || '';
-        document.getElementById('setting-wifi-ssid').value = state.eventInfo.wifiSsid || '';
-        document.getElementById('setting-wifi-pass').value = state.eventInfo.wifiPass || '';
+        document.getElementById('setting-title').value = state.eventInfo.title || 'Clarke Family Reunion';
+        document.getElementById('setting-title-mi').value = state.eventInfo.titleMi || 'Te Huihuinga Whānau o Clarke';
+        document.getElementById('setting-subtitle').value = state.eventInfo.subtitle || state.eventInfo.motto || 'Ye shall drink of the brook by the way';
+        document.getElementById('setting-date').value = state.eventInfo.dateISO || '2026-10-17T19:30:00+13:00';
+        document.getElementById('setting-location').value = state.eventInfo.location || 'Papanui Club, 310 Sawyers Arms Road, Bishopdale, Christchurch 8053';
+        document.getElementById('setting-wifi-ssid').value = state.eventInfo.wifiSsid || 'PapanuiClub_Guest';
+        document.getElementById('setting-wifi-pass').value = state.eventInfo.wifiPass || 'Clarke2026';
+        if (document.getElementById('setting-shared-album-url')) {
+          var alb = state.eventInfo.sharedAlbumUrl || 'https://photos.app.goo.gl/6fGko2NUqKfQp7866';
+          document.getElementById('setting-shared-album-url').value = alb;
+          var testA = document.getElementById('btn-admin-test-album');
+          if (testA) testA.href = alb;
+          var paneA = document.getElementById('btn-admin-pane-photos-album');
+          if (paneA) paneA.href = alb;
+        }
         if (document.getElementById('setting-cloud-url')) {
           document.getElementById('setting-cloud-url').value = state.eventInfo.cloudSyncUrl || '';
         }
+        var chk = document.getElementById('setting-enable-tereeo');
+        if (chk) chk.checked = !!(state.settings && state.settings.useTeReo);
       }
 
       window.handleSaveEventSettings = function (e) {
         e.preventDefault();
         state.eventInfo.title = document.getElementById('setting-title').value.trim();
+        state.eventInfo.titleMi = document.getElementById('setting-title-mi').value.trim();
         state.eventInfo.subtitle = document.getElementById('setting-subtitle').value.trim();
         state.eventInfo.dateISO = document.getElementById('setting-date').value.trim();
         state.eventInfo.location = document.getElementById('setting-location').value.trim();
         state.eventInfo.wifiSsid = document.getElementById('setting-wifi-ssid').value.trim();
         state.eventInfo.wifiPass = document.getElementById('setting-wifi-pass').value.trim();
+
+        if (document.getElementById('setting-shared-album-url')) {
+          var albVal = document.getElementById('setting-shared-album-url').value.trim();
+          state.eventInfo.sharedAlbumUrl = albVal || 'https://photos.app.goo.gl/6fGko2NUqKfQp7866';
+          var testA = document.getElementById('btn-admin-test-album');
+          if (testA) testA.href = state.eventInfo.sharedAlbumUrl;
+          var paneA = document.getElementById('btn-admin-pane-photos-album');
+          if (paneA) paneA.href = state.eventInfo.sharedAlbumUrl;
+        }
+
+        var chk = document.getElementById('setting-enable-tereeo');
+        if (chk) {
+          state.settings.useTeReo = chk.checked;
+        }
+
         window.ClarkeApp.saveState(state);
+        renderTranslations();
         showToast("Event details saved and broadcasted!", "✓");
       };
 
@@ -1169,14 +1426,14 @@
 
         var html = '';
         day.items.forEach(function (item, idx) {
-          html += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">';
+          html += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">';
           html += '<div style="flex: 1; min-width: 0;">';
           html += '<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">';
-          html += '<strong style="color: var(--gold-light); font-family: var(--font-mono);">' + item.time + '</strong>';
+          html += '<strong style="color: var(--gold-bright); font-family: ui-monospace, monospace;">' + item.time + '</strong>';
           html += '<strong style="color: #ffffff;">' + item.title + '</strong>';
           html += '</div>';
           html += '<div style="font-size: 12px; color: var(--text-muted);">';
-          html += '📍 ' + item.location + ' • Lead: <span style="color: var(--text-secondary);">' + item.lead + '</span>';
+          html += '📍 ' + item.location + ' • Lead: <span style="color: var(--gold-primary);">' + item.lead + '</span>';
           html += '</div></div>';
           html += '<button class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;" onclick="deleteScheduleItem(' + dayNum + ', ' + idx + ')">Delete</button>';
           html += '</div>';
@@ -1191,12 +1448,11 @@
         var time = document.getElementById('sch-time').value.trim();
         var title = document.getElementById('sch-title').value.trim();
         var loc = document.getElementById('sch-loc').value.trim();
-        var lead = document.getElementById('sch-lead').value.trim() || 'Whānau Committee';
+        var lead = document.getElementById('sch-lead').value.trim() || 'Reunion Committee';
 
         var day = state.schedule.find(function (d) { return d.dayNumber === dayNum; });
         if (day) {
           day.items.push({ time: time, title: title, location: loc, lead: lead });
-          // Sort items by time string
           day.items.sort(function (a, b) { return a.time.localeCompare(b.time); });
           window.ClarkeApp.saveState(state);
           renderAdminSchedule();
@@ -1223,7 +1479,7 @@
 
         var term = (document.getElementById('admin-rsvp-search') ? document.getElementById('admin-rsvp-search').value.toLowerCase() : '');
         var filtered = state.rsvps.filter(function (r) {
-          return !term || r.name.toLowerCase().includes(term) || r.branch.toLowerCase().includes(term);
+          return !term || r.name.toLowerCase().includes(term) || (r.branch && r.branch.toLowerCase().includes(term));
         });
 
         if (filtered.length === 0) {
@@ -1237,7 +1493,7 @@
           var k = parseInt(r.kids, 10) || 0;
           var total = a + k;
           html += '<tr>';
-          html += '<td style="font-weight: 700; color: #ffffff;">' + r.name + '</td>';
+          html += '<td style="font-weight: 700; color: var(--gold-bright);">' + r.name + '</td>';
           html += '<td><span class="badge badge-gold">' + r.branch + '</span></td>';
           html += '<td>' + a + '</td>';
           html += '<td>' + k + '</td>';
@@ -1328,9 +1584,9 @@
         state.photos.forEach(function (p) {
           html += '<tr>';
           html += '<td><img src="' + p.url + '" style="width: 56px; height: 42px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-color);"></td>';
-          html += '<td style="font-weight: 700; color: #ffffff;">' + p.title + '</td>';
+          html += '<td style="font-weight: 700; color: var(--gold-bright);">' + p.title + '</td>';
           html += '<td><span class="badge badge-gold">' + p.year + '</span></td>';
-          html += '<td><span class="badge badge-red">' + p.branch + '</span></td>';
+          html += '<td><span class="badge badge-green">' + (p.branch || 'General') + '</span></td>';
           html += '<td style="font-size: 12px; color: var(--text-muted); max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + p.caption + '</td>';
           html += '<td><button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deletePhoto(\'' + p.id + '\')">Delete</button></td>';
           html += '</tr>';
@@ -1371,9 +1627,7 @@
         var fileInput = document.getElementById('admin-ph-file');
         if (fileInput.files && fileInput.files[0]) {
           var reader = new FileReader();
-          reader.onload = function (evt) {
-            commit(evt.target.result);
-          };
+          reader.onload = function (evt) { commit(evt.target.result); };
           reader.readAsDataURL(fileInput.files[0]);
         } else {
           var url = document.getElementById('admin-ph-url').value.trim();
@@ -1393,19 +1647,19 @@
         showToast("Photo deleted", "🗑️");
       };
 
-      // TAB 5: Whakapapa & Memoriam
+      // TAB 5: Family Tree & Memorial
       function renderAdminWhakapapa() {
         var bList = document.getElementById('admin-branches-list');
         if (bList && state.familyTree && state.familyTree.branches) {
           var html = '';
-          state.familyTree.branches.forEach(function (b, idx) {
-            html += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px;">';
+          state.familyTree.branches.forEach(function (b) {
+            html += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; margin-bottom: 10px;">';
             html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">';
-            html += '<strong style="color: var(--gold-light); font-size: 15px;">' + b.name + '</strong>';
+            html += '<strong style="color: var(--gold-bright); font-size: 15px;">' + b.name + '</strong>';
             html += '<span class="badge badge-green">' + b.membersCount + ' Descendants</span>';
             html += '</div>';
-            html += '<div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">Ancestor: ' + b.ancestor + ' • ' + b.era + '</div>';
-            html += '<div style="font-size: 13px; font-style: italic; color: var(--text-secondary); margin-bottom: 8px;">"' + b.motto + '"</div>';
+            html += '<div style="font-size: 12px; color: var(--gold-muted); margin-bottom: 4px;">Ancestor: ' + b.ancestor + ' • ' + b.era + '</div>';
+            html += '<div style="font-size: 13px; font-style: italic; color: var(--gold-primary); margin-bottom: 8px;">"' + b.motto + '"</div>';
             html += '<div style="font-size: 12px; color: var(--text-muted);">' + b.highlights + '</div>';
             html += '</div>';
           });
@@ -1416,11 +1670,11 @@
         if (mList && state.memoriam) {
           var mHtml = '';
           state.memoriam.forEach(function (m) {
-            mHtml += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">';
+            mHtml += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">';
             mHtml += '<div style="flex: 1; min-width: 0;">';
-            mHtml += '<strong style="color: var(--gold-light); font-size: 15px;">' + m.name + '</strong>';
-            mHtml += '<div style="font-size: 12px; color: var(--text-muted);">' + m.years + ' • ' + m.branch + ' (' + (m.role || 'Whānau Elder') + ')</div>';
-            mHtml += '<p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">"' + m.tribute + '"</p>';
+            mHtml += '<strong style="color: var(--gold-bright); font-size: 15px;">' + m.name + '</strong>';
+            mHtml += '<div style="font-size: 12px; color: var(--gold-muted);">' + m.years + ' • ' + m.branch + ' (' + (m.role || 'Family Member') + ')</div>';
+            mHtml += '<p style="font-size: 12px; color: var(--text-primary); margin-top: 4px;">"' + m.tribute + '"</p>';
             mHtml += '</div>';
             mHtml += '<button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteMemorial(\'' + m.id + '\')">Delete</button>';
             mHtml += '</div>';
@@ -1467,18 +1721,18 @@
         showToast("Memorial removed", "🗑️");
       };
 
-      // TAB 6: Announcements & Potluck
+      // TAB 6: Announcements & Food Roster
       function renderAdminAnnouncements() {
         var aList = document.getElementById('admin-announcements-list');
         if (aList && state.announcements) {
           var html = '';
           state.announcements.forEach(function (a) {
-            html += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px;">';
+            html += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; margin-bottom: 10px;">';
             html += '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">';
-            html += '<strong style="color: #ffffff; font-size: 15px;">' + a.title + '</strong>';
+            html += '<strong style="color: var(--gold-bright); font-size: 15px;">' + a.title + '</strong>';
             html += '<div>' + (a.pinned ? '<span class="badge badge-gold" style="margin-right: 6px;">📌 PINNED</span>' : '') + '<span class="badge badge-red">' + a.priority + '</span></div>';
             html += '</div>';
-            html += '<p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">' + a.body + '</p>';
+            html += '<p style="font-size: 13px; color: var(--text-primary); margin-bottom: 8px;">' + a.body + '</p>';
             html += '<div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-muted);">';
             html += '<span>' + a.time + ' • ' + a.author + '</span>';
             html += '<div style="display: flex; gap: 6px;">';
@@ -1493,14 +1747,14 @@
         if (pList && state.potluck) {
           var pHtml = '';
           state.potluck.forEach(function (p) {
-            pHtml += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">';
+            pHtml += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">';
             pHtml += '<div style="flex: 1; min-width: 0;">';
             pHtml += '<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">';
-            pHtml += '<strong style="color: #ffffff;">' + p.item + '</strong>';
+            pHtml += '<strong style="color: var(--gold-bright);">' + p.item + '</strong>';
             pHtml += '<span class="badge badge-gold">' + p.category + '</span>';
             pHtml += '</div>';
             pHtml += '<div style="font-size: 12px; color: var(--text-muted);">';
-            pHtml += 'Qty: ' + p.neededQty + ' • Status: <strong style="color: ' + (p.status === 'Claimed' ? 'var(--green-light)' : 'var(--gold-light)') + '">' + p.status + '</strong>';
+            pHtml += 'Qty: ' + p.neededQty + ' • Status: <strong style="color: ' + (p.status === 'Claimed' ? 'var(--green-light)' : 'var(--gold-primary)') + '">' + p.status + '</strong>';
             if (p.claimedBy && p.claimedBy !== 'Unclaimed') {
               pHtml += ' (' + p.claimedBy + ' - ' + p.branch + ')';
             }
@@ -1591,7 +1845,7 @@
         renderAdminAnnouncements();
         toggleAddPotluckModal(false);
         document.getElementById('admin-pot-form').reset();
-        showToast("Item added to potluck roster", "🍲");
+        showToast("Item added to food roster", "🍲");
       };
 
       window.unclaimPotluck = function (id) {
@@ -1607,7 +1861,7 @@
       };
 
       window.deletePotluck = function (id) {
-        if (!confirm("Delete this potluck item from roster?")) return;
+        if (!confirm("Delete this roster item?")) return;
         state.potluck = state.potluck.filter(function (p) { return p.id !== id; });
         window.ClarkeApp.saveState(state);
         renderAdminAnnouncements();
@@ -1618,13 +1872,9 @@
       function getScoresObj() {
         if (state.branchScores) return state.branchScores;
         if (state.trivia && state.trivia.branchScores) return state.trivia.branchScores;
-        return {
-          "Te Ariki Branch": 190,
-          "Hemi & Mere Branch": 165,
-          "Wiremu Clarke Line": 210,
-          "Aroha & Rawiri Branch": 140,
-          "Kahu Southern Line": 180
-        };
+        var def = {};
+        getBranchNames().forEach(function (b, i) { def[b] = 100 + i * 25; });
+        return def;
       }
 
       function getTriviaArr() {
@@ -1641,7 +1891,7 @@
           var html = '';
           Object.keys(scores).forEach(function (branch) {
             html += '<div class="form-group">';
-            html += '<label class="form-label">' + branch + ' Points</label>';
+            html += '<label class="form-label" style="color: var(--gold-bright);">' + branch + ' Points</label>';
             html += '<input type="number" class="form-control admin-score-input" data-branch="' + branch + '" value="' + scores[branch] + '">';
             html += '</div>';
           });
@@ -1657,15 +1907,15 @@
           }
           var qHtml = '';
           questions.forEach(function (q, idx) {
-            qHtml += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px;">';
+            qHtml += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; margin-bottom: 10px;">';
             qHtml += '<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">';
-            qHtml += '<strong style="color: var(--gold-light);">Q' + (idx + 1) + ': ' + q.question + '</strong>';
+            qHtml += '<strong style="color: var(--gold-bright);">Q' + (idx + 1) + ': ' + q.question + '</strong>';
             qHtml += '<button class="btn btn-danger" style="padding: 2px 6px; font-size: 11px;" onclick="deleteTriviaQuestion(' + idx + ')">Delete</button>';
             qHtml += '</div>';
             qHtml += '<div style="font-size: 12px; color: var(--text-muted); margin: 6px 0;">';
             qHtml += 'Options: ' + q.options.join(', ') + ' • Correct: <strong style="color: var(--green-light);">' + q.options[q.answerIndex] + '</strong>';
             qHtml += '</div>';
-            qHtml += '<div style="font-size: 12px; color: var(--text-secondary); font-style: italic;">Fact: ' + q.fact + '</div>';
+            qHtml += '<div style="font-size: 12px; color: var(--gold-primary); font-style: italic;">Fact: ' + q.fact + '</div>';
             qHtml += '</div>';
           });
           qList.innerHTML = qHtml;
@@ -1690,7 +1940,7 @@
       };
 
       window.resetBranchScores = function () {
-        if (!confirm("Reset all 5 branch scores to zero?")) return;
+        if (!confirm("Reset all branch scores to zero?")) return;
         var scores = getScoresObj();
         Object.keys(scores).forEach(function (k) { scores[k] = 0; });
         state.branchScores = scores;
@@ -1805,7 +2055,9 @@
       };
 
       function refreshAllPanes() {
+        populateBranchSelects();
         populateSettingsForm();
+        renderTranslations();
         updateTvStatusStrip();
         renderAdminSchedule();
         renderAdminRsvps();
@@ -1821,16 +2073,24 @@
           state = newState;
           refreshAllPanes();
         });
+
+        window.ClarkeApp.onCommand(function (cmdData) {
+          if (cmdData && (cmdData.cmd === 'toggleTeReo' || cmdData.cmd === 'TOGGLE_TE_REO')) {
+            state = window.ClarkeApp.getState();
+            renderTranslations();
+          }
+        });
       }
 
       // Keyboard navigation rules (with input guard)
       window.addEventListener('keydown', function (e) {
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
         if (e.key === 'a' || e.key === 'A') {
-          // Already in admin panel
           showToast("Admin Panel active", "⚙️");
         } else if (e.key === 'r' || e.key === 'R') {
           window.open('remote.html', '_blank');
+        } else if (e.key === 'l' || e.key === 'L') {
+          toggleLanguage();
         }
       });
 

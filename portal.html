@@ -3,35 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clarke Whānau Reunion 2026 — Guest Portal</title>
+  <title>Clarke Family Reunion 2026 — Guest Portal</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Portal Specific Enhancements */
+    /* ==========================================================================
+       Clarke Family Reunion — Hunter / Forest Green & Warm Parchment Palette
+       ========================================================================== */
+    :root {
+      --bg-deep: #1b281e;
+      --bg-surface: #253528;
+      --bg-elevated: #2f4233;
+      --bg-glass: rgba(37, 53, 40, 0.92);
+
+      --gold-primary: #dfd3b8;
+      --gold-bright: #f4eee1;
+      --gold-muted: #9e937b;
+      --border-gold: #dfd3b8;
+      --border-subtle: rgba(223, 211, 184, 0.25);
+
+      --green-forest: #3b5a42;
+      --green-light: #6ca177;
+      --red-pohutukawa: #b84a39;
+
+      --text-primary: #f4eee1;
+      --text-secondary: #dfd3b8;
+      --text-muted: #9e937b;
+      --text-gold: #f4eee1;
+
+      --border-color: #3b5a42;
+      --shadow-gold: 0 0 16px rgba(223, 211, 184, 0.2);
+    }
+
     body {
-      background-color: var(--bg-primary);
+      background-color: var(--bg-deep);
       color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
+    /* Portal Header */
     .portal-header {
-      background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+      background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-deep) 100%);
       border-bottom: 2px solid var(--gold-primary);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 16px 24px;
+      padding: 14px 24px;
     }
 
     .portal-header-inner {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
@@ -41,17 +70,22 @@
       gap: 14px;
     }
 
-    .portal-crest {
-      width: 48px;
-      height: 48px;
-      filter: drop-shadow(0 0 8px var(--gold-glow));
+    .portal-crest-img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--gold-primary);
+      background: #1b281e;
+      box-shadow: 0 0 10px rgba(223, 211, 184, 0.3);
+      flex-shrink: 0;
     }
 
     .portal-brand-title {
-      font-family: var(--font-heading);
+      font-family: "Cinzel", Georgia, serif, -apple-system, sans-serif;
       font-size: 20px;
       font-weight: 800;
-      color: var(--gold-light);
+      color: var(--gold-bright);
       letter-spacing: 1px;
       line-height: 1.2;
       white-space: nowrap;
@@ -61,55 +95,84 @@
 
     .portal-brand-subtitle {
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--gold-muted);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 400px;
+      max-width: 440px;
+      font-style: italic;
     }
 
     .portal-header-stats {
       display: flex;
       align-items: center;
-      gap: 20px;
-      font-family: var(--font-mono);
+      gap: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
     .portal-clock-box {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--gold-primary);
+      border-radius: 8px;
       padding: 6px 14px;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--text-primary);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
       white-space: nowrap;
     }
 
     .portal-countdown-box {
-      background: rgba(201, 59, 43, 0.15);
-      border: 1px solid var(--red-primary);
-      border-radius: var(--radius-md);
-      padding: 6px 14px;
+      background: rgba(59, 90, 66, 0.4);
+      border: 1px solid var(--green-light);
+      border-radius: 8px;
+      padding: 6px 12px;
       font-size: 13px;
-      color: #ff9990;
+      color: #bbf0c8;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       white-space: nowrap;
+    }
+
+    .lang-toggle-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-bright);
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .lang-toggle-btn:hover {
+      background: var(--green-forest);
+      border-color: var(--gold-bright);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .lang-toggle-btn.active {
+      background: var(--gold-primary);
+      color: #1b281e;
+      font-weight: 800;
     }
 
     .portal-nav-links {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .portal-nav-btn {
-      padding: 7px 13px;
+      padding: 7px 12px;
       font-size: 13px;
-      border-radius: var(--radius-sm);
+      border-radius: 6px;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -117,11 +180,29 @@
       font-weight: 700;
       transition: all 0.2s ease;
       white-space: nowrap;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .portal-nav-btn:hover {
+      background: var(--green-forest);
+      border-color: var(--gold-primary);
+    }
+
+    .portal-nav-btn-gold {
+      background: var(--gold-primary);
+      color: #1b281e;
+      border-color: var(--gold-bright);
+    }
+
+    .portal-nav-btn-gold:hover {
+      background: var(--gold-bright);
     }
 
     /* Tab Navigation Bar */
     .tab-bar-container {
-      background: var(--bg-secondary);
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 80px;
@@ -129,7 +210,7 @@
     }
 
     .tab-bar {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       display: flex;
       overflow-x: auto;
@@ -145,43 +226,43 @@
     .tab-btn {
       background: transparent;
       border: 1px solid transparent;
-      color: var(--text-secondary);
-      padding: 10px 18px;
+      color: var(--gold-muted);
+      padding: 9px 16px;
       font-size: 14px;
       font-weight: 700;
-      border-radius: var(--radius-md);
+      border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       white-space: nowrap;
       transition: all 0.2s ease;
     }
 
     .tab-btn:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
+      background: var(--bg-elevated);
+      color: var(--gold-bright);
     }
 
     .tab-btn.active {
-      background: var(--gold-primary);
-      color: #0d1117;
-      border-color: var(--gold-light);
-      box-shadow: var(--shadow-gold);
+      background: var(--green-forest);
+      color: #ffffff;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 12px rgba(223, 211, 184, 0.25);
     }
 
     /* Content Area */
     .portal-content {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 28px 24px 60px;
+      padding: 24px 24px 60px;
       flex: 1;
       width: 100%;
     }
 
     .tab-pane {
       display: none;
-      animation: fadeIn 0.25s ease-out;
+      animation: fadeIn 0.2s ease-out;
     }
 
     .tab-pane.active {
@@ -189,368 +270,136 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Grid Layouts */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    /* Stat Cards */
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .stat-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-md);
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid var(--border-gold);
+    /* Diamond Divider */
+    .diamond-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      color: var(--gold-light);
-      flex-shrink: 0;
-    }
-
-    .stat-val {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.1;
-      font-family: var(--font-heading);
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Timeline Styling */
-    .timeline {
-      position: relative;
-      border-left: 2px solid var(--gold-primary);
-      margin-left: 14px;
-      padding-left: 22px;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 24px;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -29px;
-      top: 4px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--gold-primary);
-      box-shadow: 0 0 10px var(--gold-glow);
-    }
-
-    .timeline-time {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
-
-    .timeline-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .timeline-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* Photo Wall Cards */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
-    }
-
-    .photo-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .photo-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--gold-primary);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .photo-img-wrap {
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-      background: #000;
-    }
-
-    .photo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    .photo-card:hover .photo-img {
-      transform: scale(1.05);
-    }
-
-    .photo-badges {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .photo-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .photo-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .photo-caption {
-      font-size: 13px;
-      color: var(--text-secondary);
-      flex: 1;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* Branch Whakapapa Cards */
-    .branch-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      position: relative;
-      transition: border-color 0.2s;
-    }
-
-    .branch-card:hover {
-      border-color: var(--gold-primary);
-    }
-
-    .branch-badge-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .branch-name {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
-
-    .branch-motto {
-      font-style: italic;
-      font-size: 13px;
-      color: var(--text-gold);
-      margin: 8px 0 12px;
-      padding-left: 10px;
-      border-left: 2px solid var(--gold-primary);
-    }
-
-    /* Memoriam Cards */
-    .memorial-card {
-      background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      position: relative;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-    }
-
-    .memorial-card::before {
-      content: "✦";
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      color: var(--gold-primary);
-      font-size: 18px;
-      opacity: 0.7;
-    }
-
-    .memorial-name {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
-
-    .memorial-years {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-
-    .memorial-tribute {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    /* Trivia Interactive Board */
-    .trivia-box {
-      background: var(--bg-card);
-      border: 2px solid var(--border-gold);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-gold);
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .trivia-q-num {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--gold-light);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .trivia-q-text {
-      font-family: var(--font-heading);
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 22px;
-      line-height: 1.35;
-    }
-
-    .trivia-opt-btn {
-      width: 100%;
-      text-align: left;
-      padding: 14px 18px;
-      margin-bottom: 12px;
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      color: var(--text-primary);
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
       gap: 12px;
-    }
-
-    .trivia-opt-btn:hover:not(:disabled) {
-      border-color: var(--gold-primary);
-      background: rgba(212, 175, 55, 0.1);
-      transform: translateX(4px);
-    }
-
-    .trivia-opt-btn.correct {
-      background: rgba(31, 111, 80, 0.3) !important;
-      border-color: var(--green-light) !important;
-      color: #ffffff !important;
-    }
-
-    .trivia-opt-btn.wrong {
-      background: rgba(201, 59, 43, 0.3) !important;
-      border-color: var(--red-light) !important;
-      color: #ffffff !important;
-    }
-
-    .trivia-fact-box {
-      margin-top: 20px;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid var(--border-gold);
-      color: var(--text-gold);
+      color: var(--gold-primary);
+      margin: 16px 0;
       font-size: 14px;
-      line-height: 1.45;
-      display: none;
+      opacity: 0.85;
     }
 
-    /* Toast Notification */
-    #toast-notification {
+    .diamond-divider::before,
+    .diamond-divider::after {
+      content: "";
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      flex: 1;
+      max-width: 180px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+    }
+
+    .card-gold {
+      border: 1px solid var(--gold-primary);
+      background: linear-gradient(145deg, rgba(37, 53, 40, 0.95), rgba(27, 40, 30, 0.95));
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* Poster Showcase Hero */
+    .poster-showcase-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .poster-showcase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .poster-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 2px solid var(--gold-primary);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+      display: block;
+    }
+
+    /* Badges */
+    .badge-gold {
+      background: rgba(223, 211, 184, 0.15);
+      color: var(--gold-bright);
+      border: 1px solid var(--gold-primary);
+    }
+
+    .badge-green {
+      background: rgba(108, 161, 119, 0.2);
+      color: #9fe2ad;
+      border: 1px solid var(--green-light);
+    }
+
+    .badge-red {
+      background: rgba(184, 74, 57, 0.2);
+      color: #ffa599;
+      border: 1px solid var(--red-pohutukawa);
+    }
+
+    /* Form Controls */
+    .form-control {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 8px;
+    }
+
+    .form-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 2px rgba(223, 211, 184, 0.25);
+    }
+
+    /* Blinking colon */
+    .blink-colon {
+      display: inline-block;
+      animation: colonBlink 1s step-start infinite;
+      color: var(--gold-primary);
+      font-weight: 700;
+      padding: 0 1px;
+    }
+
+    @keyframes colonBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+
+    /* Toast */
+    #portal-toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: #161b22;
+      background: var(--bg-surface);
       border: 1px solid var(--gold-primary);
       color: var(--text-primary);
       padding: 14px 20px;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-lg);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
       z-index: 9999;
       transform: translateY(120px);
       transition: transform 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-size: 14px;
     }
 
-    #toast-notification.show {
+    #portal-toast.show {
       transform: translateY(0);
     }
   </style>
@@ -561,18 +410,21 @@
   <header class="portal-header">
     <div class="portal-header-inner">
       <div class="portal-brand">
-        <!-- Heritage Gold Maori Koru Crest SVG -->
-        <svg class="portal-crest" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="46" fill="#161b22" stroke="#d4af37" stroke-width="4"/>
-          <path d="M50 14 C68 14 82 28 82 46 C82 64 68 78 50 78 C36 78 26 68 26 54 C26 42 34 34 44 34 C52 34 58 40 58 48 C58 54 54 58 48 58 C44 58 42 55 42 51 C42 47 45 44 49 44" fill="none" stroke="#f3cc56" stroke-width="4.5" stroke-linecap="round"/>
-        </svg>
+        <!-- Official Clarke Crest Image -->
+        <img src="clarke_crest.jpg" alt="Clarke Family Crest" class="portal-crest-img">
         <div>
-          <h1 class="portal-brand-title" id="portal-title">CLARKE WHĀNAU REUNION 2026</h1>
-          <p class="portal-brand-subtitle" id="portal-subtitle">Kia Whakatōmuri Te Haere Whakamua — Honouring Our Past, Building Our Future</p>
+          <h1 class="portal-brand-title" id="lbl-portal-title">Clarke Family Reunion</h1>
+          <p class="portal-brand-subtitle" id="lbl-portal-subtitle">Clarkes of Chipley, Somersetshire — "Ye shall drink of the brook by the way"</p>
         </div>
       </div>
 
       <div class="portal-header-stats">
+        <!-- Language Switcher Button -->
+        <button class="lang-toggle-btn" id="btn-language-toggle" onclick="toggleLanguage()" title="Toggle Language (Shortcut: L)">
+          <span id="lang-toggle-icon">🌐</span>
+          <span id="lang-toggle-text">Language: English</span>
+        </button>
+
         <div class="portal-countdown-box">
           <span>⏳</span>
           <span id="header-countdown">Loading countdown...</span>
@@ -583,14 +435,14 @@
       </div>
 
       <div class="portal-nav-links">
-        <a href="index.html" class="portal-nav-btn btn-secondary" title="View 1080p Digital Signage Live TV Display">
-          📺 <span>Live TV</span>
+        <a href="index.html" class="portal-nav-btn" title="View 1080p Digital Signage Live Display">
+          📺 <span id="lbl-nav-live">Live TV</span>
         </a>
-        <a href="remote.html" target="_blank" class="portal-nav-btn btn-secondary" title="Open Touch TV Remote Control">
-          📱 <span>TV Remote</span>
+        <a href="remote.html" target="_blank" class="portal-nav-btn" title="Open Mobile Remote Control">
+          📱 <span id="lbl-nav-remote">Remote</span>
         </a>
-        <a href="admin.html" target="_blank" class="portal-nav-btn btn-primary" title="Open Master Admin Panel">
-          ⚙️ <span>Admin</span>
+        <a href="admin.html" target="_blank" class="portal-nav-btn portal-nav-btn-gold" title="Open Master Admin Panel">
+          ⚙️ <span id="lbl-nav-admin">Admin</span>
         </a>
       </div>
     </div>
@@ -599,12 +451,12 @@
   <!-- Navigation Tab Bar -->
   <div class="tab-bar-container">
     <nav class="tab-bar" role="tablist">
-      <button class="tab-btn active" data-tab="tab-overview" role="tab">📅 Overview & Schedule</button>
-      <button class="tab-btn" data-tab="tab-rsvp" role="tab">✍️ RSVP & Check-In</button>
-      <button class="tab-btn" data-tab="tab-photos" role="tab">📸 Photo Wall</button>
-      <button class="tab-btn" data-tab="tab-whakapapa" role="tab">🌳 Whakapapa & Memoriam</button>
-      <button class="tab-btn" data-tab="tab-potluck" role="tab">🍲 Kai & Volunteer Tasks</button>
-      <button class="tab-btn" data-tab="tab-trivia" role="tab">🎯 Whānau Trivia</button>
+      <button class="tab-btn active" data-tab="tab-overview" id="tab-btn-overview" role="tab">📅 Overview & Schedule</button>
+      <button class="tab-btn" data-tab="tab-rsvp" id="tab-btn-rsvp" role="tab">✍️ RSVP & Check-In</button>
+      <button class="tab-btn" data-tab="tab-photos" id="tab-btn-photos" role="tab">📸 Photo Gallery</button>
+      <button class="tab-btn" data-tab="tab-whakapapa" id="tab-btn-whakapapa" role="tab">🌳 Family Tree & Memorial</button>
+      <button class="tab-btn" data-tab="tab-potluck" id="tab-btn-potluck" role="tab">🍲 Food & Tasks Roster</button>
+      <button class="tab-btn" data-tab="tab-trivia" id="tab-btn-trivia" role="tab">🎯 Family Trivia</button>
     </nav>
   </div>
 
@@ -613,27 +465,122 @@
 
     <!-- TAB 1: OVERVIEW & SCHEDULE -->
     <section id="tab-overview" class="tab-pane active" role="tabpanel">
-      <!-- Top Banner Cards -->
-      <div class="grid-3" style="margin-bottom: 24px;">
-        <div class="card" style="border-left: 4px solid var(--gold-primary);">
-          <h3 style="color: var(--gold-light); font-size: 16px; margin-bottom: 8px;">📍 Gathering Location</h3>
-          <p style="font-weight: 700; font-size: 15px;" id="overview-location">Waitangi Treaty Grounds & Clarke Homestead, Bay of Islands</p>
-          <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Free whānau shuttle runs every 30 mins from Paihia motels to Treaty Grounds.</p>
-        </div>
 
-        <div class="card" style="border-left: 4px solid var(--green-primary);">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <h3 style="color: var(--green-light); font-size: 16px; margin-bottom: 8px;">📶 Whānau Wi-Fi</h3>
-            <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 12px;" onclick="copyWifi()">Copy Pass</button>
+      <!-- Official Poster & Key Reunion Details Card -->
+      <div class="card card-gold">
+        <div class="poster-showcase-grid">
+          <!-- Left: Official Invitation Poster -->
+          <div>
+            <img src="clarke_invitation.jpg" alt="Official Clarke Family Reunion Invitation" class="poster-img">
           </div>
-          <p style="font-size: 14px;"><strong>SSID:</strong> <code id="overview-wifi-ssid" style="color: var(--gold-light);">ClarkeReunion2026</code></p>
-          <p style="font-size: 14px; margin-top: 4px;"><strong>Password:</strong> <code id="overview-wifi-pass" style="color: var(--gold-light);">Whanau2026</code></p>
-        </div>
 
-        <div class="card" style="border-left: 4px solid var(--red-primary);">
-          <h3 style="color: var(--red-light); font-size: 16px; margin-bottom: 8px;">📣 Pinned Announcements</h3>
-          <div id="overview-pinned-announcements" style="font-size: 13px; color: var(--text-secondary); max-height: 80px; overflow-y: auto;">
-            Loading notices...
+          <!-- Right: Official Gathering Details & RSVP Info -->
+          <div>
+            <span class="badge badge-gold" id="lbl-official-invitation-badge" style="margin-bottom: 10px; font-size: 13px;">Official Invitation & Reunion Details</span>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 28px; line-height: 1.2; margin-bottom: 8px;" id="lbl-invitation-header">
+              Clarke Family Reunion
+            </h2>
+            <div class="diamond-divider" style="justify-content: flex-start; margin: 10px 0 16px;">── ◆ ──</div>
+
+            <p style="font-size: 17px; font-style: italic; color: var(--gold-primary); margin-bottom: 20px;" id="lbl-invitation-quote">
+              "Join us for an evening of good company, great conversation, and plenty of laughter."
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px;">
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 20px;">📅</span>
+                <div>
+                  <strong style="color: var(--gold-bright); font-size: 16px;" id="lbl-detail-datetime">Saturday, October 17, 2026 • From 7:30 PM</strong>
+                  <div style="font-size: 13px; color: var(--text-muted);" id="lbl-detail-subdate">Evening Gathering & Reunion Celebration</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 20px;">📍</span>
+                <div>
+                  <strong style="color: var(--gold-bright); font-size: 16px;" id="lbl-detail-venue">Papanui Club</strong>
+                  <div style="font-size: 14px; color: var(--gold-primary);">310 Sawyers Arms Road, Bishopdale, Christchurch 8053</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 20px;">🎟️</span>
+                <div>
+                  <strong style="color: var(--gold-bright); font-size: 15px;" id="lbl-detail-fee-title">Event Registration Fee</strong>
+                  <div style="font-size: 13px; color: var(--gold-primary);" id="lbl-detail-fee-desc">To help cover event costs, there will be a registration fee for all attendees.</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 20px;">✉️</span>
+                <div>
+                  <strong style="color: var(--gold-bright); font-size: 15px;" id="lbl-detail-rsvp-title">RSVP Contact (Please RSVP by 31 July)</strong>
+                  <div style="font-size: 14px; color: var(--gold-primary);">
+                    Email: <a href="mailto:ashleycroons@yahoo.com" style="color: var(--gold-bright); text-decoration: underline;">ashleycroons@yahoo.com</a> &nbsp;•&nbsp; Phone: <a href="tel:0275844663" style="color: var(--gold-bright); text-decoration: underline;">027 584 4663</a>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 20px;">📶</span>
+                <div>
+                  <strong style="color: var(--gold-bright); font-size: 15px;" id="lbl-detail-wifi-title">Club Wi-Fi Access</strong>
+                  <div style="font-size: 13px; color: var(--gold-primary);">
+                    Network: <code>PapanuiClub_Guest</code> &nbsp;•&nbsp; Pass: <code>Clarke2026</code>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="font-size: 20px;">📸</span>
+                <div>
+                  <strong style="color: var(--gold-bright); font-size: 15px;" id="lbl-detail-album-title">Shared Google Photos Album</strong>
+                  <div style="font-size: 13px; color: var(--gold-primary);" id="lbl-detail-album-name">
+                    Album: <strong>2026 -CLARKE FAMILY REUNION</strong>
+                  </div>
+                  <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;" id="lbl-detail-album-desc">
+                    Share photos and videos directly from your smartphone with all family branches!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Links -->
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-primary" onclick="switchToTab('tab-rsvp')" id="btn-quick-rsvp">✍️ Register RSVP Now</button>
+              <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="btn-quick-album" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">📸 Open Google Photos Album</a>
+              <button class="btn btn-secondary" onclick="copyContactInfo()" id="btn-copy-contact">📋 Copy Contact Info</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shared Google Photos Album Showcase Card -->
+      <div class="card" style="background: linear-gradient(135deg, rgba(37, 53, 40, 0.95), rgba(47, 66, 51, 0.95)); border: 1.5px solid var(--gold-primary); margin-bottom: 24px;">
+        <div style="display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 260px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 24px;">📸</span>
+              <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;" id="lbl-album-showcase-title">Clarke Family Shared Photo Album</h2>
+            </div>
+            <p style="font-size: 13.5px; color: var(--gold-light); margin-bottom: 8px;" id="lbl-album-showcase-sub">
+              Upload and explore high-resolution memories in the official shared album: <strong style="color: var(--gold-bright);">"2026 -CLARKE FAMILY REUNION"</strong>.
+            </p>
+            <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px;" id="lbl-album-showcase-hint">
+              Scan this QR code with any smartphone camera or click below to contribute your family reunion photos.
+            </p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="btn-album-showcase-open" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                🚀 Open Album in Google Photos
+              </a>
+              <button class="btn btn-secondary" onclick="copyAlbumLink()" id="btn-album-showcase-copy">
+                🔗 Copy Album Link
+              </button>
+            </div>
+          </div>
+          <div style="text-align: center; background: #ffffff; padding: 10px; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.4); flex-shrink: 0;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fphotos.app.goo.gl%2F6fGko2NUqKfQp7866" alt="QR Code to Clarke Family Photos Album" style="width: 140px; height: 140px; display: block;" loading="lazy">
+            <span style="font-size: 11px; font-weight: 700; color: #1b281e; display: block; margin-top: 4px;">SCAN FOR PHOTOS</span>
           </div>
         </div>
       </div>
@@ -642,15 +589,15 @@
       <div class="card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 22px;">Reunion Itinerary & Schedule</h2>
-            <p style="font-size: 13px; color: var(--text-muted);">Explore the official 3-day programme across Waitangi and the Clarke Homestead.</p>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 22px;" id="lbl-itinerary-title">Reunion Itinerary & Schedule</h2>
+            <p style="font-size: 13px; color: var(--text-muted);" id="lbl-itinerary-subtitle">Explore the weekend timetable at the Papanui Club and Christchurch venues.</p>
           </div>
           <!-- Day Selector Buttons -->
           <div style="display: flex; gap: 8px;" id="schedule-day-buttons">
-            <button class="btn btn-primary" onclick="filterScheduleDay(1)">Day 1 (Fri 26)</button>
-            <button class="btn btn-secondary" onclick="filterScheduleDay(2)">Day 2 (Sat 27)</button>
-            <button class="btn btn-secondary" onclick="filterScheduleDay(3)">Day 3 (Sun 28)</button>
-            <button class="btn btn-secondary" onclick="filterScheduleDay(0)">Show All Days</button>
+            <button class="btn btn-primary" onclick="filterScheduleDay(1)" id="btn-day-1">Day 1 (Fri)</button>
+            <button class="btn btn-secondary" onclick="filterScheduleDay(2)" id="btn-day-2">Day 2 (Sat)</button>
+            <button class="btn btn-secondary" onclick="filterScheduleDay(3)" id="btn-day-3">Day 3 (Sun)</button>
+            <button class="btn btn-secondary" onclick="filterScheduleDay(0)" id="btn-day-all">All Days</button>
           </div>
         </div>
 
@@ -664,32 +611,32 @@
     <section id="tab-rsvp" class="tab-pane" role="tabpanel">
       <!-- Attendance Statistics -->
       <div class="grid-4" style="margin-bottom: 24px;">
-        <div class="stat-card">
-          <div class="stat-icon">👥</div>
+        <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+          <div class="stat-icon" style="background: rgba(223, 211, 184, 0.15); color: var(--gold-bright); border-color: var(--gold-primary);">👥</div>
           <div>
             <div class="stat-val" id="stat-total-headcount">0</div>
-            <div class="stat-label">Total Confirmed</div>
+            <div class="stat-label" id="lbl-stat-headcount">Total Confirmed</div>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon">🧑</div>
+        <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+          <div class="stat-icon" style="background: rgba(223, 211, 184, 0.15); color: var(--gold-bright); border-color: var(--gold-primary);">🧑</div>
           <div>
             <div class="stat-val" id="stat-adults">0</div>
-            <div class="stat-label">Adults</div>
+            <div class="stat-label" id="lbl-stat-adults">Adults</div>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon">🧒</div>
+        <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+          <div class="stat-icon" style="background: rgba(223, 211, 184, 0.15); color: var(--gold-bright); border-color: var(--gold-primary);">🧒</div>
           <div>
             <div class="stat-val" id="stat-kids">0</div>
-            <div class="stat-label">Tamariki (Kids)</div>
+            <div class="stat-label" id="lbl-stat-kids">Children</div>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="color: var(--green-light); border-color: var(--green-primary);">✓</div>
+        <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">
+          <div class="stat-icon" style="background: rgba(108, 161, 119, 0.2); color: var(--green-light); border-color: var(--green-light);">✓</div>
           <div>
             <div class="stat-val" id="stat-checked-in">0</div>
-            <div class="stat-label">Checked-In On-Site</div>
+            <div class="stat-label" id="lbl-stat-checked">Checked In On-Site</div>
           </div>
         </div>
       </div>
@@ -697,53 +644,48 @@
       <div class="grid-2">
         <!-- New RSVP Submission Form -->
         <div class="card">
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Whānau RSVP Registration</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Register your attendance so the hāngī pit crew and marae committee can cater for all whānau.</p>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;" id="lbl-rsvp-form-title">Family RSVP Registration</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;" id="lbl-rsvp-form-desc">Please register your attendance by 31 July so the committee can confirm seating & catering.</p>
 
           <form id="rsvp-form" onsubmit="handleRsvpSubmit(event)">
             <div class="form-group">
-              <label class="form-label" for="rsvp-name">Full Name / Whānau Representative *</label>
-              <input type="text" id="rsvp-name" class="form-control" placeholder="e.g. Tane & Aroha Clarke" required>
+              <label class="form-label" for="rsvp-name" id="lbl-form-name">Full Name / Representative *</label>
+              <input type="text" id="rsvp-name" class="form-control" placeholder="e.g. Ashley & Sarah Clarke" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="rsvp-branch">Family Branch *</label>
-              <select id="rsvp-branch" class="form-control" required>
-                <option value="">-- Select Your Lineage Branch --</option>
-                <option value="Te Ariki Branch">Te Ariki Branch</option>
-                <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-                <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-                <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-                <option value="Kahu Southern Line">Kahu Southern Line</option>
+              <label class="form-label" for="rsvp-branch" id="lbl-form-branch">Family Branch *</label>
+              <select id="rsvp-branch" class="form-control dynamic-branch-select" required>
+                <!-- Dynamically populated via JS -->
               </select>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
               <div class="form-group">
-                <label class="form-label" for="rsvp-adults">Adults Count *</label>
+                <label class="form-label" for="rsvp-adults" id="lbl-form-adults">Adults Count *</label>
                 <input type="number" id="rsvp-adults" class="form-control" min="1" max="50" value="2" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="rsvp-kids">Tamariki (Kids)</label>
+                <label class="form-label" for="rsvp-kids" id="lbl-form-kids">Children Count</label>
                 <input type="number" id="rsvp-kids" class="form-control" min="0" max="50" value="0">
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="rsvp-dietary">Dietary Requirements / Allergies</label>
-              <input type="text" id="rsvp-dietary" class="form-control" placeholder="e.g. Vegetarian (1), Gluten-Free, Nut Allergy, or None">
+              <label class="form-label" for="rsvp-dietary" id="lbl-form-dietary">Dietary Requirements / Allergies</label>
+              <input type="text" id="rsvp-dietary" class="form-control" placeholder="e.g. Gluten-Free, Vegetarian, None">
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="rsvp-status">Attendance Status</label>
+              <label class="form-label" for="rsvp-status" id="lbl-form-status">Attendance Status</label>
               <select id="rsvp-status" class="form-control">
                 <option value="Confirmed" selected>Confirmed (Attending)</option>
                 <option value="Tentative">Tentative (Checking Flights / Dates)</option>
-                <option value="Regrets">Regrets (Sending Aroha from Afar)</option>
+                <option value="Regrets">Regrets (Sending Greetings from Afar)</option>
               </select>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;" id="btn-submit-rsvp">
               Submit RSVP Registration
             </button>
           </form>
@@ -753,10 +695,9 @@
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
             <div>
-              <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Whānau Check-In Desk</h2>
-              <p style="font-size: 13px; color: var(--text-muted);">Arriving at Waitangi? Click "Check In Here" for 1-click arrival verification.</p>
+              <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;" id="lbl-checkin-desk-title">Arrival Check-In Desk</h2>
+              <p style="font-size: 13px; color: var(--text-muted);" id="lbl-checkin-desk-subtitle">Arrived at Papanui Club? Click "Check In Here" for 1-click arrival verification.</p>
             </div>
-            <!-- Search Filter -->
             <input type="text" id="rsvp-search" class="form-control" placeholder="Search by name..." style="max-width: 200px;" oninput="renderRsvpsList()">
           </div>
 
@@ -771,23 +712,45 @@
     <section id="tab-photos" class="tab-pane" role="tabpanel">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
         <div>
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 24px;">Whānau Photo Wall & Archives</h2>
-          <p style="font-size: 13px; color: var(--text-muted);">Historic memories and live photo uploads immediately appear on the 1080p TV Display!</p>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 24px;" id="lbl-photo-wall-title">Family Photo Gallery & Archives</h2>
+          <p style="font-size: 13px; color: var(--text-muted);" id="lbl-photo-wall-subtitle">Historic memories and uploaded family photos appear immediately on the Live TV Display!</p>
         </div>
-        <button class="btn btn-primary" onclick="togglePhotoUploadModal(true)">
-          📷 + Upload New Photo
-        </button>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="btn-wall-google-photos" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            📸 Shared Google Album
+          </a>
+          <button class="btn btn-primary" onclick="togglePhotoUploadModal(true)" id="btn-upload-photo">
+            📷 + Upload New Photo
+          </button>
+        </div>
+      </div>
+
+      <!-- Shared Google Photos Banner in Photo Wall -->
+      <div style="background: rgba(37, 53, 40, 0.85); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 24px;">📱</span>
+          <div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--gold-bright);" id="lbl-wall-shared-album-title">
+              Official Shared Google Photos Album: "2026 -CLARKE FAMILY REUNION"
+            </div>
+            <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;" id="lbl-wall-shared-album-sub">
+              Upload high-resolution camera rolls directly from mobile — no storage limits!
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-open-album">
+            🚀 Open Album
+          </a>
+          <a href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fphotos.app.goo.gl%2F6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-qr-album">
+            📱 View QR Code
+          </a>
+        </div>
       </div>
 
       <!-- Branch Filter Buttons -->
       <div style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 20px; padding-bottom: 4px;" id="photo-filter-buttons">
-        <button class="btn btn-primary" onclick="filterPhotos('all')">All Photos</button>
-        <button class="btn btn-secondary" onclick="filterPhotos('Founders')">Founders</button>
-        <button class="btn btn-secondary" onclick="filterPhotos('Te Ariki Branch')">Te Ariki</button>
-        <button class="btn btn-secondary" onclick="filterPhotos('Hemi & Mere Branch')">Hemi & Mere</button>
-        <button class="btn btn-secondary" onclick="filterPhotos('Wiremu Clarke Line')">Wiremu</button>
-        <button class="btn btn-secondary" onclick="filterPhotos('Aroha & Rawiri Branch')">Aroha & Rawiri</button>
-        <button class="btn btn-secondary" onclick="filterPhotos('Kahu Southern Line')">Kahu Southern</button>
+        <!-- Rendered via JS -->
       </div>
 
       <!-- Photo Grid -->
@@ -796,26 +759,29 @@
       </div>
     </section>
 
-    <!-- TAB 4: WHAKAPAPA & IN MEMORIAM -->
+    <!-- TAB 4: FAMILY TREE & IN MEMORIAM -->
     <section id="tab-whakapapa" class="tab-pane" role="tabpanel">
       <!-- Founders Banner -->
-      <div class="card" style="border: 2px solid var(--border-gold); background: linear-gradient(180deg, rgba(212,175,55,0.12) 0%, rgba(22,27,34,0.9) 100%); margin-bottom: 28px;">
+      <div class="card card-gold" style="margin-bottom: 28px;">
         <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-          <div style="font-size: 40px;">🌿</div>
+          <img src="clarke_crest.jpg" alt="Ancestral Crest" style="width: 70px; height: 70px; border-radius: 8px; border: 1px solid var(--gold-primary);">
           <div style="flex: 1;">
-            <span class="badge badge-gold" style="margin-bottom: 6px;">Ancestral Matriarch & Patriarch</span>
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 24px;" id="whakapapa-founders-title">
-              Samuel & Mereana Clarke (m. 1898, Hokianga)
+            <span class="badge badge-gold" id="lbl-ancestral-founders-badge" style="margin-bottom: 6px;">Family Heritage & Ancestral Founders</span>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 24px;" id="lbl-founders-header">
+              Clarkes of Chipley, Somersetshire & Canterbury Pioneers
             </h2>
-            <p style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">
-              Married on 24 November 1898 at Rawene, Hokianga. Together they founded our five great lineage branches, nurturing land, sea, waiata, and community leadership across Aotearoa and the world.
+            <div class="diamond-divider" style="justify-content: flex-start; margin: 6px 0 10px;">── ◆ ──</div>
+            <p style="font-size: 14px; color: var(--gold-primary);" id="lbl-founders-desc">
+              Bearing the historic crest with three scallop shells and crescent moon, our ancestors established enduring roots across Somersetshire and Canterbury, New Zealand.
             </p>
           </div>
         </div>
       </div>
 
       <!-- 5 Lineage Branches -->
-      <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 14px;">The Five Lineage Branches</h3>
+      <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 14px;" id="lbl-branches-header">
+        The Five Family Branches
+      </h3>
       <div class="grid-3" id="whakapapa-branches-grid" style="margin-bottom: 40px;">
         <!-- Rendered via JS -->
       </div>
@@ -823,10 +789,10 @@
       <!-- In Memoriam Tribute Wall -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
         <div>
-          <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 24px;">Heaimahara — In Loving Memory</h2>
-          <p style="font-size: 13px; color: var(--text-muted);">Honouring our beloved Kaumātua, Kuia, and departed whānau whose spirit guides us.</p>
+          <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 24px;" id="lbl-memorial-title">In Memoriam Tributes</h2>
+          <p style="font-size: 13px; color: var(--text-muted);" id="lbl-memorial-subtitle">Honouring our beloved elders and departed family members whose memories live on.</p>
         </div>
-        <button class="btn btn-secondary" onclick="toggleMemorialModal(true)">
+        <button class="btn btn-secondary" onclick="toggleMemorialModal(true)" id="btn-submit-memorial">
           ✦ Submit Memorial Tribute
         </button>
       </div>
@@ -843,8 +809,8 @@
         <div>
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div>
-              <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Kai & Volunteer Coordinator</h2>
-              <p style="font-size: 13px; color: var(--text-muted);">Click "Claim" to take responsibility for a shared dish or event roster task.</p>
+              <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;" id="lbl-potluck-title">Food & Volunteer Coordinator</h2>
+              <p style="font-size: 13px; color: var(--text-muted);" id="lbl-potluck-subtitle">Click "Claim" to take responsibility for an item or roster role.</p>
             </div>
           </div>
 
@@ -856,51 +822,45 @@
         <!-- Right: Offer New Kai or Volunteer Duty Form -->
         <div>
           <div class="card">
-            <h2 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px; margin-bottom: 6px;">Offer Kai or Volunteer Service</h2>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;">Bringing extra food, baking, or willing to help with hāngī pit or cleanup? Add it here!</p>
+            <h2 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px; margin-bottom: 6px;" id="lbl-offer-item-title">Offer Item or Volunteer Role</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 18px;" id="lbl-offer-item-subtitle">Bringing baking, supplies, or willing to help with setup or registration? Add it here!</p>
 
             <form id="potluck-form" onsubmit="handlePotluckSubmit(event)">
               <div class="form-group">
-                <label class="form-label" for="pot-item">Dish Name / Volunteer Duty *</label>
-                <input type="text" id="pot-item" class="form-control" placeholder="e.g. Steamed Mussel Pots, Sound Equipment Setup" required>
+                <label class="form-label" for="pot-item" id="lbl-form-item-name">Dish Name / Volunteer Duty *</label>
+                <input type="text" id="pot-item" class="form-control" placeholder="e.g. Pavlova, Reception Greeter" required>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="pot-category">Category</label>
+                <label class="form-label" for="pot-category" id="lbl-form-item-cat">Category</label>
                 <select id="pot-category" class="form-control">
-                  <option value="Kaimoana">Kaimoana (Seafood)</option>
-                  <option value="Salads">Salads & Veges</option>
-                  <option value="Sides">Sides & Breads</option>
                   <option value="Desserts">Desserts & Sweets</option>
+                  <option value="Salads">Salads & Sides</option>
                   <option value="Baking">Baking & Snacks</option>
                   <option value="Fruit">Fresh Fruit</option>
-                  <option value="Volunteer Duties">Volunteer Duty (Setup/Pit/Clean)</option>
+                  <option value="Volunteer Duties">Volunteer Duty (Setup / Packdown)</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="pot-qty">Quantity / Portions / Notes</label>
-                <input type="text" id="pot-qty" class="form-control" placeholder="e.g. 2 Large Bowls, 4 People Crew" value="1 Tray" required>
+                <label class="form-label" for="pot-qty" id="lbl-form-item-qty">Quantity / Portions / Notes</label>
+                <input type="text" id="pot-qty" class="form-control" placeholder="e.g. 2 Bowls, 1 Team Member" value="1 Platter" required>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="pot-name">Your Name *</label>
-                <input type="text" id="pot-name" class="form-control" placeholder="e.g. Mere Clarke" required>
+                <label class="form-label" for="pot-name" id="lbl-form-item-yourname">Your Name *</label>
+                <input type="text" id="pot-name" class="form-control" placeholder="e.g. Sarah Clarke" required>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="pot-branch">Your Family Branch</label>
-                <select id="pot-branch" class="form-control" required>
-                  <option value="Te Ariki Branch">Te Ariki Branch</option>
-                  <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-                  <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-                  <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-                  <option value="Kahu Southern Line">Kahu Southern Line</option>
+                <label class="form-label" for="pot-branch" id="lbl-form-item-branch">Your Family Branch</label>
+                <select id="pot-branch" class="form-control dynamic-branch-select" required>
+                  <!-- Dynamically populated -->
                 </select>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
-                + Add to Kai & Task Roster
+              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;" id="btn-add-roster">
+                + Add to Roster
               </button>
             </form>
           </div>
@@ -908,12 +868,12 @@
       </div>
     </section>
 
-    <!-- TAB 6: WHĀNAU TRIVIA -->
+    <!-- TAB 6: FAMILY TRIVIA -->
     <section id="tab-trivia" class="tab-pane" role="tabpanel">
       <!-- Trivia Branch Scoreboard Header -->
       <div class="card" style="margin-bottom: 24px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px; margin-bottom: 12px; text-align: center;">
-          🏆 Whānau Branch Trivia Leaderboard
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px; margin-bottom: 12px; text-align: center;" id="lbl-trivia-scoreboard-title">
+          🏆 Family Branch Trivia Leaderboard
         </h3>
         <div class="grid-3" id="trivia-scoreboard-grid" style="gap: 12px;">
           <!-- Rendered via JS -->
@@ -921,28 +881,24 @@
       </div>
 
       <!-- Interactive Question Board -->
-      <div class="trivia-box">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-          <div class="trivia-q-num" id="trivia-q-badge">Question 1 of 4</div>
+      <div class="trivia-box" style="background: var(--bg-surface); border: 2px solid var(--gold-primary);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+          <div class="trivia-q-num" id="trivia-q-badge" style="color: var(--gold-bright);">Question 1 of 4</div>
           <div>
-            <label for="trivia-branch-selector" style="font-size: 12px; color: var(--gold-light); font-weight: 700; margin-right: 6px;">Playing For Branch:</label>
-            <select id="trivia-branch-selector" class="form-control" style="display: inline-block; width: auto; padding: 4px 8px; font-size: 13px;">
-              <option value="Te Ariki Branch">Te Ariki Branch</option>
-              <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-              <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-              <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-              <option value="Kahu Southern Line">Kahu Southern Line</option>
+            <label for="trivia-branch-selector" style="font-size: 12px; color: var(--gold-bright); font-weight: 700; margin-right: 6px;" id="lbl-trivia-playing-for">Playing For Branch:</label>
+            <select id="trivia-branch-selector" class="form-control dynamic-branch-select" style="display: inline-block; width: auto; padding: 4px 8px; font-size: 13px;">
+              <!-- Dynamically populated -->
             </select>
           </div>
         </div>
 
-        <h3 class="trivia-q-text" id="trivia-question-prompt">Loading Clarke Whānau Trivia...</h3>
+        <h3 class="trivia-q-text" id="trivia-question-prompt">Loading Family Trivia...</h3>
 
         <div id="trivia-options-list">
           <!-- Rendered dynamically -->
         </div>
 
-        <div class="trivia-fact-box" id="trivia-fact-box">
+        <div class="trivia-fact-box" id="trivia-fact-box" style="background: rgba(223, 211, 184, 0.1); border-color: var(--gold-primary); color: var(--gold-bright);">
           <!-- Fact revealed here -->
         </div>
 
@@ -958,33 +914,27 @@
 
   <!-- Photo Upload Modal -->
   <div id="photo-upload-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Add Photo to Whānau Wall</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;" id="lbl-modal-upload-title">Add Photo to Family Wall</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="togglePhotoUploadModal(false)">✕</button>
       </div>
 
       <form id="new-photo-form" onsubmit="handlePhotoUpload(event)">
         <div class="form-group">
           <label class="form-label" for="photo-title">Photo Title *</label>
-          <input type="text" id="photo-title" class="form-control" placeholder="e.g. Waitangi Waka Gathering" required>
+          <input type="text" id="photo-title" class="form-control" placeholder="e.g. Canterbury Homestead Reunion" required>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div class="form-group">
             <label class="form-label" for="photo-year">Year Taken *</label>
-            <input type="number" id="photo-year" class="form-control" min="1890" max="2026" value="2026" required>
+            <input type="number" id="photo-year" class="form-control" min="1850" max="2026" value="2026" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="photo-branch">Associated Branch</label>
-            <select id="photo-branch" class="form-control">
-              <option value="All Branches">All Branches</option>
-              <option value="Te Ariki Branch">Te Ariki Branch</option>
-              <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-              <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-              <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-              <option value="Kahu Southern Line">Kahu Southern Line</option>
-              <option value="Youth Committee">Youth Committee</option>
+            <select id="photo-branch" class="form-control dynamic-branch-select">
+              <!-- Dynamically populated -->
             </select>
           </div>
         </div>
@@ -1014,43 +964,39 @@
 
   <!-- Memorial Tribute Modal -->
   <div id="memorial-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 520px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 520px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 20px;">Submit Memorial Tribute</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 20px;" id="lbl-modal-memorial-title">Submit Memorial Tribute</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="toggleMemorialModal(false)">✕</button>
       </div>
 
       <form id="new-memorial-form" onsubmit="handleMemorialSubmit(event)">
         <div class="form-group">
-          <label class="form-label" for="mem-name">Departed Whānau Member Name *</label>
-          <input type="text" id="mem-name" class="form-control" placeholder="e.g. Uncle Wiremu 'Bill' Clarke" required>
+          <label class="form-label" for="mem-name">Departed Family Member Name *</label>
+          <input type="text" id="mem-name" class="form-control" placeholder="e.g. Uncle John Clarke" required>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div class="form-group">
             <label class="form-label" for="mem-years">Lifespan / Years *</label>
-            <input type="text" id="mem-years" class="form-control" placeholder="e.g. 1940 – 2024" required>
+            <input type="text" id="mem-years" class="form-control" placeholder="e.g. 1935 – 2021" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="mem-branch">Family Branch</label>
-            <select id="mem-branch" class="form-control">
-              <option value="Te Ariki Branch">Te Ariki Branch</option>
-              <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-              <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-              <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-              <option value="Kahu Southern Line">Kahu Southern Line</option>
+            <select id="mem-branch" class="form-control dynamic-branch-select">
+              <!-- Dynamically populated -->
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="mem-role">Whānau Role / Community Title</label>
-          <input type="text" id="mem-role" class="form-control" placeholder="e.g. Waka Navigator, Kaumātua, Beloved Kuia">
+          <label class="form-label" for="mem-role">Family Role / Title</label>
+          <input type="text" id="mem-role" class="form-control" placeholder="e.g. Family Historian, Beloved Matriarch">
         </div>
 
         <div class="form-group">
           <label class="form-label" for="mem-tribute">Tribute Message / Words of Remembrance *</label>
-          <textarea id="mem-tribute" class="form-control" rows="3" placeholder="Share beloved memories, teachings, or aroha..." required></textarea>
+          <textarea id="mem-tribute" class="form-control" rows="3" placeholder="Share memories and loving words..." required></textarea>
         </div>
 
         <div style="display: flex; gap: 10px; margin-top: 14px;">
@@ -1063,9 +1009,9 @@
 
   <!-- Claim Kai / Task Modal -->
   <div id="claim-task-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; align-items: center; justify-content: center; padding: 20px;">
-    <div class="card" style="max-width: 440px; width: 100%; border: 2px solid var(--border-gold);">
+    <div class="card" style="max-width: 440px; width: 100%; border: 2px solid var(--gold-primary); background: var(--bg-surface);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-        <h3 style="font-family: var(--font-heading); color: var(--gold-light); font-size: 18px;">Claim Kai / Task</h3>
+        <h3 style="font-family: 'Cinzel', Georgia, serif; color: var(--gold-bright); font-size: 18px;">Claim Roster Item</h3>
         <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="closeClaimModal()">✕</button>
       </div>
 
@@ -1073,17 +1019,13 @@
 
       <div class="form-group">
         <label class="form-label" for="claim-name">Your Full Name *</label>
-        <input type="text" id="claim-name" class="form-control" placeholder="e.g. Tane Clarke" required>
+        <input type="text" id="claim-name" class="form-control" placeholder="e.g. David Clarke" required>
       </div>
 
       <div class="form-group">
         <label class="form-label" for="claim-branch">Your Family Branch</label>
-        <select id="claim-branch" class="form-control">
-          <option value="Te Ariki Branch">Te Ariki Branch</option>
-          <option value="Hemi & Mere Branch">Hemi & Mere Branch</option>
-          <option value="Wiremu Clarke Line">Wiremu Clarke Line</option>
-          <option value="Aroha & Rawiri Branch">Aroha & Rawiri Branch</option>
-          <option value="Kahu Southern Line">Kahu Southern Line</option>
+        <select id="claim-branch" class="form-control dynamic-branch-select">
+          <!-- Dynamically populated -->
         </select>
       </div>
 
@@ -1095,7 +1037,7 @@
   </div>
 
   <!-- Toast Notification Box -->
-  <div id="toast-notification">
+  <div id="portal-toast">
     <span id="toast-icon">✨</span>
     <span id="toast-message">State synchronized</span>
   </div>
@@ -1103,16 +1045,198 @@
   <!-- Shared App Script -->
   <script src="app.js"></script>
 
-  <!-- Portal Interactive Controller Script -->
+  <!-- Portal Controller Script -->
   <script>
     (function () {
       var state = window.ClarkeApp ? window.ClarkeApp.getState() : {};
-      var currentDayFilter = 0; // 0 = all days
+      var currentDayFilter = 0;
       var currentPhotoFilter = 'all';
       var activeTriviaIndex = 0;
       var claimingTaskId = null;
 
-      // Clock and Countdown Update Engine
+      var DEFAULT_BRANCHES = [
+        "Chipley Somerset Line",
+        "Christchurch & Canterbury Branch",
+        "North Canterbury Branch",
+        "Otago & Southern Line",
+        "North Island Clarke Branch"
+      ];
+
+      // Dynamic branch getter
+      function getBranchNames() {
+        if (state.familyTree && state.familyTree.branches && Array.isArray(state.familyTree.branches) && state.familyTree.branches.length > 0) {
+          return state.familyTree.branches.map(function (b) { return b.name; });
+        }
+        return DEFAULT_BRANCHES;
+      }
+
+      // Populate all branch select elements dynamically
+      function populateBranchSelects() {
+        var branches = getBranchNames();
+        var selects = document.querySelectorAll('.dynamic-branch-select');
+        selects.forEach(function (sel) {
+          var currentVal = sel.value;
+          var html = '<option value="">-- Select Family Branch --</option>';
+          branches.forEach(function (br) {
+            html += '<option value="' + br + '">' + br + '</option>';
+          });
+          sel.innerHTML = html;
+          if (currentVal && branches.includes(currentVal)) {
+            sel.value = currentVal;
+          }
+        });
+      }
+
+      // Translation Helper
+      function t(enStr, miStr) {
+        if (window.ClarkeApp && typeof window.ClarkeApp.t === 'function') {
+          return window.ClarkeApp.t(enStr, miStr);
+        }
+        var useTeReo = state && state.settings && state.settings.useTeReo;
+        return useTeReo ? miStr : enStr;
+      }
+
+      // Toggle Te Reo
+      window.toggleLanguage = function () {
+        if (window.ClarkeApp && typeof window.ClarkeApp.toggleTeReo === 'function') {
+          window.ClarkeApp.toggleTeReo();
+          state = window.ClarkeApp.getState();
+        } else {
+          if (!state.settings) state.settings = {};
+          state.settings.useTeReo = !state.settings.useTeReo;
+          if (window.ClarkeApp && window.ClarkeApp.saveState) {
+            window.ClarkeApp.saveState(state);
+          }
+        }
+        renderTranslations();
+        renderHeaderDetails();
+        renderSchedule();
+        renderWhakapapa();
+        renderTrivia();
+        showToast(state.settings.useTeReo ? "Te Reo Māori labels enabled" : "English labels active", "🌐");
+      };
+
+      // Render All Translated Text across Portal
+      function renderTranslations() {
+        var isMi = !!(state.settings && state.settings.useTeReo);
+
+        // Language toggle button
+        var toggleBtn = document.getElementById('btn-language-toggle');
+        var toggleText = document.getElementById('lang-toggle-text');
+        var toggleIcon = document.getElementById('lang-toggle-icon');
+        if (toggleBtn && toggleText) {
+          if (isMi) {
+            toggleBtn.classList.add('active');
+            toggleText.textContent = "Te Reo Māori: ON";
+            toggleIcon.textContent = "🌿";
+          } else {
+            toggleBtn.classList.remove('active');
+            toggleText.textContent = "Te Reo Māori: OFF (English)";
+            toggleIcon.textContent = "🌐";
+          }
+        }
+
+        // Header and Nav Labels
+        document.getElementById('lbl-portal-title').textContent = isMi ? (state.eventInfo.titleMi || "Te Huihuinga Whānau o Clarke") : (state.eventInfo.title || "Clarke Family Reunion");
+        document.getElementById('lbl-nav-live').textContent = isMi ? "Tātari Ora" : "Live TV";
+        document.getElementById('lbl-nav-remote').textContent = isMi ? "Mana Mamao" : "Remote";
+        document.getElementById('lbl-nav-admin').textContent = isMi ? "Kaiwhakahaere" : "Admin";
+
+        // Tab Bar Buttons
+        document.getElementById('tab-btn-overview').textContent = t("📅 Overview & Schedule", "📅 Tirohanga Whānui & Hōtaka");
+        document.getElementById('tab-btn-rsvp').textContent = t("✍️ RSVP & Check-In", "✍️ RSVP & Tomokanga");
+        document.getElementById('tab-btn-photos').textContent = t("📸 Photo Gallery", "📸 Pātū Whakaahua");
+        document.getElementById('tab-btn-whakapapa').textContent = t("🌳 Family Tree & Memorial", "🌳 Whakapapa & He Aimahara");
+        document.getElementById('tab-btn-potluck').textContent = t("🍲 Food & Tasks Roster", "🍲 Kai & Mahi Coordinator");
+        document.getElementById('tab-btn-trivia').textContent = t("🎯 Family Trivia", "🎯 Whānau Trivia");
+
+        // Overview Tab Texts
+        document.getElementById('lbl-official-invitation-badge').textContent = t("Official Invitation & Reunion Details", "Pānui Pōwhiri Whaimana");
+        document.getElementById('lbl-invitation-header').textContent = isMi ? "Te Huihuinga Whānau o Clarke" : "Clarke Family Reunion";
+        document.getElementById('lbl-invitation-quote').textContent = t('"Join us for an evening of good company, great conversation, and plenty of laughter."', '"Kia hui tahi tātou ki te whakanui, ki te kōrerorero, ki te whakakatakata hoki."');
+        document.getElementById('lbl-detail-datetime').textContent = t("Saturday, October 17, 2026 • From 7:30 PM", "Rāhoroi, 17 Whiringa-ā-nuku 2026 • Mai i te 7:30 PM");
+        document.getElementById('lbl-detail-fee-title').textContent = t("Event Registration Fee", "Utu Rēhita Whakauru");
+        document.getElementById('lbl-detail-fee-desc').textContent = t("To help cover event costs, there will be a registration fee for all attendees.", "Hei āwhina i ngā utu whakahaere, he utu rēhita mō ia tangata.");
+        document.getElementById('lbl-detail-rsvp-title').textContent = t("RSVP Contact (Please RSVP by 31 July)", "Whakapā mai (RSVP i mua i te 31 Hūrae)");
+        document.getElementById('btn-quick-rsvp').textContent = t("✍️ Register RSVP Now", "✍️ Rēhita RSVP Ināianei");
+        document.getElementById('btn-copy-contact').textContent = t("📋 Copy Contact Info", "📋 Tārua Whakapā");
+
+        var elDetailAlbum = document.getElementById('lbl-detail-album-title');
+        if (elDetailAlbum) elDetailAlbum.textContent = t("Shared Google Photos Album", "Puka Whakaahua Tiri (Google Photos)");
+        var elDetailAlbumDesc = document.getElementById('lbl-detail-album-desc');
+        if (elDetailAlbumDesc) elDetailAlbumDesc.textContent = t("Share photos and videos directly from your smartphone with all family branches!", "Tukua mai ō whakaahua me ō ataata mai i tō waea pūkoro!");
+        var elBtnQuickAlbum = document.getElementById('btn-quick-album');
+        if (elBtnQuickAlbum) elBtnQuickAlbum.textContent = t("📸 Open Google Photos Album", "📸 Whakatuwhera Puka Whakaahua");
+
+        var elShowcaseTitle = document.getElementById('lbl-album-showcase-title');
+        if (elShowcaseTitle) elShowcaseTitle.textContent = t("Clarke Family Shared Photo Album", "Puka Whakaahua Tiri o Clarke (Google Photos)");
+        var elShowcaseSub = document.getElementById('lbl-album-showcase-sub');
+        if (elShowcaseSub) elShowcaseSub.innerHTML = t('Upload and explore high-resolution memories in the official shared album: <strong style="color: var(--gold-bright);">"2026 -CLARKE FAMILY REUNION"</strong>.', 'Tukua ō whakaahua kounga teitei ki te puka whakaahua whaimana: <strong style="color: var(--gold-bright);">"2026 -CLARKE FAMILY REUNION"</strong>.');
+        var elShowcaseHint = document.getElementById('lbl-album-showcase-hint');
+        if (elShowcaseHint) elShowcaseHint.textContent = t("Scan this QR code with any smartphone camera or click below to contribute your family reunion photos.", "Mātaki i tēnei waehere QR ki tō waea pūkoro, pāwhiritia rānei te pātene i raro.");
+        var elBtnShowcaseOpen = document.getElementById('btn-album-showcase-open');
+        if (elBtnShowcaseOpen) elBtnShowcaseOpen.textContent = t("🚀 Open Album in Google Photos", "🚀 Whakatuwheratia ki Google Photos");
+        var elBtnShowcaseCopy = document.getElementById('btn-album-showcase-copy');
+        if (elBtnShowcaseCopy) elBtnShowcaseCopy.textContent = t("🔗 Copy Album Link", "🔗 Tāruatia te Hononga");
+
+        document.getElementById('lbl-itinerary-title').textContent = t("Reunion Itinerary & Schedule", "Hōtaka o te Huihuinga");
+        document.getElementById('lbl-itinerary-subtitle').textContent = t("Explore the timetable at the Papanui Club and Christchurch venues.", "Tirohia ngā wātaka ki te Papanui Club, Ōtautahi.");
+        document.getElementById('btn-day-1').textContent = t("Day 1 (Fri)", "Rā 1 (Paraire)");
+        document.getElementById('btn-day-2').textContent = t("Day 2 (Sat)", "Rā 2 (Rāhoroi)");
+        document.getElementById('btn-day-3').textContent = t("Day 3 (Sun)", "Rā 3 (Rātapu)");
+        document.getElementById('btn-day-all').textContent = t("All Days", "Ngā Rā Katoa");
+
+        // RSVP Tab Texts
+        document.getElementById('lbl-stat-headcount').textContent = t("Total Confirmed", "Katoa Kua Whakaae");
+        document.getElementById('lbl-stat-adults').textContent = t("Adults", "Pakeke");
+        document.getElementById('lbl-stat-kids').textContent = t("Children", "Tamariki");
+        document.getElementById('lbl-stat-checked').textContent = t("Checked In On-Site", "Kua Tomo Mai");
+        document.getElementById('lbl-rsvp-form-title').textContent = t("Family RSVP Registration", "Rēhita Pōwhiri Whānau");
+        document.getElementById('lbl-rsvp-form-desc').textContent = t("Please register by 31 July so the committee can confirm seating & catering.", "Rēhita mai i mua i te 31 Hūrae mō ngā whakaritenga kai.");
+        document.getElementById('lbl-form-name').textContent = t("Full Name / Representative *", "Ingoa Katoa / Māngai *");
+        document.getElementById('lbl-form-branch').textContent = t("Family Branch *", "Manga Whānau *");
+        document.getElementById('lbl-form-adults').textContent = t("Adults Count *", "Tau o ngā Pakeke *");
+        document.getElementById('lbl-form-kids').textContent = t("Children Count", "Tau o ngā Tamariki");
+        document.getElementById('lbl-form-dietary').textContent = t("Dietary Requirements / Allergies", "Ngā Kai Motuhake / Matewhero");
+        document.getElementById('btn-submit-rsvp').textContent = t("Submit RSVP Registration", "Tukuna te Rēhita");
+        document.getElementById('lbl-checkin-desk-title').textContent = t("Arrival Check-In Desk", "Tēpu Tomokanga");
+        document.getElementById('lbl-checkin-desk-subtitle').textContent = t('Arrived at Papanui Club? Click "Check In Here" for 1-click arrival verification.', 'Kua tae mai ki Papanui Club? Pāwhiritia "Tomo Mai".');
+
+        // Photo Wall Tab Texts
+        document.getElementById('lbl-photo-wall-title').textContent = t("Family Photo Gallery & Archives", "Pātū Whakaahua Whānau");
+        document.getElementById('lbl-photo-wall-subtitle').textContent = t("Historic memories and uploaded family photos appear immediately on the Live TV Display!", "Ka whakaatuhia ngā whakaahua hou ki te mata pouaka whakaata ora!");
+        document.getElementById('btn-upload-photo').textContent = t("📷 + Upload New Photo", "📷 + Tuku Whakaahua Hou");
+
+        var elWallGooglePhotos = document.getElementById('btn-wall-google-photos');
+        if (elWallGooglePhotos) elWallGooglePhotos.textContent = t("📸 Shared Google Album", "📸 Puka Whakaahua Tiri");
+        var elWallSharedTitle = document.getElementById('lbl-wall-shared-album-title');
+        if (elWallSharedTitle) elWallSharedTitle.textContent = t('Official Shared Google Photos Album: "2026 -CLARKE FAMILY REUNION"', 'Puka Whakaahua Whaimana: "2026 -CLARKE FAMILY REUNION"');
+        var elWallSharedSub = document.getElementById('lbl-wall-shared-album-sub');
+        if (elWallSharedSub) elWallSharedSub.textContent = t("Upload high-resolution camera rolls directly from mobile — no storage limits!", "Tukua mai ō whakaahua kounga teitei tonu mai i tō waea pūkoro!");
+        var elWallOpenAlbum = document.getElementById('btn-wall-open-album');
+        if (elWallOpenAlbum) elWallOpenAlbum.textContent = t("🚀 Open Album", "🚀 Whakatuwhera");
+        var elWallQrAlbum = document.getElementById('btn-wall-qr-album');
+        if (elWallQrAlbum) elWallQrAlbum.textContent = t("📱 View QR Code", "📱 Waehere QR");
+
+        // Whakapapa Tab Texts
+        document.getElementById('lbl-ancestral-founders-badge').textContent = t("Family Heritage & Ancestral Founders", "Tīpuna & Pūtakenga Whānau");
+        document.getElementById('lbl-branches-header').textContent = t("The Five Family Branches", "Ngā Manga Whakapapa e Rima");
+        document.getElementById('lbl-memorial-title').textContent = t("In Memoriam Tributes", "He Aimahara — In Memoriam");
+        document.getElementById('lbl-memorial-subtitle').textContent = t("Honouring our beloved elders and departed family members whose memories live on.", "E maumahara tonu ana ki ngā kaumātua me ngā whānau kua whetūrangitia.");
+        document.getElementById('btn-submit-memorial').textContent = t("✦ Submit Memorial Tribute", "✦ Tukuna he Kōrero Whakamahara");
+
+        // Potluck Tab Texts
+        document.getElementById('lbl-potluck-title').textContent = t("Food & Volunteer Coordinator", "Kai & Mahi Coordinator");
+        document.getElementById('lbl-potluck-subtitle').textContent = t('Click "Claim" to take responsibility for an item or roster role.', 'Pāwhiritia "Tango" hei waha i tētahi mahi, kai rānei.');
+        document.getElementById('lbl-offer-item-title').textContent = t("Offer Item or Volunteer Role", "Tuku Kai, Mahi Tūao Rānei");
+        document.getElementById('btn-add-roster').textContent = t("+ Add to Roster", "+ Tāpiri ki te Rārangi");
+
+        // Trivia Tab Texts
+        document.getElementById('lbl-trivia-scoreboard-title').textContent = t("🏆 Family Branch Trivia Leaderboard", "🏆 Papatohu Whiwhinga Manga");
+        document.getElementById('lbl-trivia-playing-for').textContent = t("Playing For Branch:", "E tākaro ana mō:");
+      }
+
+      // Clocks and Countdown
       function updateClocks() {
         var now = new Date();
         var clockEl = document.getElementById('header-clock');
@@ -1124,7 +1248,7 @@
         if (countdownEl && window.ClarkeApp && state.eventInfo) {
           var parts = window.ClarkeApp.getCountdownParts(state.eventInfo.dateISO);
           if (parts.isPassed) {
-            countdownEl.textContent = "Reunion Happening Now!";
+            countdownEl.textContent = t("Reunion Happening Now!", "Kei te tū te huihuinga ināianei!");
           } else {
             countdownEl.innerHTML = parts.days + "d " + parts.hours + '<span class="blink-colon">:</span>' + String(parts.mins).padStart(2, '0') + '<span class="blink-colon">:</span>' + String(parts.secs).padStart(2, '0');
           }
@@ -1147,57 +1271,55 @@
         });
       });
 
-      // Toast helper
+      window.switchToTab = function (tabId) {
+        var btn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+        if (btn) btn.click();
+      };
+
+      // Toast notification helper
       function showToast(msg, icon) {
-        var toast = document.getElementById('toast-notification');
+        var toast = document.getElementById('portal-toast');
         if (!toast) return;
         document.getElementById('toast-message').textContent = msg;
         document.getElementById('toast-icon').textContent = icon || '✨';
         toast.classList.add('show');
         setTimeout(function () {
           toast.classList.remove('show');
-        }, 3500);
+        }, 3200);
       }
 
-      // Copy Wi-Fi
-      window.copyWifi = function () {
-        var pass = (state.eventInfo && state.eventInfo.wifiPass) || "Whanau2026";
-        navigator.clipboard.writeText(pass).then(function () {
-          showToast("Wi-Fi Password copied to clipboard!", "📶");
+      window.copyContactInfo = function () {
+        var text = "Clarke Family Reunion (Oct 17 2026 @ Papanui Club)\nRSVP by 31 July: ashleycroons@yahoo.com or 027 584 4663";
+        navigator.clipboard.writeText(text).then(function () {
+          showToast(t("RSVP contact info copied to clipboard!", "Kua tāruatia ngā pārongo whakapā!"), "📋");
         }).catch(function () {
-          alert("Wi-Fi Password: " + pass);
+          alert(text);
         });
       };
 
-      // Render Header Details
+      window.copyAlbumLink = function () {
+        var url = (state.eventInfo && state.eventInfo.sharedAlbumUrl) || 'https://photos.app.goo.gl/6fGko2NUqKfQp7866';
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            showToast(t("Google Photos album link copied!", "Kua tāruatia te hononga puka whakaahua!"), "📸");
+          }).catch(function () {
+            prompt("Google Photos Album URL:", url);
+          });
+        } else {
+          prompt("Google Photos Album URL:", url);
+        }
+      };
+
+      // Header Details
       function renderHeaderDetails() {
         if (!state.eventInfo) return;
-        var titleEl = document.getElementById('portal-title');
-        var subEl = document.getElementById('portal-subtitle');
-        var locEl = document.getElementById('overview-location');
-        var ssidEl = document.getElementById('overview-wifi-ssid');
-        var passEl = document.getElementById('overview-wifi-pass');
-
-        if (titleEl) titleEl.textContent = state.eventInfo.title;
-        if (subEl) subEl.textContent = state.eventInfo.subtitle;
-        if (locEl) locEl.textContent = state.eventInfo.location;
-        if (ssidEl) ssidEl.textContent = state.eventInfo.wifiSsid;
-        if (passEl) passEl.textContent = state.eventInfo.wifiPass;
-
-        var pinnedEl = document.getElementById('overview-pinned-announcements');
-        if (pinnedEl && state.announcements) {
-          var pinned = state.announcements.filter(function (a) { return a.pinned; });
-          if (pinned.length === 0) {
-            pinnedEl.innerHTML = '<em>No urgent notices at this moment.</em>';
-          } else {
-            pinnedEl.innerHTML = pinned.map(function (a) {
-              return '<div style="margin-bottom: 6px;"><strong>• ' + a.title + ':</strong> ' + a.body + '</div>';
-            }).join('');
-          }
+        var subEl = document.getElementById('lbl-portal-subtitle');
+        if (subEl) {
+          subEl.textContent = (state.eventInfo.crestTitle || "Clarkes of Chipley, Somersetshire") + ' — "' + (state.eventInfo.motto || "Ye shall drink of the brook by the way") + '"';
         }
       }
 
-      // Render Schedule Itinerary
+      // Schedule Itinerary
       window.filterScheduleDay = function (day) {
         currentDayFilter = day;
         var btns = document.querySelectorAll('#schedule-day-buttons .btn');
@@ -1217,19 +1339,19 @@
 
         var html = '';
         daysToRender.forEach(function (day) {
-          html += '<div style="margin-bottom: 30px;">';
-          html += '<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">';
-          html += '<h3 style="font-family: var(--font-heading); font-size: 18px; color: var(--gold-light);">' + day.dayName + '</h3>';
+          html += '<div style="margin-bottom: 26px;">';
+          html += '<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">';
+          html += '<h3 style="font-family: \'Cinzel\', Georgia, serif; font-size: 18px; color: var(--gold-bright);">' + day.dayName + '</h3>';
           html += '<span class="badge badge-gold">' + day.dateString + '</span>';
           html += '</div>';
 
-          html += '<div class="timeline">';
+          html += '<div class="timeline" style="border-left-color: var(--green-light);">';
           day.items.forEach(function (item) {
             html += '<div class="timeline-item">';
-            html += '<div class="timeline-dot"></div>';
-            html += '<div class="timeline-time">' + item.time + ' — ' + item.location + '</div>';
-            html += '<div class="timeline-title">' + item.title + '</div>';
-            html += '<div class="timeline-desc">Lead Whānau: <strong style="color: var(--gold-light);">' + item.lead + '</strong></div>';
+            html += '<div class="timeline-dot" style="background: var(--gold-primary);"></div>';
+            html += '<div class="timeline-time" style="color: var(--gold-primary);">' + item.time + ' — ' + item.location + '</div>';
+            html += '<div class="timeline-title" style="color: var(--text-primary); font-size: 15px;">' + item.title + '</div>';
+            html += '<div class="timeline-desc" style="color: var(--text-muted); font-size: 13px;">Lead: <strong style="color: var(--gold-bright);">' + item.lead + '</strong></div>';
             html += '</div>';
           });
           html += '</div></div>';
@@ -1238,7 +1360,7 @@
         container.innerHTML = html;
       }
 
-      // RSVP & Attendance Tracker
+      // RSVP & Attendance Stats
       function renderRsvpStats() {
         if (!state.rsvps) return;
         var totalHead = 0;
@@ -1259,15 +1381,10 @@
           }
         });
 
-        var headEl = document.getElementById('stat-total-headcount');
-        var adultEl = document.getElementById('stat-adults');
-        var kidsEl = document.getElementById('stat-kids');
-        var checkEl = document.getElementById('stat-checked-in');
-
-        if (headEl) headEl.textContent = totalHead;
-        if (adultEl) adultEl.textContent = totalAdults;
-        if (kidsEl) kidsEl.textContent = totalKids;
-        if (checkEl) checkEl.textContent = checkedInCount;
+        document.getElementById('stat-total-headcount').textContent = totalHead;
+        document.getElementById('stat-adults').textContent = totalAdults;
+        document.getElementById('stat-kids').textContent = totalKids;
+        document.getElementById('stat-checked-in').textContent = checkedInCount;
       }
 
       window.renderRsvpsList = function () {
@@ -1276,11 +1393,11 @@
 
         var term = (document.getElementById('rsvp-search') ? document.getElementById('rsvp-search').value.toLowerCase() : '');
         var filtered = state.rsvps.filter(function (r) {
-          return !term || r.name.toLowerCase().includes(term) || r.branch.toLowerCase().includes(term);
+          return !term || r.name.toLowerCase().includes(term) || (r.branch && r.branch.toLowerCase().includes(term));
         });
 
         if (filtered.length === 0) {
-          container.innerHTML = '<p style="color: var(--text-muted); padding: 16px;">No registrations match your search.</p>';
+          container.innerHTML = '<p style="color: var(--text-muted); padding: 16px;">' + t("No registrations match your search.", "Kāore he rēhita e rite ana.") + '</p>';
           return;
         }
 
@@ -1288,23 +1405,23 @@
         filtered.forEach(function (r) {
           var total = (parseInt(r.adults, 10) || 0) + (parseInt(r.kids, 10) || 0);
           var isChecked = r.checkedIn;
-          html += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">';
+          html += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;">';
           html += '<div style="flex: 1; min-width: 0;">';
           html += '<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">';
-          html += '<strong style="font-size: 15px; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + r.name + '</strong>';
+          html += '<strong style="font-size: 15px; color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + r.name + '</strong>';
           html += '<span class="badge badge-gold" style="font-size: 11px;">' + r.branch + '</span>';
           html += '</div>';
           html += '<div style="font-size: 12px; color: var(--text-muted);">';
-          html += 'Headcount: <strong>' + total + '</strong> (' + r.adults + ' Adults, ' + r.kids + ' Kids)';
+          html += t("Headcount: ", "Tau: ") + '<strong>' + total + '</strong> (' + r.adults + ' Adults, ' + r.kids + ' Kids)';
           if (r.dietary && r.dietary !== 'None') {
-            html += ' • Dietary: <span style="color: var(--gold-light);">' + r.dietary + '</span>';
+            html += ' • Dietary: <span style="color: var(--gold-primary);">' + r.dietary + '</span>';
           }
           html += '</div></div>';
 
           if (isChecked) {
-            html += '<span class="badge badge-green" style="padding: 6px 12px; font-size: 13px;">✓ Checked In</span>';
+            html += '<span class="badge badge-green" style="padding: 6px 12px; font-size: 13px;">✓ ' + t("Checked In", "Kua Tomo") + '</span>';
           } else {
-            html += '<button class="btn btn-primary" style="padding: 6px 12px; font-size: 13px;" onclick="checkInGuest(\'' + r.id + '\')">Check In Here</button>';
+            html += '<button class="btn btn-primary" style="padding: 6px 12px; font-size: 13px;" onclick="checkInGuest(\'' + r.id + '\')">' + t("Check In Here", "Tomo Mai") + '</button>';
           }
           html += '</div>';
         });
@@ -1319,7 +1436,7 @@
           window.ClarkeApp.saveState(state);
           renderRsvpStats();
           renderRsvpsList();
-          showToast(item.name + " checked in successfully!", "✓");
+          showToast(item.name + " " + t("checked in successfully!", "kua tomo mai!"), "✓");
         }
       };
 
@@ -1351,20 +1468,26 @@
         renderRsvpStats();
         renderRsvpsList();
         document.getElementById('rsvp-form').reset();
-        showToast("RSVP registered for " + name + "! Welcome whānau.", "🎉");
+        showToast(t("RSVP registered for " + name + "! Welcome.", "Kua rēhitatia a " + name + "! Nau mai."), "🎉");
       };
 
       // Photo Wall Logic
-      window.filterPhotos = function (branch) {
-        currentPhotoFilter = branch;
-        var btns = document.querySelectorAll('#photo-filter-buttons .btn');
-        btns.forEach(function (b) {
-          if ((branch === 'all' && b.textContent.includes('All')) || b.textContent.includes(branch.split(' ')[0])) {
-            b.className = 'btn btn-primary';
-          } else {
-            b.className = 'btn btn-secondary';
-          }
+      function renderPhotoFilterButtons() {
+        var container = document.getElementById('photo-filter-buttons');
+        if (!container) return;
+        var branches = getBranchNames();
+        var html = '<button class="btn ' + (currentPhotoFilter === 'all' ? 'btn-primary' : 'btn-secondary') + '" onclick="filterPhotos(\'all\')">' + t("All Photos", "Ngā Whakaahua Katoa") + '</button>';
+        html += '<button class="btn ' + (currentPhotoFilter === 'Invitation & Crest' ? 'btn-primary' : 'btn-secondary') + '" onclick="filterPhotos(\'Invitation & Crest\')">' + t("Invitation & Crest", "Pānui & Tohu") + '</button>';
+        branches.forEach(function (br) {
+          var isAct = currentPhotoFilter === br;
+          html += '<button class="btn ' + (isAct ? 'btn-primary' : 'btn-secondary') + '" onclick="filterPhotos(\'' + br + '\')">' + br.split(' ')[0] + '</button>';
         });
+        container.innerHTML = html;
+      }
+
+      window.filterPhotos = function (br) {
+        currentPhotoFilter = br;
+        renderPhotoFilterButtons();
         renderPhotos();
       };
 
@@ -1373,25 +1496,29 @@
         if (!grid || !state.photos) return;
 
         var filtered = state.photos.filter(function (p) {
-          return currentPhotoFilter === 'all' || p.branch === currentPhotoFilter;
+          if (currentPhotoFilter === 'all') return true;
+          if (currentPhotoFilter === 'Invitation & Crest') {
+            return p.url && (p.url.includes('clarke_invitation') || p.url.includes('clarke_crest'));
+          }
+          return p.branch === currentPhotoFilter;
         });
 
         if (filtered.length === 0) {
-          grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; padding: 20px;">No photos available under this branch filter.</p>';
+          grid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; padding: 20px;">' + t("No photos available under this filter.", "Kāore he whakaahua i raro i tēnei tātari.") + '</p>';
           return;
         }
 
         var html = '';
         filtered.forEach(function (p) {
-          html += '<div class="photo-card">';
+          html += '<div class="photo-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">';
           html += '<div class="photo-img-wrap">';
           html += '<img src="' + p.url + '" class="photo-img" alt="' + p.title + '" loading="lazy">';
           html += '<div class="photo-badges">';
           html += '<span class="badge badge-gold">' + p.year + '</span>';
-          html += '<span class="badge badge-red">' + p.branch + '</span>';
+          html += '<span class="badge badge-green">' + (p.branch || 'Heritage') + '</span>';
           html += '</div></div>';
           html += '<div class="photo-body">';
-          html += '<h4 class="photo-title">' + p.title + '</h4>';
+          html += '<h4 class="photo-title" style="color: var(--gold-bright);">' + p.title + '</h4>';
           html += '<p class="photo-caption">' + p.caption + '</p>';
           html += '</div></div>';
         });
@@ -1425,14 +1552,14 @@
         var caption = document.getElementById('photo-caption').value.trim();
         var type = document.querySelector('input[name="photo-src-type"]:checked').value;
 
-        function commitPhoto(photoUrl) {
+        function commit(url) {
           var newPhoto = {
             id: 'photo-' + Date.now(),
             title: title,
             year: year,
             branch: branch,
             caption: caption,
-            url: photoUrl
+            url: url
           };
           if (!state.photos) state.photos = [];
           state.photos.unshift(newPhoto);
@@ -1440,27 +1567,25 @@
           renderPhotos();
           togglePhotoUploadModal(false);
           document.getElementById('new-photo-form').reset();
-          showToast("Photo uploaded to Whānau Wall and TV Display!", "📸");
+          showToast(t("Photo uploaded to Family Wall & Live Display!", "Kua tukua te whakaahua ki te mata pouaka whakaata!"), "📸");
         }
 
         if (type === 'file') {
           var fileEl = document.getElementById('photo-file-input');
           if (fileEl.files && fileEl.files[0]) {
             var reader = new FileReader();
-            reader.onload = function (evt) {
-              commitPhoto(evt.target.result);
-            };
+            reader.onload = function (evt) { commit(evt.target.result); };
             reader.readAsDataURL(fileEl.files[0]);
           } else {
-            alert("Please choose an image file to upload.");
+            alert("Please choose an image file.");
           }
         } else {
-          var url = document.getElementById('photo-url-input').value.trim();
-          if (!url) {
-            alert("Please enter a valid photo URL.");
+          var u = document.getElementById('photo-url-input').value.trim();
+          if (!u) {
+            alert("Please provide a valid image URL.");
             return;
           }
-          commitPhoto(url);
+          commit(u);
         }
       };
 
@@ -1470,17 +1595,17 @@
         if (branchGrid && state.familyTree && state.familyTree.branches) {
           var html = '';
           state.familyTree.branches.forEach(function (b) {
-            html += '<div class="branch-card">';
+            html += '<div class="branch-card" style="background: var(--bg-surface); border: 1px solid var(--border-color);">';
             html += '<div class="branch-badge-header">';
             html += '<span class="badge badge-gold">' + b.era + '</span>';
-            html += '<span class="badge badge-green">' + b.membersCount + ' Registered</span>';
+            html += '<span class="badge badge-green">' + b.membersCount + ' ' + t("Members", "Mema") + '</span>';
             html += '</div>';
-            html += '<h4 class="branch-name">' + b.name + '</h4>';
-            html += '<p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Tūpuna: ' + b.ancestor + '</p>';
-            html += '<div class="branch-motto">"' + b.motto + '"</div>';
-            html += '<p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">' + b.highlights + '</p>';
+            html += '<h4 class="branch-name" style="color: var(--gold-bright); font-size: 17px;">' + b.name + '</h4>';
+            html += '<p style="font-size: 13px; color: var(--gold-muted); margin-top: 2px;">' + t("Ancestor: ", "Tūpuna: ") + b.ancestor + '</p>';
+            html += '<div class="branch-motto" style="border-left-color: var(--gold-primary); color: var(--gold-primary);">"' + b.motto + '"</div>';
+            html += '<p style="font-size: 13px; color: var(--text-primary); margin-bottom: 8px;">' + b.highlights + '</p>';
             if (b.keyMembers && b.keyMembers.length) {
-              html += '<p style="font-size: 12px; color: var(--gold-light);">Key Whānau: ' + b.keyMembers.join(', ') + '</p>';
+              html += '<p style="font-size: 12px; color: var(--gold-muted);">' + t("Key Families: ", "Whānau Matua: ") + b.keyMembers.join(', ') + '</p>';
             }
             html += '</div>';
           });
@@ -1491,13 +1616,13 @@
         if (memGrid && state.memoriam) {
           var mHtml = '';
           state.memoriam.forEach(function (m) {
-            mHtml += '<div class="memorial-card">';
-            mHtml += '<h4 class="memorial-name">' + m.name + '</h4>';
-            mHtml += '<div class="memorial-years">' + m.years + ' • <span style="color: var(--gold-primary);">' + m.branch + '</span></div>';
+            mHtml += '<div class="memorial-card" style="background: var(--bg-surface); border: 1px solid var(--gold-primary);">';
+            mHtml += '<h4 class="memorial-name" style="color: var(--gold-bright);">' + m.name + '</h4>';
+            mHtml += '<div class="memorial-years" style="color: var(--gold-muted);">' + m.years + ' • <span style="color: var(--gold-primary);">' + m.branch + '</span></div>';
             if (m.role) {
-              mHtml += '<span class="badge badge-gold" style="margin-bottom: 10px;">' + m.role + '</span>';
+              mHtml += '<span class="badge badge-gold" style="margin-bottom: 8px;">' + m.role + '</span>';
             }
-            mHtml += '<p class="memorial-tribute">"' + m.tribute + '"</p>';
+            mHtml += '<p class="memorial-tribute" style="color: var(--text-primary);">"' + m.tribute + '"</p>';
             mHtml += '</div>';
           });
           memGrid.innerHTML = mHtml;
@@ -1532,10 +1657,10 @@
         renderWhakapapa();
         toggleMemorialModal(false);
         document.getElementById('new-memorial-form').reset();
-        showToast("Memorial tribute recorded. Rest in love.", "✦");
+        showToast(t("Memorial tribute recorded. Rest in peace.", "Kua tuhia te kōrero whakamahara."), "✦");
       };
 
-      // Potluck & Tasks Coordinator
+      // Potluck & Tasks Roster
       function renderPotluck() {
         var container = document.getElementById('potluck-list-container');
         if (!container || !state.potluck) return;
@@ -1543,23 +1668,23 @@
         var html = '';
         state.potluck.forEach(function (item) {
           var isClaimed = item.status === 'Claimed';
-          html += '<div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;">';
+          html += '<div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">';
           html += '<div style="flex: 1; min-width: 200px;">';
           html += '<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">';
-          html += '<strong style="font-size: 15px; color: #ffffff;">' + item.item + '</strong>';
+          html += '<strong style="font-size: 15px; color: var(--gold-bright);">' + item.item + '</strong>';
           html += '<span class="badge badge-gold">' + item.category + '</span>';
           html += '</div>';
           html += '<div style="font-size: 13px; color: var(--text-muted);">';
-          html += 'Needed: <strong>' + item.neededQty + '</strong>';
+          html += t("Needed: ", "E hiahiatia ana: ") + '<strong>' + item.neededQty + '</strong>';
           if (isClaimed) {
-            html += ' • Claimed by: <strong style="color: var(--green-light);">' + item.claimedBy + '</strong> (' + item.branch + ')';
+            html += ' • ' + t("Claimed by: ", "Kua tangohia e: ") + '<strong style="color: var(--green-light);">' + item.claimedBy + '</strong> (' + item.branch + ')';
           }
           html += '</div></div>';
 
           if (isClaimed) {
-            html += '<span class="badge badge-green" style="padding: 6px 12px;">✓ Claimed</span>';
+            html += '<span class="badge badge-green" style="padding: 6px 12px;">✓ ' + t("Claimed", "Kua Tangohia") + '</span>';
           } else {
-            html += '<button class="btn btn-primary" style="padding: 6px 14px; font-size: 13px;" onclick="openClaimModal(\'' + item.id + '\', \'' + item.item.replace(/'/g, "\\'") + '\')">Claim Kai / Task</button>';
+            html += '<button class="btn btn-primary" style="padding: 6px 14px; font-size: 13px;" onclick="openClaimModal(\'' + item.id + '\', \'' + item.item.replace(/'/g, "\\'") + '\')">' + t("Claim Role / Food", "Tango Mai") + '</button>';
           }
           html += '</div>';
         });
@@ -1569,7 +1694,7 @@
 
       window.openClaimModal = function (id, title) {
         claimingTaskId = id;
-        document.getElementById('claim-modal-item-title').textContent = "Claiming: " + title;
+        document.getElementById('claim-modal-item-title').textContent = t("Claiming: ", "E tango ana: ") + title;
         document.getElementById('claim-task-modal').style.display = 'flex';
       };
 
@@ -1594,7 +1719,7 @@
           window.ClarkeApp.saveState(state);
           renderPotluck();
           closeClaimModal();
-          showToast(task.item + " claimed by " + name + "!", "🍲");
+          showToast(task.item + " " + t("claimed by " + name + "!", "kua tangohia e " + name + "!"), "🍲");
         }
       };
 
@@ -1621,10 +1746,10 @@
         window.ClarkeApp.saveState(state);
         renderPotluck();
         document.getElementById('potluck-form').reset();
-        showToast("New dish / volunteer task added to roster!", "🍲");
+        showToast(t("Item added to roster!", "Kua tāpirihia ki te rārangi!"), "🍲");
       };
 
-      // Whānau Trivia Game Engine
+      // Trivia Engine
       function getTriviaQuestions() {
         if (!state.trivia) return [];
         if (Array.isArray(state.trivia)) return state.trivia;
@@ -1635,13 +1760,14 @@
       function getBranchScores() {
         if (state.branchScores) return state.branchScores;
         if (state.trivia && state.trivia.branchScores) return state.trivia.branchScores;
-        return {
-          "Te Ariki Branch": 190,
-          "Hemi & Mere Branch": 165,
-          "Wiremu Clarke Line": 210,
-          "Aroha & Rawiri Branch": 140,
-          "Kahu Southern Line": 180
-        };
+        var def = {};
+        getBranchNames().forEach(function (b, i) { def[b] = 100 + i * 25; });
+        return def;
+      }
+
+      function renderTrivia() {
+        renderTriviaScoreboard();
+        renderActiveTriviaQuestion();
       }
 
       function renderTriviaScoreboard() {
@@ -1654,12 +1780,12 @@
         var html = '';
         sorted.forEach(function (branch, rank) {
           var medal = rank === 0 ? '🥇' : (rank === 1 ? '🥈' : (rank === 2 ? '🥉' : '🎖️'));
-          html += '<div style="background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">';
+          html += '<div style="background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">';
           html += '<div style="display: flex; align-items: center; gap: 8px;">';
           html += '<span>' + medal + '</span>';
-          html += '<span style="font-size: 13px; font-weight: 700; color: #ffffff;">' + branch + '</span>';
+          html += '<span style="font-size: 13px; font-weight: 700; color: var(--gold-bright);">' + branch + '</span>';
           html += '</div>';
-          html += '<span class="badge badge-gold" style="font-family: var(--font-mono); font-size: 13px;">' + scores[branch] + ' pts</span>';
+          html += '<span class="badge badge-gold" style="font-family: ui-monospace, monospace; font-size: 13px;">' + scores[branch] + ' pts</span>';
           html += '</div>';
         });
 
@@ -1673,14 +1799,14 @@
         var q = questions[activeTriviaIndex];
         if (!q) return;
 
-        document.getElementById('trivia-q-badge').textContent = 'Question ' + (activeTriviaIndex + 1) + ' of ' + questions.length + ' (' + (q.points || 50) + ' pts)';
+        document.getElementById('trivia-q-badge').textContent = t("Question ", "Pātai ") + (activeTriviaIndex + 1) + " of " + questions.length + " (" + (q.points || 50) + " pts)";
         document.getElementById('trivia-question-prompt').textContent = q.question;
 
         var optContainer = document.getElementById('trivia-options-list');
         var html = '';
         q.options.forEach(function (opt, idx) {
-          html += '<button class="trivia-opt-btn" onclick="submitTriviaAnswer(' + idx + ')">';
-          html += '<span style="width: 24px; height: 24px; border-radius: 50%; background: var(--bg-secondary); border: 1px solid var(--border-gold); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--gold-light);">' + String.fromCharCode(65 + idx) + '</span>';
+          html += '<button class="trivia-opt-btn" style="background: var(--bg-elevated); border-color: var(--border-color); color: var(--text-primary);" onclick="submitTriviaAnswer(' + idx + ')">';
+          html += '<span style="width: 24px; height: 24px; border-radius: 50%; background: var(--bg-surface); border: 1px solid var(--gold-primary); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--gold-bright);">' + String.fromCharCode(65 + idx) + '</span>';
           html += '<span>' + opt + '</span>';
           html += '</button>';
         });
@@ -1712,7 +1838,7 @@
         factBox.style.display = 'block';
 
         if (isCorrect) {
-          var branch = document.getElementById('trivia-branch-selector').value;
+          var branch = document.getElementById('trivia-branch-selector').value || getBranchNames()[0];
           var pts = q.points || 50;
           var scores = getBranchScores();
           scores[branch] = (scores[branch] || 0) + pts;
@@ -1726,10 +1852,10 @@
           window.ClarkeApp.saveState(state);
           renderTriviaScoreboard();
 
-          factBox.innerHTML = '<strong style="color: var(--green-light);">🎉 Correct! +' + pts + ' points for ' + branch + '!</strong><br>' + q.fact;
-          showToast("Ka rawe! +" + pts + " pts for " + branch + "!", "🎯");
+          factBox.innerHTML = '<strong style="color: var(--green-light);">' + t("🎉 Correct! +" + pts + " points for " + branch + "!", "🎉 Tika tonu! +" + pts + " piro mō " + branch + "!") + '</strong><br>' + q.fact;
+          showToast(t("Correct! +" + pts + " pts for " + branch + "!", "Ka rawe! +" + pts + " piro mō " + branch + "!"), "🎯");
         } else {
-          factBox.innerHTML = '<strong style="color: var(--red-light);">Not quite, but here is the whānau history:</strong><br>' + q.fact;
+          factBox.innerHTML = '<strong style="color: var(--red-pohutukawa);">' + t("Not quite, but here is the family history:", "Kāore i tino tika, koinei te kōrero tuku iho:") + '</strong><br>' + q.fact;
         }
 
         document.getElementById('trivia-next-btn').style.display = 'inline-flex';
@@ -1742,42 +1868,56 @@
         renderActiveTriviaQuestion();
       };
 
-      // Listen for Cross-Tab / Cross-Device State Changes
+      // Realtime State Sync
       if (window.ClarkeApp) {
         window.ClarkeApp.onStateChange(function (newState) {
           state = newState;
+          populateBranchSelects();
+          renderTranslations();
           renderHeaderDetails();
           renderSchedule();
           renderRsvpStats();
           renderRsvpsList();
+          renderPhotoFilterButtons();
           renderPhotos();
           renderWhakapapa();
           renderPotluck();
-          renderTriviaScoreboard();
-          showToast("Real-time update received from TV / Admin", "🔄");
+          renderTrivia();
+          showToast(t("Real-time update received", "Kua whakahoutia ngā raraunga"), "🔄");
+        });
+
+        window.ClarkeApp.onCommand(function (cmdData) {
+          if (cmdData && (cmdData.cmd === 'toggleTeReo' || cmdData.cmd === 'TOGGLE_TE_REO')) {
+            state = window.ClarkeApp.getState();
+            renderTranslations();
+          }
         });
       }
 
-      // Keyboard navigation rules (with input guard)
+      // Keyboard Controls (with input guard)
       window.addEventListener('keydown', function (e) {
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
         if (e.key === 'a' || e.key === 'A') {
           window.open('admin.html', '_blank');
         } else if (e.key === 'r' || e.key === 'R') {
           window.open('remote.html', '_blank');
+        } else if (e.key === 'l' || e.key === 'L') {
+          toggleLanguage();
         }
       });
 
-      // Initial Render
+      // Initial Setup
+      populateBranchSelects();
+      renderTranslations();
       renderHeaderDetails();
       renderSchedule();
       renderRsvpStats();
       renderRsvpsList();
+      renderPhotoFilterButtons();
       renderPhotos();
       renderWhakapapa();
       renderPotluck();
-      renderTriviaScoreboard();
-      renderActiveTriviaQuestion();
+      renderTrivia();
 
     })();
   </script>
