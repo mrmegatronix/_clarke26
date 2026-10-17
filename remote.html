@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Clarke Whānau Reunion 2026 — TV Remote Control</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Handheld Smartphone TV Remote Styling */
+    body {
+      background-color: #080a0f;
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 12px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .remote-casing {
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(165deg, #181d26 0%, #0d1117 100%);
+      border: 2px solid #28303d;
+      border-radius: 36px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+    }
+
+    /* Top Infrared Emitter Notch */
+    .remote-ir-emitter {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 8px;
+      background: #c93b2b;
+      border-radius: 4px;
+      box-shadow: 0 0 12px rgba(201, 59, 43, 0.8);
+    }
+
+    /* Remote Header */
+    .remote-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .remote-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .remote-crest {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 6px var(--gold-glow));
+    }
+
+    .remote-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold-light);
+      letter-spacing: 0.5px;
+    }
+
+    .remote-clock {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      background: #11151c;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    /* LCD Virtual Status Screen */
+    .remote-lcd {
+      background: #080c10;
+      border: 2px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px var(--gold-glow);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .remote-lcd-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .remote-lcd-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lcd-status-badge {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .lcd-dur-badge {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-primary);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--gold-light);
+    }
+
+    .remote-lcd-notice {
+      font-size: 11px;
+      color: #ff9990;
+      background: rgba(201, 59, 43, 0.2);
+      border-radius: 4px;
+      padding: 4px 6px;
+      display: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Tactile Remote Buttons */
+    .remote-btn {
+      background: linear-gradient(180deg, #242b35 0%, #171c24 100%);
+      color: var(--text-primary);
+      border: 1px solid #363e4d;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      user-select: none;
+    }
+
+    .remote-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      background: #11151c;
+      border-color: var(--gold-primary);
+    }
+
+    .remote-btn-gold {
+      background: linear-gradient(180deg, #d4af37 0%, #aa8522 100%);
+      color: #0d1117;
+      border-color: var(--gold-light);
+    }
+
+    .remote-btn-gold:active {
+      background: #8e6e16;
+      color: #ffffff;
+    }
+
+    .remote-btn-red {
+      background: linear-gradient(180deg, #c93b2b 0%, #8c2317 100%);
+      color: #ffffff;
+      border-color: #e64938;
+    }
+
+    /* Circular D-Pad Controller */
+    .dpad-container {
+      width: 210px;
+      height: 210px;
+      margin: 4px auto;
+      position: relative;
+    }
+
+    .dpad-ring {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #13171f;
+      border: 2px solid #2b3342;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dpad-btn {
+      position: absolute;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      transition: background 0.1s ease;
+    }
+
+    .dpad-btn:active {
+      background: rgba(212, 175, 55, 0.25);
+    }
+
+    .dpad-up {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      padding-bottom: 24px;
+    }
+
+    .dpad-down {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      padding-top: 24px;
+    }
+
+    .dpad-left {
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 64px;
+      padding-right: 24px;
+    }
+
+    .dpad-right {
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 64px;
+      padding-left: 24px;
+    }
+
+    .dpad-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1f2530 0%, #141820 100%);
+      border: 2px solid var(--border-gold);
+      color: var(--gold-light);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: all 0.1s ease;
+    }
+
+    .dpad-center:active {
+      transform: translate(-50%, -50%) scale(0.95);
+      background: var(--gold-primary);
+      color: #0d1117;
+    }
+
+    /* Sub-Controls: Pause, Lock */
+    .controls-row-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .controls-row-duo .remote-btn {
+      height: 44px;
+      font-size: 13px;
+    }
+
+    /* Module Jump Buttons */
+    .module-jump-title {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .module-jump-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .module-jump-btn {
+      height: 38px;
+      font-size: 11px;
+      padding: 0 6px;
+      text-align: center;
+      border-radius: 10px;
+      background: #181d26;
+      border: 1px solid #2c3442;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .module-jump-btn:active {
+      background: var(--gold-primary);
+      color: #0d1117;
+      border-color: var(--gold-light);
+    }
+
+    /* Numeric Duration Keypad (1=10s, 2=20s, ..., 9=90s) */
+    .numeric-keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .num-key-btn {
+      height: 42px;
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .num-key-label {
+      font-size: 9px;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* Quick Announcement Section */
+    .quick-announce-box {
+      background: #12161f;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Bottom Nav Bar */
+    .remote-footer-links {
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+    }
+
+    .remote-footer-link {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+    }
+
+    .remote-footer-link:hover {
+      color: var(--gold-light);
+    }
+
+    /* Toast Notification for Remote */
+    #remote-toast {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(22, 27, 34, 0.95);
+      border: 1px solid var(--gold-primary);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 9999;
+      transition: transform 0.25s ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    #remote-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toast Notification -->
+  <div id="remote-toast">
+    <span id="remote-toast-text">Command Dispatched</span>
+  </div>
+
+  <div class="remote-casing">
+    <!-- Physical Infrared Emitter Visual -->
+    <div class="remote-ir-emitter"></div>
+
+    <!-- Remote Header -->
+    <header class="remote-header">
+      <div class="remote-brand">
+        <!-- Gold Koru Crest -->
+        <svg class="remote-crest" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="#161b22" stroke="#d4af37" stroke-width="4"/>
+          <path d="M50 14 C68 14 82 28 82 46 C82 64 68 78 50 78 C36 78 26 68 26 54 C26 42 34 34 44 34 C52 34 58 40 58 48 C58 54 54 58 48 58 C44 58 42 55 42 51 C42 47 45 44 49 44" fill="none" stroke="#f3cc56" stroke-width="4.5" stroke-linecap="round"/>
+        </svg>
+        <span class="remote-title">CLARKE TV REMOTE</span>
+      </div>
+      <div class="remote-clock" id="remote-header-clock">
+        12<span class="blink-colon">:</span>00<span class="blink-colon">:</span>00
+      </div>
+    </header>
+
+    <!-- Virtual LCD Feedback Screen -->
+    <section class="remote-lcd">
+      <div class="remote-lcd-top">
+        <span>1080P TV FEEDBACK</span>
+        <span id="lcd-lock-status">UNLOCKED</span>
+      </div>
+      <div class="remote-lcd-main">
+        <span class="lcd-status-badge badge-green" id="lcd-mode-status">PLAYING</span>
+        <span class="lcd-dur-badge" id="lcd-dur-status">10s</span>
+      </div>
+      <div class="remote-lcd-notice" id="lcd-emergency-notice"></div>
+    </section>
+
+    <!-- Circular Navigation D-Pad & Center Action -->
+    <div class="dpad-container">
+      <div class="dpad-ring">
+        <!-- Up: Restart Module Slide 0 -->
+        <button class="dpad-btn dpad-up" onclick="triggerRemoteAction('restartModule')" title="ArrowUp: Reset to slide 0 of module">
+          ▲ TOP
+        </button>
+        <!-- Down: Skip to Next Module -->
+        <button class="dpad-btn dpad-down" onclick="triggerRemoteAction('nextModule')" title="ArrowDown: Next Module">
+          ▼ NEXT MOD
+        </button>
+        <!-- Left: Previous Slide -->
+        <button class="dpad-btn dpad-left" onclick="triggerRemoteAction('prevSlide')" title="ArrowLeft: Previous Slide">
+          ◀
+        </button>
+        <!-- Right: Next Slide -->
+        <button class="dpad-btn dpad-right" onclick="triggerRemoteAction('nextSlide')" title="ArrowRight: Next Slide">
+          ▶
+        </button>
+      </div>
+
+      <!-- Center OK / Play-Pause -->
+      <button class="dpad-center" id="dpad-center-btn" onclick="triggerRemoteAction('togglePause')" title="Spacebar: Play/Pause">
+        <span id="dpad-pause-icon" style="font-size: 16px;">⏸</span>
+        <span id="dpad-pause-label" style="font-size: 10px; margin-top: 2px;">PAUSE</span>
+      </button>
+    </div>
+
+    <!-- Secondary Transport Controls: Pause / Lock -->
+    <div class="controls-row-duo">
+      <button class="remote-btn" id="remote-pause-btn" onclick="triggerRemoteAction('togglePause')">
+        ⏸️ Pause / Play
+      </button>
+      <button class="remote-btn remote-btn-gold" id="remote-lock-btn" onclick="triggerRemoteAction('toggleLock')">
+        🔒 Freeze Lock
+      </button>
+    </div>
+
+    <!-- Direct Module Jump Grid -->
+    <div>
+      <div class="module-jump-title">DIRECT MODULE JUMP</div>
+      <div class="module-jump-grid">
+        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(0)">0: Schedule</button>
+        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(1)">1: RSVPs</button>
+        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(2)">2: Photos</button>
+        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(3)">3: Whakapapa</button>
+        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(4)">4: Notices</button>
+        <button class="remote-btn module-jump-btn" onclick="triggerModuleJump(5)">5: Trivia</button>
+      </div>
+    </div>
+
+    <!-- Numeric Duration Keypad (1=10s ... 9=90s) -->
+    <div>
+      <div class="module-jump-title">SLIDE TIMER PRESETS (KEYS 1–9)</div>
+      <div class="numeric-keypad-grid">
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(1)">
+          <span>1</span><span class="num-key-label">10s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(2)">
+          <span>2</span><span class="num-key-label">20s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(3)">
+          <span>3</span><span class="num-key-label">30s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(4)">
+          <span>4</span><span class="num-key-label">40s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(5)">
+          <span>5</span><span class="num-key-label">50s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(6)">
+          <span>6</span><span class="num-key-label">60s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(7)">
+          <span>7</span><span class="num-key-label">70s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(8)">
+          <span>8</span><span class="num-key-label">80s</span>
+        </button>
+        <button class="remote-btn num-key-btn" onclick="triggerDurationKey(9)">
+          <span>9</span><span class="num-key-label">90s</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Live Announcement Push Box -->
+    <div class="quick-announce-box">
+      <div style="font-size: 11px; font-weight: 700; color: var(--gold-light); text-transform: uppercase;">
+        PUSH LIVE BANNER TO TV
+      </div>
+      <input type="text" id="remote-notice-input" class="form-control" style="padding: 7px 10px; font-size: 12px;" placeholder="Urgent message for TV...">
+      <div style="display: flex; gap: 6px;">
+        <button class="remote-btn remote-btn-red" style="flex: 2; height: 34px; font-size: 12px;" onclick="pushRemoteNotice()">
+          🚨 Push to TV
+        </button>
+        <button class="remote-btn" style="flex: 1; height: 34px; font-size: 12px;" onclick="clearRemoteNotice()">
+          Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Quick Links -->
+    <footer class="remote-footer-links">
+      <a href="index.html" target="_blank" class="remote-footer-link">📺 Display</a>
+      <a href="portal.html" target="_blank" class="remote-footer-link">🌐 Portal</a>
+      <a href="admin.html" target="_blank" class="remote-footer-link">⚙️ Admin</a>
+    </footer>
+  </div>
+
+  <!-- Shared App Script -->
+  <script src="app.js"></script>
+
+  <!-- Remote Interactive Controller Script -->
+  <script>
+    (function () {
+      var state = window.ClarkeApp ? window.ClarkeApp.getState() : {};
+
+      // Haptic Vibration Feedback
+      function vibrate() {
+        try {
+          if (navigator.vibrate) {
+            navigator.vibrate(25);
+          }
+        } catch (e) {}
+      }
+
+      // Toast Notification
+      function showRemoteToast(text) {
+        var toast = document.getElementById('remote-toast');
+        if (!toast) return;
+        document.getElementById('remote-toast-text').textContent = text;
+        toast.classList.add('show');
+        setTimeout(function () {
+          toast.classList.remove('show');
+        }, 1800);
+      }
+
+      // Live Blinking Colon Clock
+      function updateClock() {
+        var el = document.getElementById('remote-header-clock');
+        if (el && window.ClarkeApp) {
+          el.innerHTML = window.ClarkeApp.formatClockWithBlinkingColons(new Date());
+        }
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // Update Remote LCD Display
+      function updateLcdDisplay() {
+        if (!state.settings) return;
+        var modeEl = document.getElementById('lcd-mode-status');
+        var lockEl = document.getElementById('lcd-lock-status');
+        var durEl = document.getElementById('lcd-dur-status');
+        var pauseIcon = document.getElementById('dpad-pause-icon');
+        var pauseLabel = document.getElementById('dpad-pause-label');
+        var remotePauseBtn = document.getElementById('remote-pause-btn');
+        var remoteLockBtn = document.getElementById('remote-lock-btn');
+
+        if (state.settings.isPaused) {
+          if (modeEl) { modeEl.textContent = 'PAUSED'; modeEl.className = 'lcd-status-badge badge-gold'; }
+          if (pauseIcon) pauseIcon.textContent = '▶';
+          if (pauseLabel) pauseLabel.textContent = 'PLAY';
+          if (remotePauseBtn) remotePauseBtn.textContent = '▶️ Resume';
+        } else {
+          if (modeEl) { modeEl.textContent = 'PLAYING'; modeEl.className = 'lcd-status-badge badge-green'; }
+          if (pauseIcon) pauseIcon.textContent = '⏸';
+          if (pauseLabel) pauseLabel.textContent = 'PAUSE';
+          if (remotePauseBtn) remotePauseBtn.textContent = '⏸️ Pause';
+        }
+
+        if (state.settings.isLocked) {
+          if (lockEl) { lockEl.textContent = 'LOCKED'; lockEl.style.color = 'var(--red-light)'; }
+          if (remoteLockBtn) { remoteLockBtn.textContent = '🔓 Unlock Screen'; remoteLockBtn.className = 'remote-btn remote-btn-red'; }
+        } else {
+          if (lockEl) { lockEl.textContent = 'UNLOCKED'; lockEl.style.color = 'var(--gold-light)'; }
+          if (remoteLockBtn) { remoteLockBtn.textContent = '🔒 Freeze Lock'; remoteLockBtn.className = 'remote-btn remote-btn-gold'; }
+        }
+
+        var d = state.settings.slideDurationSec || 10;
+        if (durEl) durEl.textContent = d + 's';
+
+        var noticeEl = document.getElementById('lcd-emergency-notice');
+        if (noticeEl) {
+          if (state.eventInfo && state.eventInfo.emergencyNotice) {
+            noticeEl.style.display = 'block';
+            noticeEl.textContent = '🚨 ' + state.eventInfo.emergencyNotice;
+          } else {
+            noticeEl.style.display = 'none';
+          }
+        }
+      }
+
+      // Remote Actions Dispatcher
+      window.triggerRemoteAction = function (cmd, payload) {
+        vibrate();
+        if (!window.ClarkeApp) return;
+
+        // Send command with both uppercase and camelCase aliases for full compatibility
+        window.ClarkeApp.sendCommand(cmd, payload);
+        if (cmd === 'nextSlide') window.ClarkeApp.sendCommand('NEXT_SLIDE', payload);
+        if (cmd === 'prevSlide') window.ClarkeApp.sendCommand('PREV_SLIDE', payload);
+        if (cmd === 'restartModule') window.ClarkeApp.sendCommand('FIRST_SLIDE', payload);
+        if (cmd === 'nextModule') window.ClarkeApp.sendCommand('NEXT_MODULE', payload);
+        if (cmd === 'togglePause') {
+          state.settings.isPaused = !state.settings.isPaused;
+          window.ClarkeApp.sendCommand('TOGGLE_PAUSE', payload);
+          window.ClarkeApp.saveState(state);
+        }
+        if (cmd === 'toggleLock') {
+          state.settings.isLocked = !state.settings.isLocked;
+          window.ClarkeApp.sendCommand('TOGGLE_LOCK', payload);
+          window.ClarkeApp.saveState(state);
+        }
+
+        updateLcdDisplay();
+        showRemoteToast("Command: " + cmd);
+      };
+
+      // Direct Module Jump
+      window.triggerModuleJump = function (modIdx) {
+        vibrate();
+        if (!window.ClarkeApp) return;
+        window.ClarkeApp.sendCommand('jumpModule', modIdx);
+        window.ClarkeApp.sendCommand('GOTO_MODULE', modIdx);
+        showRemoteToast("Jumped to Module " + modIdx);
+      };
+
+      // Numeric Duration Keypad
+      window.triggerDurationKey = function (num) {
+        vibrate();
+        var sec = num * 10;
+        state.settings.slideDurationSec = sec;
+        window.ClarkeApp.saveState(state);
+        window.ClarkeApp.sendCommand('setDuration', sec);
+        window.ClarkeApp.sendCommand('SET_DURATION', sec);
+        updateLcdDisplay();
+        showRemoteToast("Duration: " + sec + "s");
+      };
+
+      // Quick Announcement Push
+      window.pushRemoteNotice = function () {
+        vibrate();
+        var notice = document.getElementById('remote-notice-input').value.trim();
+        if (!notice) return;
+        state.eventInfo.emergencyNotice = notice;
+        window.ClarkeApp.saveState(state);
+        window.ClarkeApp.sendCommand('emergencyNotice', notice);
+        updateLcdDisplay();
+        showRemoteToast("Pushed urgent notice to TV!");
+      };
+
+      window.clearRemoteNotice = function () {
+        vibrate();
+        document.getElementById('remote-notice-input').value = '';
+        state.eventInfo.emergencyNotice = '';
+        window.ClarkeApp.saveState(state);
+        window.ClarkeApp.sendCommand('emergencyNotice', '');
+        updateLcdDisplay();
+        showRemoteToast("Cleared notice from TV");
+      };
+
+      // Sync across tabs
+      if (window.ClarkeApp) {
+        window.ClarkeApp.onStateChange(function (newState) {
+          state = newState;
+          updateLcdDisplay();
+        });
+      }
+
+      // Keyboard Controls for desktop pairing / testing (with input guard)
+      window.addEventListener('keydown', function (e) {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+
+        switch (e.key) {
+          case 'ArrowLeft':
+            e.preventDefault();
+            triggerRemoteAction('prevSlide');
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            triggerRemoteAction('nextSlide');
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            triggerRemoteAction('restartModule');
+            break;
+          case 'ArrowDown':
+            e.preventDefault();
+            triggerRemoteAction('nextModule');
+            break;
+          case ' ':
+          case 'Spacebar':
+            e.preventDefault();
+            triggerRemoteAction('togglePause');
+            break;
+          case '0':
+            e.preventDefault();
+            triggerRemoteAction('toggleLock');
+            break;
+          case '1':
+          case '2':
+          case '3':
+          case '4':
+          case '5':
+          case '6':
+          case '7':
+          case '8':
+          case '9':
+            e.preventDefault();
+            triggerDurationKey(parseInt(e.key, 10));
+            break;
+          case 'a':
+          case 'A':
+            window.open('admin.html', '_blank');
+            break;
+          case 'r':
+          case 'R':
+            showRemoteToast("Remote active");
+            break;
+        }
+      });
+
+      // Initial LCD sync
+      updateLcdDisplay();
+
+    })();
+  </script>
+</body>
+</html>
