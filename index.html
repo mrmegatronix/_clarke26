@@ -42,12 +42,18 @@
       </div>
     </div>
 
-    <!-- Right: Language Toggle, Status Pill & Live Digital Clock -->
+    <!-- Right: Language Toggle, Print QR, Status Pill & Live Digital Clock -->
     <div class="tv-header-right">
       <!-- Clickable Language Toggle Button -->
       <button type="button" id="tv-lang-toggle" class="tv-lang-btn" title="Toggle English / Te Reo Māori (Press L)">
         <span id="tv-lang-icon">🌐</span>
         <span id="tv-lang-text">Language: English</span>
+      </button>
+
+      <!-- Quick Link to Printable QR Poster -->
+      <button type="button" id="tv-qr-print-btn" class="tv-lang-btn" onclick="window.open('qr-print.html', '_blank')" title="Open Printable QR Poster (Press P)">
+        <span>🖨️</span>
+        <span>Print QR</span>
       </button>
 
       <div class="tv-status-pill" id="tv-status-pill">
@@ -121,19 +127,26 @@
         </div>
 
         <div class="hero-side-column">
-          <!-- Official Invitation Poster Showcase Card -->
-          <div class="hero-invitation-card">
-            <img src="clarke_invitation.jpg" alt="Clarke Reunion Invitation" class="hero-invitation-thumb">
-            <div class="hero-invitation-details">
-              <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--gold-bright);">
-                Official Reunion Invitation
+          <!-- Official Invitation Poster Showcase Card & Scannable QR -->
+          <div class="hero-invitation-card" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <img src="clarke_invitation.jpg" alt="Clarke Reunion Invitation" class="hero-invitation-thumb">
+              <div class="hero-invitation-details">
+                <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: var(--gold-bright);">
+                  Official Reunion Invitation
+                </div>
+                <div style="font-size: 13px; color: var(--text-secondary);">
+                  Papanui Club • 310 Sawyers Arms Rd
+                </div>
+                <div style="font-size: 12px; color: var(--green-light); font-weight: 600; margin-top: 4px;">
+                  📞 RSVP: Ashley Croons (027 584 4663)
+                </div>
               </div>
-              <div style="font-size: 13px; color: var(--text-secondary);">
-                Papanui Club, 310 Sawyers Arms Road, Bishopdale
-              </div>
-              <div style="font-size: 12px; color: var(--green-light); font-weight: 600; margin-top: 4px;">
-                📞 RSVP: Ashley Croons (027 584 4663)
-              </div>
+            </div>
+            <!-- Scannable QR Code Badge for Shared Google Photos -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; background: rgba(27,40,30,0.85); border: 1px solid var(--border-gold); border-radius: 8px; padding: 6px 10px; cursor: pointer;" onclick="window.open('qr-print.html', '_blank')" title="Scan QR Code or Click to Print Poster">
+              <img src="clarke_qr.png" alt="Scan QR for Shared Photos Album" style="width: 78px; height: 78px; background: #ffffff; padding: 3px; border-radius: 6px;">
+              <span style="font-size: 10px; font-weight: 700; color: var(--gold-bright); text-transform: uppercase;">Scan Photos QR</span>
             </div>
           </div>
 
@@ -547,6 +560,7 @@
       <span><span class="kbd-badge">L</span> Te Reo</span>
       <span><span class="kbd-badge">A</span> Admin</span>
       <span><span class="kbd-badge">R</span> Remote</span>
+      <span><span class="kbd-badge">P</span> Print QR</span>
     </div>
   </footer>
 
@@ -862,7 +876,7 @@
         var photos = state.photos || [];
         var albumUrl = (state.eventInfo && state.eventInfo.sharedAlbumUrl) || 'https://photos.app.goo.gl/6fGko2NUqKfQp7866';
         var albumTitle = (state.eventInfo && state.eventInfo.sharedAlbumTitle) || '2026 -CLARKE FAMILY REUNION';
-        var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(albumUrl);
+        var qrImgSrc = (state.eventInfo && state.eventInfo.qrCodeImage) || 'clarke_qr.png';
         var html = '';
 
         // Slide 0: Prominent Shared Photo Album Hub with Scannable QR Code & Cover Photo
@@ -897,7 +911,7 @@
           '</div>' +
           '<div class="diamond-divider"><span class="diamond-symbol">◆</span></div>' +
           '<div class="shared-album-qr-box">' +
-          '<img src="' + qrUrl + '" alt="QR Code to Clarke Reunion Album" class="shared-album-qr-img">' +
+          '<img src="' + qrImgSrc + '" alt="QR Code to Clarke Reunion Album" class="shared-album-qr-img" style="object-fit:contain; background:#ffffff; padding:6px; border-radius:8px;">' +
           '<div style="font-size: 12px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.5px;">' +
           ClarkeApp.t('Scan with Phone Camera', 'Matawaihia ki te Waea') +
           '</div>' +
@@ -906,9 +920,12 @@
           '</a>' +
           '</div>' +
           '</div>' +
-          '<div style="background: rgba(37,53,40,0.8); border: 1px dashed var(--border-gold); border-radius: var(--radius-md); padding: 10px 16px; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between;">' +
+          '<div style="background: rgba(37,53,40,0.8); border: 1px dashed var(--border-gold); border-radius: var(--radius-md); padding: 10px 16px; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">' +
           '<span>📱 ' + ClarkeApp.t('Compatible with iPhone & Android Camera apps', 'Ka taea e ngā waea iPhone me Android') + '</span>' +
+          '<div style="display: flex; gap: 8px; align-items: center;">' +
+          '<a href="qr-print.html" target="_blank" class="btn btn-secondary" style="padding: 6px 14px; font-size: 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">🖨️ ' + ClarkeApp.t('Print Poster', 'Tāia te Pānui') + '</a>' +
           '<a href="' + albumUrl + '" target="_blank" class="btn btn-primary" style="padding: 6px 14px; font-size: 12px; text-decoration: none;">' + ClarkeApp.t('Open Album ↗', 'Whakatuwheratia ↗') + '</a>' +
+          '</div>' +
           '</div>' +
           '</div>' +
           '</div></section>';
@@ -1334,6 +1351,11 @@
             e.preventDefault();
             ClarkeApp.toggleTeReo();
             renderAllData();
+            break;
+          case 'p':
+          case 'P':
+            e.preventDefault();
+            window.open('qr-print.html', '_blank');
             break;
           case '0':
             e.preventDefault();

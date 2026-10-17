@@ -532,10 +532,20 @@
       </button>
     </div>
 
-    <!-- Shared Google Photos Album Quick Button -->
-    <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="remote-btn remote-btn-gold" id="remote-photos-btn" style="text-decoration: none; height: 42px; font-size: 12.5px; gap: 8px;">
-      📸 Shared Google Photos Album
-    </a>
+    <!-- Shared Google Photos Album & QR Actions -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="remote-btn remote-btn-gold" id="remote-photos-btn" style="text-decoration: none; height: 42px; font-size: 12.5px; gap: 8px;">
+        📸 Shared Google Photos Album
+      </a>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <button class="remote-btn" id="btn-remote-show-qr" onclick="toggleRemoteQrModal(true)" style="height: 38px; font-size: 11.5px; gap: 6px;">
+          📱 Show Guest QR
+        </button>
+        <a href="qr-print.html" target="_blank" class="remote-btn" id="btn-remote-print-qr" style="height: 38px; font-size: 11.5px; text-decoration: none; gap: 6px;">
+          🖨️ Poster / PDF
+        </a>
+      </div>
+    </div>
 
     <!-- Direct Module Jump Grid -->
     <div>
@@ -605,7 +615,33 @@
       <a href="index.html" target="_blank" class="remote-footer-link">📺 Display</a>
       <a href="portal.html" target="_blank" class="remote-footer-link">🌐 Portal</a>
       <a href="admin.html" target="_blank" class="remote-footer-link">⚙️ Admin</a>
+      <a href="qr-print.html" target="_blank" class="remote-footer-link">🖨️ Poster</a>
+      <a href="clarke_photos_qr_printable.pdf" download="Clarke_Photos_QR_Poster.pdf" class="remote-footer-link">📥 PDF</a>
     </footer>
+  </div>
+
+  <!-- Remote Guest QR Modal Overlay (Show phone to guest) -->
+  <div id="remote-qr-modal" style="display: none; position: fixed; inset: 0; background: rgba(18, 29, 21, 0.95); z-index: 99999; align-items: center; justify-content: center; padding: 20px; flex-direction: column; text-align: center;">
+    <div style="background: #ffffff; padding: 18px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 4px solid var(--gold-primary); max-width: 320px; width: 100%;">
+      <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 800; color: #1b281e; margin-bottom: 8px;">
+        CLARKE FAMILY REUNION
+      </div>
+      <img src="clarke_qr.png" alt="Clarke QR Code" style="width: 240px; height: 240px; display: block; margin: 0 auto; object-fit: contain;">
+      <div style="font-size: 13px; font-weight: 800; color: #1b281e; margin-top: 8px;">
+        SCAN TO JOIN GOOGLE PHOTOS
+      </div>
+      <div style="font-size: 11px; color: #555555; margin-top: 2px;">
+        "2026 -CLARKE FAMILY REUNION"
+      </div>
+    </div>
+    <div style="display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; justify-content: center;">
+      <a href="clarke_photos_qr_printable.pdf" download="Clarke_Photos_QR_Poster.pdf" class="remote-btn" style="padding: 10px 16px; font-size: 12px; text-decoration: none;">
+        📥 Download PDF
+      </a>
+      <button class="remote-btn remote-btn-gold" onclick="toggleRemoteQrModal(false)" style="padding: 10px 24px; font-size: 13px;">
+        ✕ Close
+      </button>
+    </div>
   </div>
 
   <!-- Shared App Script -->
@@ -791,6 +827,11 @@
           }
         }
 
+        var showQrBtn = document.getElementById('btn-remote-show-qr');
+        if (showQrBtn) showQrBtn.textContent = t("📱 Show Guest QR", "📱 Waehere QR Whānau");
+        var printQrBtn = document.getElementById('btn-remote-print-qr');
+        if (printQrBtn) printQrBtn.textContent = t("🖨️ Poster / PDF", "🖨️ Pānui / PDF");
+
         var modHeading = document.getElementById('module-jump-heading');
         if (modHeading) {
           modHeading.textContent = t('DIRECT MODULE JUMP', 'WHAKATERE KI TE WĀHANGA');
@@ -831,6 +872,14 @@
         if (m4) m4.textContent = t('4: Notices', '4: Pānui (Notices)');
         if (m5) m5.textContent = t('5: Trivia', '5: Pātai (Trivia)');
       }
+
+      window.toggleRemoteQrModal = function (show) {
+        vibrate();
+        var modal = document.getElementById('remote-qr-modal');
+        if (modal) {
+          modal.style.display = show ? 'flex' : 'none';
+        }
+      };
 
       window.toggleRemoteLanguage = function () {
         vibrate();

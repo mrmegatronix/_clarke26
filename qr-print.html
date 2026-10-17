@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clarke Family Reunion 2026 — Photo Album QR Poster (A4 Printable)</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Reset & Page Settings for A4 Printing */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #121914;
+      font-family: var(--font-family);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Top Action Bar (Screen only) */
+    .no-print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      background: rgba(27, 40, 30, 0.98);
+      border-bottom: 2px solid var(--border-gold);
+      backdrop-filter: blur(12px);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .no-print-left, .no-print-center, .no-print-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .no-print-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold-bright);
+      white-space: nowrap;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      border: 1px solid var(--border-gold);
+    }
+
+    .btn-print {
+      background: var(--gold-primary);
+      color: #1b281e;
+    }
+    .btn-print:hover {
+      background: var(--gold-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
+
+    .btn-toggle-ink {
+      background: var(--bg-surface);
+      color: var(--gold-bright);
+    }
+    .btn-toggle-ink:hover {
+      background: var(--bg-elevated);
+    }
+
+    .btn-nav {
+      background: rgba(47, 66, 51, 0.7);
+      color: var(--text-primary);
+    }
+    .btn-nav:hover {
+      background: var(--bg-surface);
+      color: var(--gold-bright);
+    }
+
+    .clock-widget {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold-bright);
+      background: rgba(27, 40, 30, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+
+    /* Poster Preview Canvas Area */
+    .poster-viewport {
+      padding: 30px 20px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Exact A4 Ratio Sheet: 210mm x 297mm */
+    .poster-sheet {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      background: #263829; /* Exact Heritage Hunter Green */
+      color: #f4eee1;
+      padding: 14mm 16mm;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(223, 211, 184, 0.3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    /* Double Ornate Border */
+    .poster-border-outer {
+      position: absolute;
+      inset: 6mm;
+      border: 2px solid #dfd3b8;
+      pointer-events: none;
+    }
+
+    .poster-border-inner {
+      position: absolute;
+      inset: 8.5mm;
+      border: 1px solid rgba(223, 211, 184, 0.5);
+      pointer-events: none;
+    }
+
+    .corner-ornament {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #dfd3b8;
+    }
+    .corner-tl { top: 6mm; left: 6mm; border-right: none; border-bottom: none; }
+    .corner-tr { top: 6mm; right: 6mm; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 6mm; left: 6mm; border-right: none; border-top: none; }
+    .corner-br { bottom: 6mm; right: 6mm; border-left: none; border-top: none; }
+
+    /* Poster Content Structure */
+    .poster-header {
+      text-align: center;
+      margin-top: 2mm;
+    }
+
+    .poster-crest-img {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+      margin-bottom: 2mm;
+    }
+
+    .poster-lineage {
+      font-family: var(--font-heading);
+      font-size: 11pt;
+      font-weight: 700;
+      color: #dfd3b8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+      white-space: nowrap;
+    }
+
+    .poster-motto {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 9pt;
+      color: #dfd3b8;
+      opacity: 0.9;
+      letter-spacing: 0.5px;
+      margin-bottom: 3mm;
+      white-space: nowrap;
+    }
+
+    .poster-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: #dfd3b8;
+      font-size: 9pt;
+      margin: 2mm auto;
+      width: 80%;
+      opacity: 0.8;
+    }
+    .poster-divider::before, .poster-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #dfd3b8;
+    }
+
+    .poster-title {
+      font-family: var(--font-heading);
+      font-size: 26pt;
+      font-weight: 800;
+      color: #f4eee1;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 2.5mm 0 1.5mm;
+      line-height: 1.1;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      white-space: nowrap;
+    }
+
+    .poster-subtitle {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #dfd3b8;
+      letter-spacing: 0.5px;
+      margin-bottom: 2mm;
+      white-space: nowrap;
+    }
+
+    .poster-lead {
+      font-size: 10.5pt;
+      color: #dfd3b8;
+      max-width: 145mm;
+      margin: 0 auto 3mm;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    /* QR Code Display Centerpiece */
+    .poster-qr-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 1mm 0 2mm;
+    }
+
+    .poster-qr-card {
+      background: #ffffff;
+      padding: 14px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 3px #dfd3b8;
+      display: inline-block;
+      margin-bottom: 3.5mm;
+    }
+
+    .poster-qr-img {
+      width: 78mm;
+      height: 78mm;
+      display: block;
+      object-fit: contain;
+    }
+
+    .poster-qr-label {
+      font-size: 11pt;
+      font-weight: 800;
+      color: #f4eee1;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 1.5mm;
+    }
+
+    .poster-url-pill {
+      background: rgba(37, 53, 40, 0.9);
+      border: 1px solid #dfd3b8;
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-family: var(--font-mono);
+      font-size: 10pt;
+      font-weight: 700;
+      color: #f4eee1;
+      display: inline-block;
+      margin-bottom: 3mm;
+      letter-spacing: 0.3px;
+    }
+
+    /* 3-Step Scan Instructions Grid */
+    .poster-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin: 1mm 0 3mm;
+    }
+
+    .step-card {
+      background: rgba(37, 53, 40, 0.65);
+      border: 1px solid rgba(223, 211, 184, 0.4);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #dfd3b8;
+      color: #1b281e;
+      font-size: 9pt;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .step-text {
+      font-size: 9pt;
+      color: #f4eee1;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+
+    /* Venue & Date Footer Details */
+    .poster-footer {
+      border-top: 1px solid rgba(223, 211, 184, 0.5);
+      padding-top: 3mm;
+      margin-bottom: 1mm;
+      text-align: center;
+    }
+
+    .poster-event-meta {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 2mm;
+    }
+
+    .meta-item-title {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #dfd3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1px;
+    }
+
+    .meta-item-value {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #f4eee1;
+      white-space: nowrap;
+    }
+
+    .poster-bilingual-tag {
+      font-size: 8.5pt;
+      color: #dfd3b8;
+      font-style: italic;
+      margin-top: 1mm;
+    }
+
+    /* ==========================================================================
+       INK-SAVER MODE (Clean White Print-Friendly Background)
+       ========================================================================== */
+    body.ink-saver .poster-sheet {
+      background: #ffffff !important;
+      color: #1b281e !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    body.ink-saver .poster-border-outer {
+      border-color: #263829 !important;
+    }
+    body.ink-saver .poster-border-inner {
+      border-color: rgba(38, 56, 41, 0.4) !important;
+    }
+    body.ink-saver .corner-ornament {
+      border-color: #263829 !important;
+    }
+
+    body.ink-saver .poster-lineage,
+    body.ink-saver .poster-motto,
+    body.ink-saver .poster-subtitle,
+    body.ink-saver .poster-lead,
+    body.ink-saver .poster-divider,
+    body.ink-saver .poster-bilingual-tag,
+    body.ink-saver .meta-item-title {
+      color: #263829 !important;
+    }
+
+    body.ink-saver .poster-title,
+    body.ink-saver .poster-qr-label,
+    body.ink-saver .meta-item-value {
+      color: #121914 !important;
+      text-shadow: none !important;
+    }
+
+    body.ink-saver .poster-divider::before,
+    body.ink-saver .poster-divider::after {
+      background: #263829 !important;
+    }
+
+    body.ink-saver .poster-qr-card {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 0 2px #263829 !important;
+    }
+
+    body.ink-saver .poster-url-pill {
+      background: #eef3ef !important;
+      border-color: #263829 !important;
+      color: #1b281e !important;
+    }
+
+    body.ink-saver .step-card {
+      background: #f7faf7 !important;
+      border-color: #3b5a42 !important;
+    }
+    body.ink-saver .step-num {
+      background: #263829 !important;
+      color: #ffffff !important;
+    }
+    body.ink-saver .step-text {
+      color: #1b281e !important;
+    }
+    body.ink-saver .poster-footer {
+      border-top-color: #263829 !important;
+    }
+
+    /* ==========================================================================
+       PRINT MEDIA QUERY (Exact A4 1-Page Output)
+       ========================================================================== */
+    @media print {
+      body {
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .no-print-bar {
+        display: none !important;
+      }
+
+      .poster-viewport {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+      }
+
+      .poster-sheet {
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen Only: Top Interactive Control Bar -->
+  <header class="no-print-bar">
+    <div class="no-print-left">
+      <a href="index.html" class="btn-action btn-nav" title="Return to Live TV Slideshow (Esc)">
+        <span>←</span> <span>Live Display</span>
+      </a>
+      <a href="admin.html" class="btn-action btn-nav" target="_blank" title="Open Admin Panel">
+        <span>⚙️</span> <span>Admin</span>
+      </a>
+      <a href="remote.html" class="btn-action btn-nav" target="_blank" title="Open Mobile Remote">
+        <span>📱</span> <span>Remote</span>
+      </a>
+    </div>
+
+    <div class="no-print-center">
+      <button type="button" class="btn-action btn-print" onclick="window.print()" title="Print Poster (P or Ctrl+P)">
+        <span>🖨️</span> <span>Print Poster</span>
+      </button>
+      <button type="button" id="ink-saver-btn" class="btn-action btn-toggle-ink" onclick="toggleInkSaver()" title="Toggle White Background (I)">
+        <span>🌿</span> <span id="ink-saver-label">Ink-Saver Mode (White BG)</span>
+      </button>
+      <a href="clarke_photos_qr_printable.pdf" download="clarke_photos_qr_poster.pdf" class="btn-action btn-nav" title="Download 300DPI Print-Ready PDF">
+        <span>📄</span> <span>Download PDF</span>
+      </a>
+      <a href="clarke_photos_qr_printable.jpg" download="clarke_photos_qr_poster.jpg" class="btn-action btn-nav" title="Download High-Res A4 JPG">
+        <span>🖼️</span> <span>Download JPG</span>
+      </a>
+    </div>
+
+    <div class="no-print-right">
+      <div class="clock-widget">
+        <span id="poster-clock">--<span class="blink-colon">:</span>--<span class="blink-colon">:</span>--</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewport containing the A4 Sheet -->
+  <main class="poster-viewport">
+    <article class="poster-sheet" id="poster-sheet">
+      <!-- Decorative Borders & Corner Accents -->
+      <div class="poster-border-outer"></div>
+      <div class="poster-border-inner"></div>
+      <div class="corner-ornament corner-tl"></div>
+      <div class="corner-ornament corner-tr"></div>
+      <div class="corner-ornament corner-bl"></div>
+      <div class="corner-ornament corner-br"></div>
+
+      <!-- Poster Top Branding -->
+      <header class="poster-header">
+        <img src="clarke_crest.jpg" alt="Clarkes of Chipley Somersetshire Crest" class="poster-crest-img">
+        <div class="poster-lineage">Clarkes of Chipley, Somersetshire</div>
+        <div class="poster-motto">“Ye shall drink of the brook by the way”</div>
+        <div class="poster-divider"><span class="diamond-symbol">◆</span></div>
+        <h1 class="poster-title">Clarke Family Reunion</h1>
+        <div class="poster-subtitle">Official Shared Google Photos Album</div>
+        <p class="poster-lead">
+          Capture and celebrate our family memories together. Scan the QR code below using your smartphone camera to instantly join our shared album and upload your photos!
+        </p>
+      </header>
+
+      <!-- Central QR Code Showcase -->
+      <section class="poster-qr-section">
+        <div class="poster-qr-card">
+          <img src="clarke_qr.png" alt="Clarke Reunion Google Photos Album QR Code" class="poster-qr-img">
+        </div>
+        <div class="poster-qr-label">Scan With Any Phone Camera</div>
+        <div class="poster-url-pill">photos.app.goo.gl/6fGko2NUqKfQp7866</div>
+
+        <!-- 3-Step Scan Instructions -->
+        <div class="poster-steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-text">Open the standard <strong>Camera app</strong> on your iPhone or Android</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-text">Hold your camera steady over the <strong>QR code</strong> above</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-text">Tap the <strong>Google Photos</strong> banner to view & upload photos</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Event & Venue Heritage Footer -->
+      <footer class="poster-footer">
+        <div class="poster-event-meta">
+          <div>
+            <div class="meta-item-title">Gathering Date</div>
+            <div class="meta-item-value">Easter Weekend • April 3–6, 2026</div>
+          </div>
+          <div>
+            <div class="meta-item-title">Official Album Title</div>
+            <div class="meta-item-value">2026 -CLARKE FAMILY REUNION</div>
+          </div>
+          <div>
+            <div class="meta-item-title">Celebration Venue</div>
+            <div class="meta-item-value">The Headland, 41 Ocean Rd, Ohope Beach</div>
+          </div>
+        </div>
+        <div class="poster-divider" style="margin: 2mm auto 1mm;"><span class="diamond-symbol">◆</span></div>
+        <div class="poster-bilingual-tag">
+          Nau mai, haere mai ki te whakanui i tō tātou whānau • Welcome to our family celebration
+        </div>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Interactive Controls & Live Clock Script -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Digital Clock with Mandatory Blinking Colon
+      function updateClock() {
+        var now = new Date();
+        var h = String(now.getHours()).padStart(2, '0');
+        var m = String(now.getMinutes()).padStart(2, '0');
+        var s = String(now.getSeconds()).padStart(2, '0');
+        var el = document.getElementById('poster-clock');
+        if (el) {
+          el.innerHTML = h + '<span class="blink-colon">:</span>' + m + '<span class="blink-colon">:</span>' + s;
+        }
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+
+      // Ink-Saver Toggle
+      window.toggleInkSaver = function () {
+        document.body.classList.toggle('ink-saver');
+        var isInkSaver = document.body.classList.contains('ink-saver');
+        var lbl = document.getElementById('ink-saver-label');
+        if (lbl) {
+          lbl.textContent = isInkSaver ? 'Heritage Mode (Green BG)' : 'Ink-Saver Mode (White BG)';
+        }
+      };
+
+      // Keyboard Shortcuts: P (Print), I (Ink-saver), Esc (Back)
+      window.addEventListener('keydown', function (e) {
+        if (e.target.matches('input, textarea, select')) return;
+        if (e.key === 'p' || e.key === 'P') {
+          e.preventDefault();
+          window.print();
+        } else if (e.key === 'i' || e.key === 'I') {
+          e.preventDefault();
+          toggleInkSaver();
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          window.location.href = 'index.html';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

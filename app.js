@@ -6,7 +6,7 @@
 (function (window) {
   'use strict';
 
-  var STORAGE_KEY = 'clarke26_v3_state';
+  var STORAGE_KEY = 'clarke26_v4_state';
   var CHANNEL_NAME = 'clarke26_channel';
   var CMD_KEY = 'clarke26_cmd';
 
@@ -74,6 +74,7 @@
       wifiPass: "Clarke2026",
       sharedAlbumUrl: "https://photos.app.goo.gl/6fGko2NUqKfQp7866",
       sharedAlbumTitle: "2026 -CLARKE FAMILY REUNION",
+      qrCodeImage: "clarke_qr.png",
       emergencyNotice: ""
     },
     settings: {

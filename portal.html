@@ -441,6 +441,9 @@
         <a href="remote.html" target="_blank" class="portal-nav-btn" title="Open Mobile Remote Control">
           📱 <span id="lbl-nav-remote">Remote</span>
         </a>
+        <a href="qr-print.html" target="_blank" class="portal-nav-btn" title="Open Printable QR Poster" style="border-color: var(--gold-primary);">
+          🖨️ <span id="lbl-nav-qr">Print QR</span>
+        </a>
         <a href="admin.html" target="_blank" class="portal-nav-btn portal-nav-btn-gold" title="Open Master Admin Panel">
           ⚙️ <span id="lbl-nav-admin">Admin</span>
         </a>
@@ -576,11 +579,19 @@
               <button class="btn btn-secondary" onclick="copyAlbumLink()" id="btn-album-showcase-copy">
                 🔗 Copy Album Link
               </button>
+              <a href="qr-print.html" target="_blank" class="btn btn-secondary" id="btn-album-showcase-print" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                🖨️ Printable QR Poster
+              </a>
+              <a href="clarke_photos_qr_printable.pdf" download="Clarke_Photos_QR_Poster.pdf" class="btn btn-secondary" id="btn-album-showcase-pdf" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                📥 Download PDF
+              </a>
             </div>
           </div>
-          <div style="text-align: center; background: #ffffff; padding: 10px; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.4); flex-shrink: 0;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fphotos.app.goo.gl%2F6fGko2NUqKfQp7866" alt="QR Code to Clarke Family Photos Album" style="width: 140px; height: 140px; display: block;" loading="lazy">
-            <span style="font-size: 11px; font-weight: 700; color: #1b281e; display: block; margin-top: 4px;">SCAN FOR PHOTOS</span>
+          <div style="text-align: center; background: #ffffff; padding: 12px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); flex-shrink: 0; border: 2px solid var(--gold-primary);">
+            <a href="clarke_qr.png" target="_blank" title="Click to view full-resolution Clarke QR code">
+              <img src="clarke_qr.png" alt="Scan QR Code to join Clarke Family Photos Album" style="width: 170px; height: 170px; display: block; object-fit: contain;" loading="lazy">
+            </a>
+            <span style="font-size: 11px; font-weight: 800; color: #1b281e; display: block; margin-top: 6px; letter-spacing: 0.5px;">SCAN WITH PHONE</span>
           </div>
         </div>
       </div>
@@ -738,12 +749,18 @@
             </div>
           </div>
         </div>
-        <div style="display: flex; gap: 8px;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
           <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-open-album">
             🚀 Open Album
           </a>
-          <a href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fphotos.app.goo.gl%2F6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-qr-album">
-            📱 View QR Code
+          <a href="clarke_qr.png" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-qr-album">
+            📱 View Custom QR Code
+          </a>
+          <a href="qr-print.html" target="_blank" class="btn btn-secondary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-print-qr">
+            🖨️ Printable QR Poster
+          </a>
+          <a href="clarke_photos_qr_printable.pdf" download="Clarke_Photos_QR_Poster.pdf" class="btn btn-secondary" style="padding: 7px 14px; font-size: 12px; text-decoration: none;" id="btn-wall-pdf-qr">
+            📥 Download PDF
           </a>
         </div>
       </div>
@@ -1140,6 +1157,8 @@
         document.getElementById('lbl-portal-title').textContent = isMi ? (state.eventInfo.titleMi || "Te Huihuinga Whānau o Clarke") : (state.eventInfo.title || "Clarke Family Reunion");
         document.getElementById('lbl-nav-live').textContent = isMi ? "Tātari Ora" : "Live TV";
         document.getElementById('lbl-nav-remote').textContent = isMi ? "Mana Mamao" : "Remote";
+        var elNavQr = document.getElementById('lbl-nav-qr');
+        if (elNavQr) elNavQr.textContent = isMi ? "Tā QR" : "Print QR";
         document.getElementById('lbl-nav-admin').textContent = isMi ? "Kaiwhakahaere" : "Admin";
 
         // Tab Bar Buttons
@@ -1178,6 +1197,10 @@
         if (elBtnShowcaseOpen) elBtnShowcaseOpen.textContent = t("🚀 Open Album in Google Photos", "🚀 Whakatuwheratia ki Google Photos");
         var elBtnShowcaseCopy = document.getElementById('btn-album-showcase-copy');
         if (elBtnShowcaseCopy) elBtnShowcaseCopy.textContent = t("🔗 Copy Album Link", "🔗 Tāruatia te Hononga");
+        var elBtnShowcasePrint = document.getElementById('btn-album-showcase-print');
+        if (elBtnShowcasePrint) elBtnShowcasePrint.textContent = t("🖨️ Printable QR Poster", "🖨️ Pānui Waehere QR");
+        var elBtnShowcasePdf = document.getElementById('btn-album-showcase-pdf');
+        if (elBtnShowcasePdf) elBtnShowcasePdf.textContent = t("📥 Download PDF", "📥 Tikiake PDF");
 
         document.getElementById('lbl-itinerary-title').textContent = t("Reunion Itinerary & Schedule", "Hōtaka o te Huihuinga");
         document.getElementById('lbl-itinerary-subtitle').textContent = t("Explore the timetable at the Papanui Club and Christchurch venues.", "Tirohia ngā wātaka ki te Papanui Club, Ōtautahi.");
@@ -1216,7 +1239,11 @@
         var elWallOpenAlbum = document.getElementById('btn-wall-open-album');
         if (elWallOpenAlbum) elWallOpenAlbum.textContent = t("🚀 Open Album", "🚀 Whakatuwhera");
         var elWallQrAlbum = document.getElementById('btn-wall-qr-album');
-        if (elWallQrAlbum) elWallQrAlbum.textContent = t("📱 View QR Code", "📱 Waehere QR");
+        if (elWallQrAlbum) elWallQrAlbum.textContent = t("📱 View Custom QR Code", "📱 Waehere QR Whaimana");
+        var elWallPrintQr = document.getElementById('btn-wall-print-qr');
+        if (elWallPrintQr) elWallPrintQr.textContent = t("🖨️ Printable QR Poster", "🖨️ Pānui Waehere QR");
+        var elWallPdfQr = document.getElementById('btn-wall-pdf-qr');
+        if (elWallPdfQr) elWallPdfQr.textContent = t("📥 Download PDF", "📥 Tikiake PDF");
 
         // Whakapapa Tab Texts
         document.getElementById('lbl-ancestral-founders-badge').textContent = t("Family Heritage & Ancestral Founders", "Tīpuna & Pūtakenga Whānau");
