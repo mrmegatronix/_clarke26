@@ -167,6 +167,13 @@
       box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
       border: 4px solid #dfd3b8;
       display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .poster-qr-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
     }
 
     .poster-qr-img {
@@ -189,6 +196,13 @@
       font-weight: 700;
       color: #dfd3b8;
       margin-top: 3mm;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      transition: color 0.2s ease;
+    }
+    .poster-url:hover {
+      color: #ffffff;
     }
 
     /* Ink-Saver Mode (White Background) */
@@ -210,6 +224,9 @@
     body.ink-saver .poster-qr-card {
       border-color: #263829 !important;
       box-shadow: none !important;
+    }
+    body.ink-saver .poster-url:hover {
+      color: #0b100d !important;
     }
 
     @media print {
@@ -251,6 +268,7 @@
       <button type="button" id="ink-saver-btn" class="btn-action btn-toggle-ink" onclick="toggleInkSaver()">
         🌿 <span id="ink-saver-label">White BG (Ink-Saver)</span>
       </button>
+      <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="btn-action btn-nav">📸 Open Album Link</a>
       <a href="clarke_photos_qr_printable.pdf" download="clarke_photos_qr_poster.pdf" class="btn-action btn-nav">📄 Download PDF</a>
       <a href="clarke_photos_qr_printable.jpg" download="clarke_photos_qr_poster.jpg" class="btn-action btn-nav">🖼️ Download JPG</a>
     </div>
@@ -273,13 +291,13 @@
         <div class="poster-subtitle">Shared Photo Album</div>
       </div>
 
-      <div class="poster-qr-card">
+      <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="poster-qr-card" title="Click or tap to open Google Photos album">
         <img src="clarke_qr.png" alt="Google Photos QR Code" class="poster-qr-img">
-      </div>
+      </a>
 
       <div>
-        <p class="poster-scan-text">Scan with your phone camera to view &amp; upload photos</p>
-        <div class="poster-url">photos.app.goo.gl/6fGko2NUqKfQp7866</div>
+        <p class="poster-scan-text">Scan with your phone camera or click to open album</p>
+        <a href="https://photos.app.goo.gl/6fGko2NUqKfQp7866" target="_blank" rel="noopener noreferrer" class="poster-url" title="Click or tap to open Google Photos album">photos.app.goo.gl/6fGko2NUqKfQp7866</a>
       </div>
     </article>
   </main>

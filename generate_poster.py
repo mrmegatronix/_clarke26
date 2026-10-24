@@ -80,7 +80,7 @@ def create_poster():
     cur_y += qr_card_size + 110
 
     # 4. Simple Scan Prompt & URL
-    draw_centered_text("Scan with your phone camera to view & upload photos", font_scan, CREAM_LIGHT, cur_y)
+    draw_centered_text("Scan with your phone camera or click to open album", font_scan, CREAM_LIGHT, cur_y)
     cur_y += 95
     draw_centered_text("photos.app.goo.gl/6fGko2NUqKfQp7866", font_url, CREAM_GOLD, cur_y)
 
@@ -88,7 +88,18 @@ def create_poster():
     pdf_path = "clarke_photos_qr_printable.pdf"
 
     img.save(jpg_path, quality=95, dpi=(300, 300))
-    img.save(pdf_path, "PDF", resolution=300.0)
+    
+    # Generate vector PDF with clickable hyperlinks via Chrome headless
+    import subprocess
+    html_url = "file://" + os.path.abspath("qr-print.html")
+    subprocess.run([
+        "/usr/bin/google-chrome",
+        "--headless",
+        "--disable-gpu",
+        f"--print-to-pdf={pdf_path}",
+        "--no-pdf-header-footer",
+        html_url
+    ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     print("Saved simple poster:", jpg_path, pdf_path)
 
 if __name__ == '__main__':
